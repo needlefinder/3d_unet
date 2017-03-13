@@ -1,0 +1,57 @@
+2017-03-11 21:34:29,432 Layers 3, features 16, filter size 3x3, pool size: 2x2
+2017-03-11 21:34:30,052 (?, ?, ?, ?, 2)
+2017-03-11 21:34:30,052 (?, ?, ?, ?, 2)
+2017-03-11 21:34:30,052 **************************************************
+2017-03-11 21:34:30,052 getting cost
+2017-03-11 21:34:30,053 (?, ?, ?, ?, 2)
+2017-03-11 21:34:30,053 (?, ?, ?, ?, 2)
+2017-03-11 21:34:36,381 Removing '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-11 21:34:36,381 Removing '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-11 21:34:36,382 Allocating '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-11 21:34:36,382 Allocating '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-11 21:34:40,204 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/028/case.nrrd
+2017-03-11 21:34:42,194 Validation Error= 32.2, Validation Loss= 0.5167
+2017-03-11 21:34:45,025 Start optimization
+2017-03-11 21:34:45,026 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-11 21:34:59,647 Iter 0, Minibatch Loss= 0.1729, Training Accuracy= 0.9390, Minibatch Error= 6.1, LogitsMatrix= [-0.07853019  0.21111321], Predictions= [ 0.42809114  0.57190883]
+2017-03-11 21:34:59,647 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-11 21:35:14,213 Iter 1, Minibatch Loss= 0.6009, Training Accuracy= 0.7055, Minibatch Error= 29.4, LogitsMatrix= [ 0.18764174  0.13470069], Predictions= [ 0.51323217  0.48676783]
+2017-03-11 21:35:14,213 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-11 21:35:28,861 Iter 2, Minibatch Loss= 0.0950, Training Accuracy= 0.9995, Minibatch Error= 0.0, LogitsMatrix= [ 0.57976246  0.14936246], Predictions= [ 0.60596913  0.39403078]
+2017-03-11 21:35:28,861 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-11 21:35:43,468 Iter 3, Minibatch Loss= 0.1147, Training Accuracy= 0.9997, Minibatch Error= 0.0, LogitsMatrix= [ 0.4516784   0.14051214], Predictions= [ 0.5771699   0.42283008]
+2017-03-11 21:35:43,468 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-11 21:35:57,825 Iter 4, Minibatch Loss= 0.0780, Training Accuracy= 0.9996, Minibatch Error= 0.0, LogitsMatrix= [ 0.47295022  0.11313034], Predictions= [ 0.58899683  0.41100314]
+2017-03-11 21:35:57,825 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-11 21:36:13,013 Iter 5, Minibatch Loss= 0.1186, Training Accuracy= 0.9978, Minibatch Error= 0.2, LogitsMatrix= [ 0.54802352  0.10687383], Predictions= [ 0.60853297  0.39146703]
+2017-03-11 21:36:13,013 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-11 21:36:28,278 Iter 6, Minibatch Loss= 0.0130, Training Accuracy= 0.9970, Minibatch Error= 0.3, LogitsMatrix= [ 0.7913388   0.05041825], Predictions= [ 0.6771971   0.32280287]
+2017-03-11 21:36:28,279 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-11 21:36:42,750 Iter 7, Minibatch Loss= 0.0519, Training Accuracy= 0.9982, Minibatch Error= 0.2, LogitsMatrix= [ 0.61367655  0.08339664], Predictions= [ 0.62954837  0.37045163]
+2017-03-11 21:36:42,750 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-11 21:36:57,995 Iter 8, Minibatch Loss= 0.0164, Training Accuracy= 0.9992, Minibatch Error= 0.1, LogitsMatrix= [ 0.77552795  0.04857804], Predictions= [ 0.67413563  0.3258644 ]
+2017-03-11 21:36:57,995 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-11 21:37:13,610 Iter 9, Minibatch Loss= 0.0161, Training Accuracy= 0.9993, Minibatch Error= 0.1, LogitsMatrix= [ 0.76621115  0.0471888 ], Predictions= [ 0.67239165  0.32760829]
+2017-03-11 21:37:13,610 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-11 21:37:28,393 Iter 10, Minibatch Loss= 0.0116, Training Accuracy= 0.9993, Minibatch Error= 0.1, LogitsMatrix= [ 0.84764194  0.04319806], Predictions= [ 0.69092423  0.30907571]
+2017-03-11 21:37:28,394 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-11 21:37:43,695 Iter 11, Minibatch Loss= 0.0163, Training Accuracy= 0.9977, Minibatch Error= 0.2, LogitsMatrix= [ 0.79154015  0.04250199], Predictions= [ 0.67896909  0.32103091]
+2017-03-11 21:37:43,695 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-11 21:37:59,355 Iter 12, Minibatch Loss= 0.0108, Training Accuracy= 0.9995, Minibatch Error= 0.0, LogitsMatrix= [ 0.80509841  0.03340317], Predictions= [ 0.68388754  0.31611252]
+2017-03-11 21:37:59,355 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-11 21:38:14,829 Iter 13, Minibatch Loss= 0.0026, Training Accuracy= 1.0000, Minibatch Error= 0.0, LogitsMatrix= [ 0.87949157  0.03061016], Predictions= [ 0.70033246  0.29966757]
+2017-03-11 21:38:14,829 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-11 21:38:30,225 Iter 14, Minibatch Loss= 0.0212, Training Accuracy= 1.0000, Minibatch Error= 0.0, LogitsMatrix= [ 0.77096671  0.03460371], Predictions= [ 0.67620009  0.3238    ]
+2017-03-11 21:38:30,225 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-11 21:38:44,608 Iter 15, Minibatch Loss= 0.0115, Training Accuracy= 0.9990, Minibatch Error= 0.1, LogitsMatrix= [ 0.92118007  0.03514946], Predictions= [ 0.70807034  0.29192963]
+2017-03-11 21:38:44,608 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-11 21:38:59,966 Iter 16, Minibatch Loss= 0.0426, Training Accuracy= 0.9995, Minibatch Error= 0.1, LogitsMatrix= [ 0.73220211  0.03442477], Predictions= [ 0.66769481  0.33230519]
+2017-03-11 21:38:59,967 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-11 21:39:15,297 Iter 17, Minibatch Loss= 0.0212, Training Accuracy= 0.9995, Minibatch Error= 0.0, LogitsMatrix= [ 1.14325523  0.0118701 ], Predictions= [ 0.75609446  0.24390557]
+2017-03-11 21:39:15,298 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-11 21:39:30,062 Iter 18, Minibatch Loss= 0.0028, Training Accuracy= 1.0000, Minibatch Error= 0.0, LogitsMatrix= [ 0.90939426  0.02408701], Predictions= [ 0.70792079  0.29207918]
+2017-03-11 21:39:30,062 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-11 21:39:45,380 Iter 19, Minibatch Loss= 0.0216, Training Accuracy= 0.9990, Minibatch Error= 0.1, LogitsMatrix= [ 0.80469334  0.0308843 ], Predictions= [ 0.68434429  0.31565574]
+2017-03-11 21:39:45,380 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-11 21:40:00,705 Iter 20, Minibatch Loss= 0.0078, Training Accuracy= 0.9954, Minibatch Error= 0.5, LogitsMatrix= [ 0.88921535  0.02667886], Predictions= [ 0.70319033  0.29680967]
+2017-03-11 21:40:00,706 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd

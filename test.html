@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>join-needles</title>
+<title>test</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11687,10 +11687,6 @@ ul.typeahead-list > li > a {
 .ansi-bold { font-weight: bold; }
 
     </style>
-<style type="text/css">
-    .container { width:100% !important; }
-
-    </style>
 
 
 <style type="text/css">
@@ -11752,50 +11748,47 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">nrrd</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+</pre></div>
 
-<span class="n">main_dir</span> <span class="o">=</span> <span class="s2">&quot;/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00&quot;</span>
+</div>
+</div>
+</div>
 
-<span class="n">all_cases</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">main_dir</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span> <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">main_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">main_dir</span><span class="p">,</span> <span class="n">folder</span><span class="p">))]</span>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">n_class</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">channels</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>  <span class="n">n_class</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">all_cases</span><span class="p">:</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">nz</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nz</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
-    
-    <span class="n">needles</span> <span class="o">=</span> <span class="p">[</span><span class="n">needle</span> <span class="k">for</span> <span class="n">needle</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">case</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">needle</span><span class="p">))</span> <span class="ow">and</span> <span class="s1">&#39;needle&#39;</span> <span class="ow">in</span> <span class="n">needle</span><span class="p">]</span>
-    
-    <span class="n">mri</span> <span class="o">=</span> <span class="n">nrrd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/case.nrrd&#39;</span> <span class="o">%</span> <span class="n">case</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="n">needles_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">mri</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
-
-    <span class="n">valid_needles</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">needle</span> <span class="ow">in</span> <span class="n">needles</span><span class="p">:</span>
-        <span class="n">needle</span> <span class="o">=</span> <span class="n">nrrd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">needle</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
-
-        <span class="n">needle</span><span class="p">[</span><span class="n">needle</span><span class="o">!=</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-
-        <span class="k">if</span> <span class="n">needle</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">needle</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">needle</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">needle</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
-            <span class="k">pass</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">needles_sum</span> <span class="o">+=</span> <span class="n">needle</span>
-            <span class="n">valid_needles</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%d</span><span class="s1"> valid needles on </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">valid_needles</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">needles</span><span class="p">)))</span>
-    
-    <span class="n">needles_sum</span><span class="p">[</span><span class="n">needles_sum</span><span class="o">!=</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="n">nrrd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/needles.nrrd&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">case</span><span class="p">),</span> <span class="n">needles_sum</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done!&quot;</span><span class="p">)</span>
+<span class="n">x_image</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nz</span><span class="p">,</span><span class="n">channels</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;input_reshape&#39;</span><span class="p">)</span>
+<span class="n">in_node</span> <span class="o">=</span> <span class="n">x_image</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x_image</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11808,134 +11801,10 @@ div#notebook {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/053
- 8 valid needles on 8
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/014
- 8 valid needles on 8
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/039
- 15 valid needles on 15
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/054
- 12 valid needles on 12
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/045
- 17 valid needles on 17
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/028
- 12 valid needles on 12
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/002
- 7 valid needles on 7
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/021
- 6 valid needles on 6
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/029
- 8 valid needles on 8
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/040
- 14 valid needles on 14
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/016
- 15 valid needles on 15
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/022
- 7 valid needles on 7
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/012
- 9 valid needles on 9
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/063
- 26 valid needles on 26
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/069
- 35 valid needles on 35
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/072
- 20 valid needles on 20
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/041
- 32 valid needles on 32
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/076
- 11 valid needles on 12
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/048
- 19 valid needles on 19
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/064
- 19 valid needles on 19
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/033
- 5 valid needles on 5
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/049
- 9 valid needles on 9
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/060
- 10 valid needles on 11
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/035
- 17 valid needles on 17
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/075
- 7 valid needles on 7
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/026
- 14 valid needles on 14
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/038
- 9 valid needles on 9
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/051
- 9 valid needles on 9
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/037
- 6 valid needles on 6
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/070
- 15 valid needles on 15
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/044
- 14 valid needles on 14
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/058
- 11 valid needles on 11
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/042
- 18 valid needles on 18
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/077
- 7 valid needles on 7
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/024
- 7 valid needles on 7
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/023
- 14 valid needles on 14
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/008
- 8 valid needles on 8
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/034
- 7 valid needles on 7
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/071
- 13 valid needles on 13
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/030
- 15 valid needles on 15
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/074
- 14 valid needles on 16
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/050
- 20 valid needles on 20
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/059
- 33 valid needles on 35
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/056
- 12 valid needles on 12
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/031
- 15 valid needles on 16
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/025
- 9 valid needles on 9
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/027
- 5 valid needles on 5
-/home/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMaps_1.00-1.00-1.00/007
- 7 valid needles on 7
-Done!
+<pre>Tensor(&#34;strided_slice_14:0&#34;, shape=(), dtype=int32) Tensor(&#34;strided_slice_15:0&#34;, shape=(), dtype=int32) Tensor(&#34;strided_slice_16:0&#34;, shape=(), dtype=int32)
+Tensor(&#34;strided_slice_17:0&#34;, shape=(), dtype=int32)
 </pre>
 </div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nrrd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">main_dir</span><span class="o">+</span><span class="s1">&#39;/002/needle-1.nrrd&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>0</pre>
-</div>
-
 </div>
 
 </div>

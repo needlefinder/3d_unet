@@ -1,0 +1,267 @@
+2017-03-11 18:16:16,053 Layers 3, features 16, filter size 3x3, pool size: 2x2
+2017-03-11 18:16:16,674 (?, ?, ?, ?, 2)
+2017-03-11 18:16:16,674 (?, ?, ?, ?, 2)
+2017-03-11 18:16:16,674 **************************************************
+2017-03-11 18:16:16,674 getting cost
+2017-03-11 18:16:16,674 (?, ?, ?, ?, 2)
+2017-03-11 18:16:16,674 (?, ?, ?, ?, 2)
+2017-03-11 18:16:20,364 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/028/case.nrrd
+2017-03-11 18:16:31,241 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/051/case.nrrd
+2017-03-11 18:16:35,151 Model restored from file: ./unet_trained/model.cpkt
+2017-03-11 19:06:41,767 Layers 3, features 16, filter size 3x3, pool size: 2x2
+2017-03-11 19:06:42,442 (?, ?, ?, ?, 2)
+2017-03-11 19:06:42,442 (?, ?, ?, ?, 2)
+2017-03-11 19:06:42,442 **************************************************
+2017-03-11 19:06:42,442 getting cost
+2017-03-11 19:06:42,442 (?, ?, ?, ?, 2)
+2017-03-11 19:06:42,442 (?, ?, ?, ?, 2)
+2017-03-11 19:06:48,050 Removing '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-11 19:06:48,051 Removing '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-11 19:06:48,053 Allocating '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-11 19:06:48,053 Allocating '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-11 20:08:03,774 Layers 3, features 16, filter size 3x3, pool size: 2x2
+2017-03-11 20:08:04,478 (?, ?, ?, ?, 2)
+2017-03-11 20:08:04,478 (?, ?, ?, ?, 2)
+2017-03-11 20:08:04,478 **************************************************
+2017-03-11 20:08:04,478 getting cost
+2017-03-11 20:08:04,478 (?, ?, ?, ?, 2)
+2017-03-11 20:08:04,478 (?, ?, ?, ?, 2)
+2017-03-11 20:08:19,695 Removing '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-11 20:08:19,696 Removing '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-11 20:08:19,696 Allocating '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-11 20:08:19,696 Allocating '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-11 20:08:20,408 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/028/case.nrrd
+2017-03-11 20:08:22,137 Validation Error= 83.5, Validation Loss= 1.3086
+2017-03-11 20:08:24,808 Start optimization
+2017-03-11 20:08:24,809 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-11 20:08:39,408 Iter 0, Minibatch Loss= 0.2060, Training Accuracy= 0.8852, Minibatch Error= 11.5%
+2017-03-11 20:08:39,408 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-11 20:08:53,948 Iter 1, Minibatch Loss= 0.1625, Training Accuracy= 0.9679, Minibatch Error= 3.2%
+2017-03-11 20:08:53,948 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-11 20:09:08,302 Iter 2, Minibatch Loss= 0.1950, Training Accuracy= 0.9928, Minibatch Error= 0.7%
+2017-03-11 20:09:08,302 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-11 20:09:22,958 Iter 3, Minibatch Loss= 0.0827, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:09:22,959 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-11 20:09:37,312 Iter 4, Minibatch Loss= 0.0596, Training Accuracy= 0.9996, Minibatch Error= 0.0%
+2017-03-11 20:09:37,313 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-11 20:09:52,588 Iter 5, Minibatch Loss= 0.0984, Training Accuracy= 0.9978, Minibatch Error= 0.2%
+2017-03-11 20:09:52,588 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-11 20:10:07,981 Iter 6, Minibatch Loss= 0.0289, Training Accuracy= 0.9970, Minibatch Error= 0.3%
+2017-03-11 20:10:07,981 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-11 20:10:22,853 Iter 7, Minibatch Loss= 0.0185, Training Accuracy= 0.9982, Minibatch Error= 0.2%
+2017-03-11 20:10:22,854 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-11 20:10:38,312 Iter 8, Minibatch Loss= 0.0228, Training Accuracy= 0.9992, Minibatch Error= 0.1%
+2017-03-11 20:10:38,312 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-11 20:10:54,006 Iter 9, Minibatch Loss= 0.0038, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:10:54,007 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-11 20:11:09,219 Iter 10, Minibatch Loss= 0.0107, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:11:09,219 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-11 20:11:24,468 Iter 11, Minibatch Loss= 0.0051, Training Accuracy= 0.9977, Minibatch Error= 0.2%
+2017-03-11 20:11:24,468 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-11 20:11:39,865 Iter 12, Minibatch Loss= 0.0066, Training Accuracy= 0.9995, Minibatch Error= 0.0%
+2017-03-11 20:11:39,866 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-11 20:11:55,472 Iter 13, Minibatch Loss= 0.0024, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:11:55,472 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-11 20:12:11,024 Iter 14, Minibatch Loss= 0.0133, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:12:11,024 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-11 20:12:25,390 Iter 15, Minibatch Loss= 0.0215, Training Accuracy= 0.9990, Minibatch Error= 0.1%
+2017-03-11 20:12:25,391 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-11 20:12:40,884 Iter 16, Minibatch Loss= 0.0066, Training Accuracy= 0.9995, Minibatch Error= 0.1%
+2017-03-11 20:12:40,884 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-11 20:12:56,426 Iter 17, Minibatch Loss= 0.0009, Training Accuracy= 0.9995, Minibatch Error= 0.0%
+2017-03-11 20:12:56,426 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-11 20:13:11,175 Iter 18, Minibatch Loss= 0.0003, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:13:11,175 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-11 20:13:26,574 Iter 19, Minibatch Loss= 0.0024, Training Accuracy= 0.9990, Minibatch Error= 0.1%
+2017-03-11 20:13:26,574 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-11 20:13:41,946 Iter 20, Minibatch Loss= 0.0048, Training Accuracy= 0.9954, Minibatch Error= 0.5%
+2017-03-11 20:13:41,946 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-11 20:13:57,276 Iter 21, Minibatch Loss= 0.0051, Training Accuracy= 0.9952, Minibatch Error= 0.5%
+2017-03-11 20:13:57,276 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-11 20:14:11,821 Iter 22, Minibatch Loss= 0.0007, Training Accuracy= 0.9995, Minibatch Error= 0.1%
+2017-03-11 20:14:11,821 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-11 20:14:27,115 Iter 23, Minibatch Loss= 0.0026, Training Accuracy= 0.9975, Minibatch Error= 0.3%
+2017-03-11 20:14:27,115 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-11 20:14:42,406 Iter 24, Minibatch Loss= 0.0002, Training Accuracy= 0.9999, Minibatch Error= 0.0%
+2017-03-11 20:14:42,406 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-11 20:14:58,100 Iter 25, Minibatch Loss= 0.0001, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:14:58,100 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-11 20:15:13,811 Iter 26, Minibatch Loss= 0.0009, Training Accuracy= 0.9992, Minibatch Error= 0.1%
+2017-03-11 20:15:13,811 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-11 20:15:29,173 Iter 27, Minibatch Loss= 0.0016, Training Accuracy= 0.9984, Minibatch Error= 0.2%
+2017-03-11 20:15:29,173 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-11 20:15:44,854 Iter 28, Minibatch Loss= 0.0035, Training Accuracy= 0.9965, Minibatch Error= 0.3%
+2017-03-11 20:15:44,855 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-11 20:16:00,254 Iter 29, Minibatch Loss= 0.0008, Training Accuracy= 0.9994, Minibatch Error= 0.1%
+2017-03-11 20:16:00,254 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-11 20:16:15,773 Iter 30, Minibatch Loss= 0.0008, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:16:15,774 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-11 20:16:31,684 Iter 31, Minibatch Loss= 0.0052, Training Accuracy= 0.9951, Minibatch Error= 0.5%
+2017-03-11 20:16:31,684 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-11 20:16:46,959 Iter 32, Minibatch Loss= 0.0008, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:16:46,959 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-11 20:17:02,328 Iter 33, Minibatch Loss= 0.0031, Training Accuracy= 0.9971, Minibatch Error= 0.3%
+2017-03-11 20:17:02,328 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-11 20:17:17,659 Iter 34, Minibatch Loss= 0.0003, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:17:17,659 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-11 20:17:32,896 Iter 35, Minibatch Loss= 0.0005, Training Accuracy= 0.9996, Minibatch Error= 0.0%
+2017-03-11 20:17:32,896 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-11 20:17:47,836 Iter 36, Minibatch Loss= 0.0032, Training Accuracy= 0.9968, Minibatch Error= 0.3%
+2017-03-11 20:17:47,836 Epoch 0, Average loss: 0.0910, learning rate: 0.2000
+2017-03-11 20:17:48,885 Validation Error= 0.4, Validation Loss= 0.0042
+2017-03-11 20:17:51,037 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-11 20:18:05,498 Iter 37, Minibatch Loss= 0.0022, Training Accuracy= 0.9979, Minibatch Error= 0.2%
+2017-03-11 20:18:05,498 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-11 20:18:20,062 Iter 38, Minibatch Loss= 0.0016, Training Accuracy= 0.9985, Minibatch Error= 0.2%
+2017-03-11 20:18:20,063 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-11 20:18:34,384 Iter 39, Minibatch Loss= 0.0005, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:18:34,384 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-11 20:18:48,883 Iter 40, Minibatch Loss= 0.0004, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:18:48,883 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-11 20:19:03,182 Iter 41, Minibatch Loss= 0.0004, Training Accuracy= 0.9996, Minibatch Error= 0.0%
+2017-03-11 20:19:03,182 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-11 20:19:18,344 Iter 42, Minibatch Loss= 0.0022, Training Accuracy= 0.9978, Minibatch Error= 0.2%
+2017-03-11 20:19:18,345 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-11 20:19:33,671 Iter 43, Minibatch Loss= 0.0033, Training Accuracy= 0.9970, Minibatch Error= 0.3%
+2017-03-11 20:19:33,672 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-11 20:19:48,201 Iter 44, Minibatch Loss= 0.0019, Training Accuracy= 0.9982, Minibatch Error= 0.2%
+2017-03-11 20:19:48,201 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-11 20:20:03,449 Iter 45, Minibatch Loss= 0.0010, Training Accuracy= 0.9992, Minibatch Error= 0.1%
+2017-03-11 20:20:03,449 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-11 20:20:19,203 Iter 46, Minibatch Loss= 0.0007, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:20:19,203 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-11 20:20:33,997 Iter 47, Minibatch Loss= 0.0008, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:20:33,998 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-11 20:20:49,026 Iter 48, Minibatch Loss= 0.0023, Training Accuracy= 0.9977, Minibatch Error= 0.2%
+2017-03-11 20:20:49,026 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-11 20:21:04,572 Iter 49, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.0%
+2017-03-11 20:21:04,572 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-11 20:21:20,070 Iter 50, Minibatch Loss= 0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:21:20,070 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-11 20:21:35,480 Iter 51, Minibatch Loss= 0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:21:35,481 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-11 20:21:49,860 Iter 52, Minibatch Loss= 0.0010, Training Accuracy= 0.9990, Minibatch Error= 0.1%
+2017-03-11 20:21:49,860 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-11 20:22:05,266 Iter 53, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.1%
+2017-03-11 20:22:05,266 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-11 20:22:20,556 Iter 54, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.0%
+2017-03-11 20:22:20,556 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-11 20:22:35,185 Iter 55, Minibatch Loss= 0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:22:35,185 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-11 20:22:50,505 Iter 56, Minibatch Loss= 0.0010, Training Accuracy= 0.9990, Minibatch Error= 0.1%
+2017-03-11 20:22:50,505 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-11 20:23:05,935 Iter 57, Minibatch Loss= 0.0046, Training Accuracy= 0.9954, Minibatch Error= 0.5%
+2017-03-11 20:23:05,935 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-11 20:23:21,202 Iter 58, Minibatch Loss= 0.0048, Training Accuracy= 0.9952, Minibatch Error= 0.5%
+2017-03-11 20:23:21,202 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-11 20:23:35,949 Iter 59, Minibatch Loss= 0.0006, Training Accuracy= 0.9995, Minibatch Error= 0.1%
+2017-03-11 20:23:35,949 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-11 20:23:51,144 Iter 60, Minibatch Loss= 0.0025, Training Accuracy= 0.9975, Minibatch Error= 0.3%
+2017-03-11 20:23:51,144 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-11 20:24:06,407 Iter 61, Minibatch Loss= 0.0001, Training Accuracy= 0.9999, Minibatch Error= 0.0%
+2017-03-11 20:24:06,407 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-11 20:24:21,960 Iter 62, Minibatch Loss= 0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:24:21,960 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-11 20:24:37,332 Iter 63, Minibatch Loss= 0.0008, Training Accuracy= 0.9992, Minibatch Error= 0.1%
+2017-03-11 20:24:37,332 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-11 20:24:52,753 Iter 64, Minibatch Loss= 0.0016, Training Accuracy= 0.9984, Minibatch Error= 0.2%
+2017-03-11 20:24:52,753 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-11 20:25:08,044 Iter 65, Minibatch Loss= 0.0035, Training Accuracy= 0.9965, Minibatch Error= 0.3%
+2017-03-11 20:25:08,045 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-11 20:25:23,404 Iter 66, Minibatch Loss= 0.0007, Training Accuracy= 0.9994, Minibatch Error= 0.1%
+2017-03-11 20:25:23,404 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-11 20:25:39,165 Iter 67, Minibatch Loss= 0.0007, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:25:39,165 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-11 20:25:54,713 Iter 68, Minibatch Loss= 0.0049, Training Accuracy= 0.9951, Minibatch Error= 0.5%
+2017-03-11 20:25:54,713 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-11 20:26:09,894 Iter 69, Minibatch Loss= 0.0008, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:26:09,894 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-11 20:26:25,409 Iter 70, Minibatch Loss= 0.0029, Training Accuracy= 0.9971, Minibatch Error= 0.3%
+2017-03-11 20:26:25,409 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-11 20:26:40,754 Iter 71, Minibatch Loss= 0.0003, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:26:40,754 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-11 20:26:56,199 Iter 72, Minibatch Loss= 0.0005, Training Accuracy= 0.9996, Minibatch Error= 0.0%
+2017-03-11 20:26:56,199 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-11 20:27:11,189 Iter 73, Minibatch Loss= 0.0032, Training Accuracy= 0.9968, Minibatch Error= 0.3%
+2017-03-11 20:27:11,190 Epoch 1, Average loss: 0.0017, learning rate: 0.1900
+2017-03-11 20:27:12,223 Validation Error= 0.4, Validation Loss= 0.0042
+2017-03-11 20:27:14,445 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-11 20:27:28,969 Iter 74, Minibatch Loss= 0.0021, Training Accuracy= 0.9979, Minibatch Error= 0.2%
+2017-03-11 20:27:28,969 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-11 20:27:43,496 Iter 75, Minibatch Loss= 0.0015, Training Accuracy= 0.9985, Minibatch Error= 0.2%
+2017-03-11 20:27:43,496 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-11 20:27:57,765 Iter 76, Minibatch Loss= 0.0003, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:27:57,766 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-11 20:28:12,608 Iter 77, Minibatch Loss= 0.0003, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:28:12,608 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-11 20:28:27,231 Iter 78, Minibatch Loss= 0.0004, Training Accuracy= 0.9996, Minibatch Error= 0.0%
+2017-03-11 20:28:27,232 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-11 20:28:42,373 Iter 79, Minibatch Loss= 0.0022, Training Accuracy= 0.9978, Minibatch Error= 0.2%
+2017-03-11 20:28:42,373 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-11 20:28:57,958 Iter 80, Minibatch Loss= 0.0030, Training Accuracy= 0.9970, Minibatch Error= 0.3%
+2017-03-11 20:28:57,958 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-11 20:29:12,459 Iter 81, Minibatch Loss= 0.0018, Training Accuracy= 0.9982, Minibatch Error= 0.2%
+2017-03-11 20:29:12,459 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-11 20:29:27,724 Iter 82, Minibatch Loss= 0.0009, Training Accuracy= 0.9992, Minibatch Error= 0.1%
+2017-03-11 20:29:27,724 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-11 20:29:43,238 Iter 83, Minibatch Loss= 0.0007, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:29:43,238 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-11 20:29:58,394 Iter 84, Minibatch Loss= 0.0007, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:29:58,394 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-11 20:30:13,360 Iter 85, Minibatch Loss= 0.0023, Training Accuracy= 0.9977, Minibatch Error= 0.2%
+2017-03-11 20:30:13,360 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-11 20:30:28,939 Iter 86, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.0%
+2017-03-11 20:30:28,939 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-11 20:30:44,538 Iter 87, Minibatch Loss= 0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:30:44,538 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-11 20:31:00,003 Iter 88, Minibatch Loss= -0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:31:00,003 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-11 20:31:14,421 Iter 89, Minibatch Loss= 0.0010, Training Accuracy= 0.9990, Minibatch Error= 0.1%
+2017-03-11 20:31:14,421 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-11 20:31:29,821 Iter 90, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.1%
+2017-03-11 20:31:29,822 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-11 20:31:45,081 Iter 91, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.0%
+2017-03-11 20:31:45,081 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-11 20:31:59,800 Iter 92, Minibatch Loss= -0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:31:59,800 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-11 20:32:15,071 Iter 93, Minibatch Loss= 0.0010, Training Accuracy= 0.9990, Minibatch Error= 0.1%
+2017-03-11 20:32:15,071 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-11 20:32:30,271 Iter 94, Minibatch Loss= 0.0045, Training Accuracy= 0.9954, Minibatch Error= 0.5%
+2017-03-11 20:32:30,271 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-11 20:32:45,530 Iter 95, Minibatch Loss= 0.0047, Training Accuracy= 0.9952, Minibatch Error= 0.5%
+2017-03-11 20:32:45,530 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-11 20:33:00,040 Iter 96, Minibatch Loss= 0.0005, Training Accuracy= 0.9995, Minibatch Error= 0.1%
+2017-03-11 20:33:00,040 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-11 20:33:14,960 Iter 97, Minibatch Loss= 0.0025, Training Accuracy= 0.9975, Minibatch Error= 0.3%
+2017-03-11 20:33:14,960 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-11 20:33:30,186 Iter 98, Minibatch Loss= 0.0001, Training Accuracy= 0.9999, Minibatch Error= 0.0%
+2017-03-11 20:33:30,186 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-11 20:33:45,730 Iter 99, Minibatch Loss= -0.0000, Training Accuracy= 1.0000, Minibatch Error= 0.0%
+2017-03-11 20:33:45,730 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-11 20:34:01,115 Iter 100, Minibatch Loss= 0.0008, Training Accuracy= 0.9992, Minibatch Error= 0.1%
+2017-03-11 20:34:01,115 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-11 20:34:16,734 Iter 101, Minibatch Loss= 0.0016, Training Accuracy= 0.9984, Minibatch Error= 0.2%
+2017-03-11 20:34:16,735 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-11 20:34:32,092 Iter 102, Minibatch Loss= 0.0035, Training Accuracy= 0.9965, Minibatch Error= 0.3%
+2017-03-11 20:34:32,092 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-11 20:34:47,440 Iter 103, Minibatch Loss= 0.0006, Training Accuracy= 0.9994, Minibatch Error= 0.1%
+2017-03-11 20:34:47,440 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-11 20:35:02,917 Iter 104, Minibatch Loss= 0.0007, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:35:02,917 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-11 20:35:18,443 Iter 105, Minibatch Loss= 0.0049, Training Accuracy= 0.9951, Minibatch Error= 0.5%
+2017-03-11 20:35:18,443 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-11 20:35:33,613 Iter 106, Minibatch Loss= 0.0008, Training Accuracy= 0.9993, Minibatch Error= 0.1%
+2017-03-11 20:35:33,613 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-11 20:35:49,185 Iter 107, Minibatch Loss= 0.0029, Training Accuracy= 0.9971, Minibatch Error= 0.3%
+2017-03-11 20:35:49,185 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-11 20:36:04,583 Iter 108, Minibatch Loss= 0.0003, Training Accuracy= 0.9997, Minibatch Error= 0.0%
+2017-03-11 20:36:04,583 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-11 20:36:20,068 Iter 109, Minibatch Loss= 0.0005, Training Accuracy= 0.9996, Minibatch Error= 0.0%
+2017-03-11 20:36:20,068 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-11 20:36:35,076 Iter 110, Minibatch Loss= 0.0032, Training Accuracy= 0.9968, Minibatch Error= 0.3%
+2017-03-11 20:36:35,076 Epoch 2, Average loss: 0.0014, learning rate: 0.1805
+2017-03-11 20:36:36,108 Validation Error= 0.4, Validation Loss= 0.0041
+2017-03-11 20:36:38,863 Optimization Finished!
+2017-03-11 20:37:05,579 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/028/case.nrrd
+2017-03-11 20:37:19,940 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/051/case.nrrd
+2017-03-11 20:37:21,767 Model restored from file: ./unet_trained/model.cpkt

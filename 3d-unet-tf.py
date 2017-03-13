@@ -1,12 +1,12 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
-# from __future__ import print_function, division, absolute_import, unicode_literals
 get_ipython().magic('matplotlib inline')
 import os
 import shutil
+from time import gmtime, strftime
 import numpy as np
 from collections import OrderedDict
 import logging
@@ -14,10 +14,10 @@ import nrrd
 from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
 import matplotlib.pylab as plt
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d %H:%M:%S", gmtime())+".log",level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
-# In[2]:
+# In[3]:
 
 from PIL import Image
 
@@ -104,7 +104,7 @@ def crop_and_concat(x1,x2):
     size = [-1, x2_shape[1], x2_shape[2], x2_shape[3], -1]
     x1_crop = tf.slice(x1, offsets, size)
     print(x1_crop.get_shape(), x2.get_shape())
-    return tf.concat([x1_crop, x2], 4)
+    return tf.concat(4,[x1_crop, x2])
 
 def pixel_wise_softmax(output_map):
     exponential_map = tf.exp(output_map)
@@ -122,7 +122,7 @@ def cross_entropy(y_,output_map):
 #     return tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(output_map), reduction_indices=[1]))
 
 
-# In[3]:
+# In[4]:
 
 def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3, pool_size=2, summaries=True):
     """
@@ -147,6 +147,7 @@ def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16,
     nx = tf.shape(x)[1]
     ny = tf.shape(x)[2]
     nz = tf.shape(x)[3]
+    
     x_image = tf.reshape(x, tf.stack([-1,nx,ny,nz,channels]), name='input_reshape')
     in_node = x_image
     batch_size = tf.shape(x_image)[0]
@@ -159,99 +160,104 @@ def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16,
     dw_h_convs = OrderedDict()
     up_h_convs = OrderedDict()
     
-    in_size = 1000
+    in_size = 1000    ##
     size = in_size
     # down layers
-    for layer in range(0, layers):
-        features = 2**layer*features_root
-        stddev = np.sqrt(2 / (filter_size**2 * features))
-        if layer == 0:
-            w1 = weight_variable([filter_size, filter_size, filter_size, channels, features], stddev)
-        else:
-            w1 = weight_variable([filter_size, filter_size, filter_size, features//2, features], stddev)
-            
-        w2 = weight_variable([filter_size, filter_size, filter_size, features, features], stddev)
-        b1 = bias_variable([features])
-        b2 = bias_variable([features])
-        
-        conv1 = conv3d(in_node, w1, keep_prob)
-        tmp_h_conv = tf.nn.relu(conv1 + b1)
-        conv2 = conv3d(tmp_h_conv, w2, keep_prob)
-        dw_h_convs[layer] = tf.nn.relu(conv2 + b2)
-        
-        weights.append((w1, w2))
-        biases.append((b1, b2))
-        convs.append((conv1, conv2))
-        
-        size -= 4
-        if layer < layers-1:
-            pools[layer] = max_pool(dw_h_convs[layer], pool_size)
-            in_node = pools[layer]
-            size /= 2
+    with tf.name_scope('going_down'):
+        for layer in range(0, layers):
+            with tf.name_scope('layer_down_%d'%layer):
+                features = 2**layer*features_root
+                stddev = np.sqrt(2 / (filter_size**2 * features))    ##Why not filter_size**3
+                if layer == 0:
+                    w1 = weight_variable([filter_size, filter_size, filter_size, channels, features], stddev)
+                else:
+                    w1 = weight_variable([filter_size, filter_size, filter_size, features//2, features], stddev)
+
+                w2 = weight_variable([filter_size, filter_size, filter_size, features, features], stddev)
+                b1 = bias_variable([features])
+                b2 = bias_variable([features])
+
+                conv1 = conv3d(in_node, w1, keep_prob)
+                tmp_h_conv = tf.nn.elu(conv1 + b1)
+                conv2 = conv3d(tmp_h_conv, w2, keep_prob)
+                dw_h_convs[layer] = tf.nn.elu(conv2 + b2)
+
+                weights.append((w1, w2))
+                biases.append((b1, b2))
+                convs.append((conv1, conv2))
+
+                size -= 4    
+                if layer < layers-1:
+                    pools[layer] = max_pool(dw_h_convs[layer], pool_size)
+                    in_node = pools[layer]
+                    size /= 2    
         
     in_node = dw_h_convs[layers-1]
         
     # up layers
-    for layer in range(layers-2, -1, -1):
-        features = 2**(layer+1)*features_root
-        stddev = np.sqrt(2 / (filter_size**2 * features))
-        
-        wd = weight_variable_devonc([pool_size, pool_size, pool_size, features//2, features], stddev)
-        bd = bias_variable([features//2])
-        h_deconv = tf.nn.relu(deconv3d(in_node, wd, pool_size) + bd)
-        h_deconv_concat = crop_and_concat(dw_h_convs[layer], h_deconv)
-        deconv[layer] = h_deconv_concat
-        
-        w1 = weight_variable([filter_size, filter_size, filter_size, features, features//2], stddev)
-        w2 = weight_variable([filter_size, filter_size, filter_size, features//2, features//2], stddev)
-        b1 = bias_variable([features//2])
-        b2 = bias_variable([features//2])
-        
-        conv1 = conv3d(h_deconv_concat, w1, keep_prob)
-        h_conv = tf.nn.relu(conv1 + b1)
-        conv2 = conv3d(h_conv, w2, keep_prob)
-        in_node = tf.nn.relu(conv2 + b2)
-        up_h_convs[layer] = in_node
+    with tf.name_scope('going_up'):
+        for layer in range(layers-2, -1, -1):      ## 1 0
+            with tf.name_scope('layer_up_%d'%layer):
+                features = 2**(layer+1)*features_root
+                stddev = np.sqrt(2 / (filter_size**2 * features))
 
-        weights.append((w1, w2))
-        biases.append((b1, b2))
-        convs.append((conv1, conv2))
-        
-        size *= 2
-        size -= 4
+                wd = weight_variable_devonc([pool_size, pool_size, pool_size, features//2, features], stddev)
+                bd = bias_variable([features//2])
+                h_deconv = tf.nn.elu(deconv3d(in_node, wd, pool_size) + bd)
+                h_deconv_concat = crop_and_concat(dw_h_convs[layer], h_deconv)    
+                deconv[layer] = h_deconv_concat
+
+                w1 = weight_variable([filter_size, filter_size, filter_size, features, features//2], stddev)
+                w2 = weight_variable([filter_size, filter_size, filter_size, features//2, features//2], stddev)
+                b1 = bias_variable([features//2])
+                b2 = bias_variable([features//2])
+
+                conv1 = conv3d(h_deconv_concat, w1, keep_prob)
+                h_conv = tf.nn.elu(conv1 + b1)
+                conv2 = conv3d(h_conv, w2, keep_prob)
+                in_node = tf.nn.elu(conv2 + b2)
+                up_h_convs[layer] = in_node
+
+                weights.append((w1, w2))
+                biases.append((b1, b2))
+                convs.append((conv1, conv2))
+
+                size *= 2
+                size -= 4
 
     # Output Map
-    weight = weight_variable([1, 1, 1, features_root, n_class], stddev)
-    bias = bias_variable([n_class])
-    conv = conv3d(in_node, weight, tf.constant(1.0))
-    output_map = tf.nn.relu(conv + bias)
-    up_h_convs["out"] = output_map
-    
-    if summaries:
-#         for i, (c1, c2) in enumerate(convs):
-#             tf.summary.image('summary_conv_%03d_01'%i, get_image_summary(c1))
-#             tf.summary.image('summary_conv_%03d_02'%i, get_image_summary(c2))
-            
-#         for k in pools.keys():
-#             tf.summary.image('summary_pool_%03d'%k, get_image_summary(pools[k]))
-        
-#         for k in deconv.keys():
-#             tf.summary.image('summary_deconv_concat_%03d'%k, get_image_summary(deconv[k]))
-            
-        for k in dw_h_convs.keys():
-            tf.summary.histogram("dw_convolution_%03d"%k + '/activations', dw_h_convs[k])
+    with tf.name_scope('output_map'):
+        weight = weight_variable([1, 1, 1, features_root, n_class], stddev)
+        bias = bias_variable([n_class])
+        conv = conv3d(in_node, weight, tf.constant(1.0))
+        output_map = tf.nn.elu(conv + bias)
+        up_h_convs["out"] = output_map
 
-        for k in up_h_convs.keys():
-            tf.summary.histogram("up_convolution_%s"%k + '/activations', up_h_convs[k])
-            
-    variables = []
-    for w1,w2 in weights:
-        variables.append(w1)
-        variables.append(w2)
-        
-    for b1,b2 in biases:
-        variables.append(b1)
-        variables.append(b2)
+        if summaries:
+    #         for i, (c1, c2) in enumerate(convs):
+    #             tf.summary.image('summary_conv_%03d_01'%i, get_image_summary(c1))
+    #             tf.summary.image('summary_conv_%03d_02'%i, get_image_summary(c2))
+
+    #         for k in pools.keys():
+    #             tf.summary.image('summary_pool_%03d'%k, get_image_summary(pools[k]))
+
+    #         for k in deconv.keys():
+    #             tf.summary.image('summary_deconv_concat_%03d'%k, get_image_summary(deconv[k]))
+
+            for k in dw_h_convs.keys():
+                tf.summary.histogram("dw_convolution_%03d"%k + '/activations', dw_h_convs[k])
+
+            for k in up_h_convs.keys():
+                tf.summary.histogram("up_convolution_%s"%k + '/activations', up_h_convs[k])
+
+        variables = []
+        for w1,w2 in weights:
+            variables.append(w1)
+            variables.append(w2)
+
+        for b1,b2 in biases:
+            variables.append(b1)
+            variables.append(b2)
 
     
     return output_map, variables, int(in_size - size)
@@ -281,15 +287,19 @@ class Unet(object):
         logging.info(logits.get_shape())
         logging.info(self.y.get_shape())
         
+        self.logits = logits
+        
         self.cost = self._get_cost(logits, cost, cost_kwargs)
         
         self.gradients_node = tf.gradients(self.cost, self.variables)
          
         self.cross_entropy = tf.reduce_mean(cross_entropy(tf.reshape(self.y, [-1, n_class], name='cross_entro_label_reshape'),
                                                           tf.reshape(pixel_wise_softmax_2(logits), [-1, n_class], name='px_logit_reshape')))
-        
-        self.predicter = pixel_wise_softmax_2(logits)
-        self.correct_pred = tf.equal(tf.argmax(self.predicter, 4), tf.argmax(self.y, 4))
+#         self.predicter = pixel_wise_softmax_2(logits)
+        self.predicter = tf.nn.softmax(logits)
+#         self.correct_pred = tf.equal(tf.(self.predicter, 4), tf.argmax(self.y, 4))
+        self.correct_pred = tf.equal(self.predicter>0.5, self.y>0.5)
+    
         self.accuracy = tf.reduce_mean(tf.cast(self.correct_pred, tf.float32))
         
     def _get_cost(self, logits, cost_name, cost_kwargs):
@@ -299,43 +309,44 @@ class Unet(object):
         class_weights: weights for the different classes in case of multi-class imbalance
         regularizer: power of the L2 regularizers added to the loss function
         """
-        logging.info('*'*50)
-        logging.info('getting cost')
-        logging.info(logits.get_shape())
-        logging.info(self.y.get_shape())
-        flat_logits = tf.reshape(logits, [-1, self.n_class], name='flat_logits_reshape')
-        flat_labels = tf.reshape(self.y, [-1, self.n_class], name='flat_labels_reshape')
-        if cost_name == "cross_entropy":
-            class_weights = cost_kwargs.pop("class_weights", None)
-            
-            if class_weights is not None:
-                class_weights = tf.constant(np.array(class_weights, dtype=np.float32))
-        
-                weight_map = tf.multiply(flat_labels, class_weights, name='weightmap')
-                weight_map = tf.reduce_sum(weight_map, axis=1)
-        
-                loss_map = tf.nn.softmax_cross_entropy_with_logits(logits=flat_logits, labels=flat_labels)
-                weighted_loss = tf.multiply(loss_map, weight_map, name='weightloss')
-        
-                loss = tf.reduce_mean(weighted_loss)
-                
+        with tf.name_scope('cost_function'):
+            logging.info('*'*50)
+            logging.info('getting cost')
+            logging.info(logits.get_shape())
+            logging.info(self.y.get_shape())
+            flat_logits = tf.reshape(logits, [-1, self.n_class], name='flat_logits_reshape')
+            flat_labels = tf.reshape(self.y, [-1, self.n_class], name='flat_labels_reshape')
+            if cost_name == "cross_entropy":
+                class_weights = cost_kwargs.pop("class_weights", None)
+
+                if class_weights is not None:
+                    class_weights = tf.constant(np.array(class_weights, dtype=np.float32))
+
+                    weight_map = tf.multiply(flat_labels, class_weights, name='weightmap')
+                    weight_map = tf.reduce_sum(weight_map, axis=1)
+
+                    loss_map = tf.nn.softmax_cross_entropy_with_logits(logits=flat_logits, labels=flat_labels)
+                    weighted_loss = tf.multiply(loss_map, weight_map, name='weightloss')
+
+                    loss = tf.reduce_mean(weighted_loss)
+
+                else:
+                    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=flat_logits, 
+                                                                                  labels=flat_labels))
+            elif cost_name == "dice_coefficient":
+                intersection = tf.reduce_sum(flat_logits * flat_labels, axis=1, keep_dims=True)
+                mulLogits = tf.multiply(flat_logits, flat_logits, name='dicecoeff_logits_mul')
+                mulLabels = tf.multiply(flat_labels, flat_labels, name='dicecoeff_labels_mul')
+                union = tf.reduce_sum(mulLogits, axis=1, keep_dims=True) + tf.reduce_sum(mulLabels, axis=1, keep_dims=True)
+                loss = 1 - tf.reduce_mean(2 * intersection/ (union))
+
             else:
-                loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=flat_logits, 
-                                                                              labels=flat_labels))
-        elif cost_name == "dice_coefficient":
-            intersection = tf.reduce_sum(flat_logits * flat_labels, axis=1, keep_dims=True)
-            mulLogits = tf.multiply(flat_logits, flat_logits, name='dicecoeff_logits_mul')
-            mulLabels = tf.multiply(flat_labels, flat_labels, name='dicecoeff_labels_mul')
-            union = tf.reduce_sum(mulLogits, axis=1, keep_dims=True) + tf.reduce_sum(mulLabels, axis=1, keep_dims=True)
-            loss = 1 - tf.reduce_mean(2 * intersection/ (union))
+                raise ValueError("Unknown cost function: "%cost_name)
 
-        else:
-            raise ValueError("Unknown cost function: "%cost_name)
-
-        regularizer = cost_kwargs.pop("regularizer", None)
-        if regularizer is not None:
-            regularizers = sum([tf.nn.l2_loss(variable) for variable in self.variables])
-            loss += (regularizer * regularizers)
+            regularizer = cost_kwargs.pop("regularizer", None)
+            if regularizer is not None:
+                regularizers = sum([tf.nn.l2_loss(variable) for variable in self.variables])
+                loss += (regularizer * regularizers)
             
         return loss
 
@@ -491,8 +502,7 @@ class Trainer(object):
                 if ckpt and ckpt.model_checkpoint_path:
                     self.net.restore(sess, ckpt.model_checkpoint_path)
             
-            test_x, test_y = data_provider(self.verification_batch_size)
-#             print('test shapes:', test_x.shape, test_y.shape)
+            test_x, test_y = data_provider(self.verification_batch_size,"testing")
             pred_shape = self.store_prediction(sess, test_x, test_y, "_init")
             
             summary_writer = tf.summary.FileWriter(output_path, graph=sess.graph)
@@ -502,9 +512,7 @@ class Trainer(object):
             for epoch in range(epochs):
                 total_loss = 0
                 for step in range((epoch*training_iters), ((epoch+1)*training_iters)):
-                    batch_x, batch_y = data_provider(self.batch_size)
-#                     print('shapes before crop', batch_x.shape, batch_y.shape)
-                     
+                    batch_x, batch_y = data_provider(self.batch_size,"training")                     
                     # Run optimization op (backprop)
                     _, loss, lr, gradients = sess.run((self.optimizer, self.net.cost, self.learning_rate_node, self.net.gradients_node), 
                                                       feed_dict={self.net.x: batch_x,
@@ -524,9 +532,9 @@ class Trainer(object):
                         
                     total_loss += loss
 
-#                 print("epoch stats")
+                #print("epoch stats")
                 self.output_epoch_stats(epoch, total_loss, training_iters, lr)
-#                 print("store predictions")
+                #print("store predictions")
                 self.store_prediction(sess, test_x, test_y, "epoch_%s"%epoch)
                     
                 save_path = self.net.save(sess, save_path)
@@ -535,7 +543,7 @@ class Trainer(object):
             return save_path
         
     def store_prediction(self, sess, batch_x, batch_y, name):
-#         logging.info("Storing prediction")
+        #logging.info("Storing prediction")
         prediction = sess.run(self.net.predicter, feed_dict={self.net.x: batch_x, 
                                                              self.net.y: batch_y, 
                                                              self.net.keep_prob: 1.})
@@ -545,7 +553,7 @@ class Trainer(object):
                                                        self.net.y: crop_to_shape(batch_y, pred_shape), 
                                                        self.net.keep_prob: 1.})
         
-        logging.info("Verification error= %.1f, loss= %.4f" % (error_rate(prediction,crop_to_shape(batch_y, prediction.shape)),
+        logging.info("Validation Error= %.1f, Validation Loss= %.4f" % (error_rate(prediction,crop_to_shape(batch_y, prediction.shape)),
                                                                loss))
               
 #         img = combine_img_prediction(batch_x, batch_y, prediction)
@@ -554,30 +562,33 @@ class Trainer(object):
         return pred_shape
     
     def output_epoch_stats(self, epoch, total_loss, training_iters, lr):
-        logging.info("Epoch {:}, Average loss: {:.4f}, learning rate: {:.4f}".format(epoch, (total_loss / training_iters), lr))
+        logging.info("Epoch {:}, Average loss: {:.4f}, Learning rate: {:.4f}".format(epoch, (total_loss / training_iters), lr))
     
     def output_minibatch_stats(self, sess, summary_writer, step, batch_x, batch_y):
         # Calculate batch loss and accuracy
-        summary_str, loss, acc, predictions = sess.run([self.summary_op, 
-                                                            self.net.cost, 
-                                                            self.net.accuracy, 
-                                                            self.net.predicter], 
-                                                           feed_dict={self.net.x: batch_x,
-                                                                      self.net.y: batch_y,
-                                                                      self.net.keep_prob: 1.})
+#         logging.info(batch_x.shape)
+        summary_str, loss, acc, predictions, logits = sess.run([self.summary_op, 
+                                                        self.net.cost, 
+                                                        self.net.accuracy, 
+                                                        self.net.predicter,
+                                                        self.net.logits], 
+                                                        feed_dict={self.net.x: batch_x,
+                                                                   self.net.y: batch_y,
+                                                                   self.net.keep_prob: 1.})
         summary_writer.add_summary(summary_str, step)
         summary_writer.flush()
-        logging.info("Iter {:}, Minibatch Loss= {:.4f}, Training Accuracy= {:.4f}, Minibatch error= {:.1f}%".format(step,
+        logging.info("Iter {:}, Minibatch Loss= {:.4f}, Training Accuracy= {:.4f}, Minibatch Error= {:.1f}, LogitsMatrix= {}, Predictions= {}".format(step,
                                                                                                             loss,
                                                                                                             acc,
-                                                                                                            error_rate(predictions, batch_y)))
+                                                                                                            error_rate(predictions, batch_y),
+                                                                                                            logits[0][0][0][0],
+                                                                                                            predictions[0][0][0][0]))
 
 
 def error_rate(predictions, labels):
     """
     Return the error rate based on dense predictions and 1-hot labels.
     """
-    
     return 100.0 - (
         100.0 *
         np.sum(np.argmax(predictions, 4) == np.argmax(labels, 4)) /
@@ -634,8 +645,8 @@ class BaseDataProvider(object):
         self.a_min = a_min if a_min is not None else -np.inf
         self.a_max = a_max if a_min is not None else np.inf
 
-    def _load_data_and_label(self):
-        data, label = self._next_data()
+    def _load_data_and_label(self,datafile):
+        data, label = self._next_data(datafile)
             
         train_data = self._process_data(data)
         labels = self._process_labels(label)
@@ -676,9 +687,16 @@ class BaseDataProvider(object):
         """
         return data, labels
     
-    def __call__(self, n):
-        train_data, labels = self._load_data_and_label()
-        return train_data, labels
+    def __call__(self, n, datafile = "training"):
+        if datafile == "training":
+            data, labels = self._load_data_and_label(self.training_data_files)
+        elif datafile == "validation":
+            data, labels = self._load_data_and_label(self.validation_data_files)
+        elif datafile == "testing":
+            data, labels = self._load_data_and_label(self.testing_data_files)
+        else:
+            raise NameError("No such datafile, datafile must be training, validation or testing")
+        return data, labels
     
 
 
@@ -705,22 +723,28 @@ class ImageDataProvider(BaseDataProvider):
         super(ImageDataProvider, self).__init__(a_min, a_max)
         
         self.file_idx = -1
-        
-        self.data_files = self._find_data_files()
+        self.training_data_files, self.validation_data_files, self.testing_data_files = self._find_data_files() 
     
-        assert len(self.data_files) > 0, "No training files"
-        print("Number of files used: %s" % len(self.data_files))
+        assert len(self.training_data_files) > 0, "No training files"
+        assert len(self.validation_data_files) > 0, "No validation files"
+        assert len(self.testing_data_files) > 0, "No testing files"
         
-        img = self._load_file(self.data_files[0])
-        self.channels = 1 #if len(img.shape) == 2 else img.shape[-1]
+        print("Number of training data used: %s" % len(self.training_data_files))
+        print("Number of validation data used: %s" % len(self.validation_data_files))
+        print("Number of testing data used: %s" % len(self.testing_data_files))
+        
+        self.channels = 1
         
         
     def _find_data_files(self):
-        rootPath = "/home/gp1514/Dropbox/2016-paolo/preprocessed_data/"
+        rootPath = "/home/ubuntu/ziyang/preprocessed_data/"
         dataPath = rootPath+"LabelMaps_1.00-1.00-1.00/"
 
-        trainCases = loadCases("train.txt")
-        return [dataPath+name+'/case.nrrd' for name in trainCases]
+        trainingCases = loadCases("train.txt")
+        validationCases = loadCases("valid.txt")
+        testingCases = loadCases("testing.txt")
+        
+        return [dataPath+name+'/case.nrrd' for name in trainingCases],[dataPath+name+'/case.nrrd' for name in validationCases],[dataPath+name+'/case.nrrd' for name in testingCases]
     
     
     def _load_file(self, path, dtype=np.float32):
@@ -733,16 +757,17 @@ class ImageDataProvider(BaseDataProvider):
         zer[:xmin, :ymin, :zmin] = data[:xmin, :ymin, :zmin]
         return zer
 
-    def _cycle_file(self):
+    def _cycle_file(self,datafile):
         self.file_idx += 1
-        if self.file_idx >= len(self.data_files):
+        if self.file_idx >= len(datafile):
             self.file_idx = 0 
         
-    def _next_data(self):
-        self._cycle_file()
-        image_name = self.data_files[self.file_idx]
-        label_name = image_name.replace('case', 'needles')
-
+    def _next_data(self,datafile):
+        self._cycle_file(datafile)
+        image_name = datafile[self.file_idx]
+        label_name = image_name.replace('case', 'labelmap')
+        
+        logging.info("Case: {}".format(image_name))
              
         img = self._load_file(image_name, np.float32)
         label = self._load_file(label_name, np.bool)
@@ -750,57 +775,55 @@ class ImageDataProvider(BaseDataProvider):
         return img,label
 
 
-# In[4]:
-
-rootPath = "/home/gp1514/Dropbox/2016-paolo/preprocessed_data/"
-dataPath = rootPath+"LabelMaps_1.00-1.00-1.00/"
-    
-nrrd.read(dataPath + '008/needles.nrrd')[0].shape
-
-
 # ## setting up the unet
 
 # In[5]:
 
 net = Unet(channels=1, 
-                n_class=2, 
-                layers=4, 
-                features_root=32,
-                )
+           n_class=2, 
+           layers=3, 
+           features_root=16, summaries=True
+          )
 
 
 # ## training
 
-# In[52]:
+# In[ ]:
 
 data_provider = ImageDataProvider()
 
-trainer = Trainer(net, optimizer="momentum", opt_kwargs=dict(momentum=0.2))
+trainer = Trainer(net, batch_size=1, optimizer="momentum", opt_kwargs=dict(momentum=0.2))
 path = trainer.train(data_provider, "./unet_trained", 
-                     training_iters=32, 
-                     epochs=20, 
+                     training_iters=37, 
+                     epochs=3, 
                      dropout=0.5, 
-                     display_step=2)
+                     display_step=1)
 
 
-# In[ ]:
+# In[21]:
 
-prediction = net.predict("./unet_trained/model.cpkt", np.expand_dims(np.array([nrrd.read(dataPath + '012/case.nrrd')[0][:148,:148,:148]]),4))
+img = ImageDataProvider()
+img._load_data_and_label(img.testing_data_files)[0].shape
 
 
-# In[1]:
+# In[23]:
 
-prediction[0].shape
+prediction = net.predict("./unet_trained/model.cpkt", img._load_data_and_label(img.testing_data_files)[0])
+
+
+# In[27]:
+
+print(prediction[0])
 res = prediction[0][:,:,:,1]
 
 
-# In[47]:
+# In[13]:
 
-rres = np.where(res>0.999999)
+rres = np.where(res>0.2)
 print(len(rres[0]))
 
 
-# In[45]:
+# In[14]:
 
 get_ipython().magic('matplotlib notebook')
 xs,ys,zs = rres
@@ -810,48 +833,8 @@ ax.scatter(xs, ys, zs, marker='o', alpha=0.3, s=1)
 plt.show()
 
 
-# In[11]:
+# In[19]:
 
-
-
-
-# In[6]:
-
-
-
-
-# In[83]:
-
-nrrd.read(dataPath + '008/case.nrrd')[0].shape
-
-
-# In[77]:
-
-200*78*1*200
-
-
-# In[28]:
-
-160* 160* 48
-
-
-# In[11]:
-
-loadCases('train.txt')
-
-
-# In[32]:
-
-a = np.ones((10,10))
-
-
-# In[33]:
-
-a.resize((12,3,3))
-a
-
-
-# In[ ]:
-
-
+train = loadCases('train.txt')
+print(train)
 
