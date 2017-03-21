@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 get_ipython().magic('matplotlib inline')
 import os
@@ -14,12 +14,11 @@ import nrrd
 from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
 import matplotlib.pylab as plt
+from PIL import Image
 logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d %H:%M:%S", gmtime())+".log",level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
-# In[3]:
-
-from PIL import Image
+# In[2]:
 
 def plot_prediction(x_test, y_test, prediction, save=False):
     import matplotlib
@@ -58,7 +57,6 @@ def plot_prediction(x_test, y_test, prediction, save=False):
 def crop_to_shape(data, shape):
     """
     Crops the array to the given image shape by removing the border (expects a tensor of shape [batches, nx, ny, nz, channels].
-    
     :param data: the array to crop
     :param shape: the target shape
     """
@@ -119,10 +117,10 @@ def pixel_wise_softmax_2(output_map):
 
 def cross_entropy(y_,output_map):
     return -tf.reduce_mean(y_*tf.log(tf.clip_by_value(output_map,1e-10,1.0)), name="cross_entropy")
-#     return tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(output_map), reduction_indices=[1]))
+#   return tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(output_map), reduction_indices=[1]))
 
 
-# In[4]:
+# In[3]:
 
 def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3, pool_size=2, summaries=True):
     """
@@ -139,19 +137,10 @@ def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16,
     :param summaries: Flag if summaries should be created
     """
     
-    logging.info("Layers {layers}, features {features}, filter size {filter_size}x{filter_size}, pool size: {pool_size}x{pool_size}".format(layers=layers,
-                                                                                                           features=features_root,
-                                                                                                           filter_size=filter_size,
-                                                                                                           pool_size=pool_size))
-    # Placeholder for the input image
-    nx = tf.shape(x)[1]
-    ny = tf.shape(x)[2]
-    nz = tf.shape(x)[3]
+    logging.info("Layers: {layers} FeaturesRoot: {features_root}                 ConvolutionSize: {filter_size}*{filter_size}*{filter_size}, PoolingSize: {pool_size}*{pool_size}*{pool_size}"                 .format(layers=layers, features_root=features_root, filter_size=filter_size, pool_size=pool_size))
     
-    x_image = tf.reshape(x, tf.stack([-1,nx,ny,nz,channels]), name='input_reshape')
-    in_node = x_image
-    batch_size = tf.shape(x_image)[0]
- 
+    in_node = x
+    batch_size = tf.shape(x)[0] 
     weights = []
     biases = []
     convs = []
@@ -159,29 +148,31 @@ def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16,
     deconv = OrderedDict()
     dw_h_convs = OrderedDict()
     up_h_convs = OrderedDict()
-    
-    in_size = 1000    ##
+    in_size = 144
     size = in_size
+
+   
     # down layers
     with tf.name_scope('going_down'):
         for layer in range(0, layers):
             with tf.name_scope('layer_down_%d'%layer):
                 features = 2**layer*features_root
-                stddev = np.sqrt(2 / (filter_size**2 * features))    ##Why not filter_size**3
+                stddev = np.sqrt(2 / (filter_size**2 * features))
                 if layer == 0:
                     w1 = weight_variable([filter_size, filter_size, filter_size, channels, features], stddev)
                 else:
                     w1 = weight_variable([filter_size, filter_size, filter_size, features//2, features], stddev)
-
                 w2 = weight_variable([filter_size, filter_size, filter_size, features, features], stddev)
                 b1 = bias_variable([features])
                 b2 = bias_variable([features])
-
+                
                 conv1 = conv3d(in_node, w1, keep_prob)
                 tmp_h_conv = tf.nn.elu(conv1 + b1)
                 conv2 = conv3d(tmp_h_conv, w2, keep_prob)
                 dw_h_convs[layer] = tf.nn.elu(conv2 + b2)
-
+                
+                logging.info("Down Convoltion Layer: {layer} Size: {size}".format(layer=layer,size=dw_h_convs[layer].get_shape()))
+                
                 weights.append((w1, w2))
                 biases.append((b1, b2))
                 convs.append((conv1, conv2))
@@ -217,7 +208,9 @@ def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16,
                 conv2 = conv3d(h_conv, w2, keep_prob)
                 in_node = tf.nn.elu(conv2 + b2)
                 up_h_convs[layer] = in_node
-
+                
+                logging.info("Up Convoltion Layer: {layer} Size: {size}".format(layer=layer,size=tf.shape(dw_h_convs[layer])))
+                
                 weights.append((w1, w2))
                 biases.append((b1, b2))
                 convs.append((conv1, conv2))
@@ -288,21 +281,16 @@ class Unet(object):
         logging.info(self.y.get_shape())
         
         self.logits = logits
-        
-        self.cost = self._get_cost(logits, cost, cost_kwargs)
-        
+        self.predicter = tf.nn.softmax(logits)
+        self.predicter_label = tf.cast(tf.argmax(tf.reshape(predictor, [-1, n_class]),axis=1), tf.float32)
+        self.correct_pred = tf.cast(tf.equal(tf.argmax(tf.reshape(predictor, [-1, n_class]),axis=1), tf.argmax(tf.reshape(self.y, [-1, n_class]),axit=1)), tf.float32)
+        self.cost = self._get_cost(self.logits, self.predicter, cost, cost_kwargs)
         self.gradients_node = tf.gradients(self.cost, self.variables)
-         
         self.cross_entropy = tf.reduce_mean(cross_entropy(tf.reshape(self.y, [-1, n_class], name='cross_entro_label_reshape'),
                                                           tf.reshape(pixel_wise_softmax_2(logits), [-1, n_class], name='px_logit_reshape')))
-#         self.predicter = pixel_wise_softmax_2(logits)
-        self.predicter = tf.nn.softmax(logits)
-#         self.correct_pred = tf.equal(tf.(self.predicter, 4), tf.argmax(self.y, 4))
-        self.correct_pred = tf.equal(self.predicter>0.5, self.y>0.5)
-    
-        self.accuracy = tf.reduce_mean(tf.cast(self.correct_pred, tf.float32))
+        self.accuracy = tf.reduce_mean(self.correct_pred)
         
-    def _get_cost(self, logits, cost_name, cost_kwargs):
+    def _get_cost(self, logits, predicter, cost_name, cost_kwargs):
         """
         Constructs the cost function, either cross_entropy, weighted cross_entropy or dice_coefficient.
         Optional arguments are: 
@@ -312,9 +300,10 @@ class Unet(object):
         with tf.name_scope('cost_function'):
             logging.info('*'*50)
             logging.info('getting cost')
-            logging.info(logits.get_shape())
-            logging.info(self.y.get_shape())
+            logging.info("Logits: {}".format(logits.get_shape()))
+            logging.info("Y: {}".format(self.y.get_shape()))
             flat_logits = tf.reshape(logits, [-1, self.n_class], name='flat_logits_reshape')
+            flat_predicter = tf.reshape(predicter, [-1, self.n_class], name='flat_predicter_reshape')
             flat_labels = tf.reshape(self.y, [-1, self.n_class], name='flat_labels_reshape')
             if cost_name == "cross_entropy":
                 class_weights = cost_kwargs.pop("class_weights", None)
@@ -334,11 +323,11 @@ class Unet(object):
                     loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=flat_logits, 
                                                                                   labels=flat_labels))
             elif cost_name == "dice_coefficient":
-                intersection = tf.reduce_sum(flat_logits * flat_labels, axis=1, keep_dims=True)
-                mulLogits = tf.multiply(flat_logits, flat_logits, name='dicecoeff_logits_mul')
-                mulLabels = tf.multiply(flat_labels, flat_labels, name='dicecoeff_labels_mul')
-                union = tf.reduce_sum(mulLogits, axis=1, keep_dims=True) + tf.reduce_sum(mulLabels, axis=1, keep_dims=True)
-                loss = 1 - tf.reduce_mean(2 * intersection/ (union))
+                intersection = tf.reduce_sum(flat_predicter[...,1] * flat_labels[...,1])
+                #mulLogits = tf.multiply(flat_predicter[...,1], flat_logits[...,1], name='dicecoeff_logits_mul')
+                #mulLabels = tf.multiply(flat_predicter[...,1], flat_labels[...,1], name='dicecoeff_labels_mul')
+                union = tf.reduce_sum(flat_predicter[...,1]) + tf.reduce_sum(flat_labels[...,1])
+                loss = 1 - 2 * intersection / union
 
             else:
                 raise ValueError("Unknown cost function: "%cost_name)
@@ -407,7 +396,6 @@ class Trainer(object):
     """
     
     prediction_path = "prediction"
-    verification_batch_size = 4
     
     def __init__(self, net, batch_size=1, optimizer="momentum", opt_kwargs={}):
         self.net = net
@@ -502,7 +490,8 @@ class Trainer(object):
                 if ckpt and ckpt.model_checkpoint_path:
                     self.net.restore(sess, ckpt.model_checkpoint_path)
             
-            test_x, test_y = data_provider(self.verification_batch_size,"testing")
+            validation_batchsize = 1
+            test_x, test_y = data_provider(validation_batchsize,"validation")
             pred_shape = self.store_prediction(sess, test_x, test_y, "_init")
             
             summary_writer = tf.summary.FileWriter(output_path, graph=sess.graph)
@@ -555,9 +544,6 @@ class Trainer(object):
         
         logging.info("Validation Error= %.1f, Validation Loss= %.4f" % (error_rate(prediction,crop_to_shape(batch_y, prediction.shape)),
                                                                loss))
-              
-#         img = combine_img_prediction(batch_x, batch_y, prediction)
-#         save_image(img, "%s/%s.jpg"%(self.prediction_path, name))
         
         return pred_shape
     
@@ -565,24 +551,25 @@ class Trainer(object):
         logging.info("Epoch {:}, Average loss: {:.4f}, Learning rate: {:.4f}".format(epoch, (total_loss / training_iters), lr))
     
     def output_minibatch_stats(self, sess, summary_writer, step, batch_x, batch_y):
-        # Calculate batch loss and accuracy
-#         logging.info(batch_x.shape)
-        summary_str, loss, acc, predictions, logits = sess.run([self.summary_op, 
+        summary_str, loss, acc, predictions, prediction_labels, logits, y = sess.run([self.summary_op, 
                                                         self.net.cost, 
                                                         self.net.accuracy, 
                                                         self.net.predicter,
-                                                        self.net.logits], 
+                                                        self.net.predicter_label,
+                                                        self.net.logits,
+                                                        self.net.y], 
                                                         feed_dict={self.net.x: batch_x,
                                                                    self.net.y: batch_y,
                                                                    self.net.keep_prob: 1.})
         summary_writer.add_summary(summary_str, step)
         summary_writer.flush()
-        logging.info("Iter {:}, Minibatch Loss= {:.4f}, Training Accuracy= {:.4f}, Minibatch Error= {:.1f}, LogitsMatrix= {}, Predictions= {}".format(step,
-                                                                                                            loss,
-                                                                                                            acc,
-                                                                                                            error_rate(predictions, batch_y),
-                                                                                                            logits[0][0][0][0],
-                                                                                                            predictions[0][0][0][0]))
+        logging.info("Iter {:}, Minibatch Loss= {:.4f}, Training Accuracy= {:.4f}, LogitsMatrix= {},                      Predictions= {}, PredictionLabels= {}, DesiredLabels= {}".format(step,
+                                                                    loss,
+                                                                    acc,
+                                                                    logits[0][0][0][0],
+                                                                    predictions[0][0][0][0],
+                                                                    np.unique(prediction_labels[...,1], return_counts=True),
+                                                                    np.unique(y[...,1], return_counts=True)))
 
 
 def error_rate(predictions, labels):
@@ -633,6 +620,7 @@ class BaseDataProvider(object):
     normalizes the values to (0,1]. To change this behavoir the `_process_data`
     method can be overwritten. To enable some post processing such as data
     augmentation the `_post_process` method can be overwritten.
+    
     :param a_min: (optional) min value used for clipping
     :param a_max: (optional) max value used for clipping
     """
@@ -648,16 +636,16 @@ class BaseDataProvider(object):
     def _load_data_and_label(self,datafile):
         data, label = self._next_data(datafile)
             
-        train_data = self._process_data(data)
-        labels = self._process_labels(label)
+        data = self._process_data(data)
+        label = self._process_labels(label)
         
-        train_data, labels = self._post_process(train_data, labels)
+        data, label = self._post_process(data, label)
         
         nx = data.shape[0]
         ny = data.shape[1]
         nz = data.shape[2]
 
-        return train_data.reshape(1, nx, ny, nz, self.channels), labels.reshape(1, nx, ny, nz, self.n_class),
+        return data.reshape(1, nx, ny, nz, self.channels), label.reshape(1, nx, ny, nz, self.n_class)
     
     def _process_labels(self, label):
         if self.n_class == 2:
@@ -689,14 +677,14 @@ class BaseDataProvider(object):
     
     def __call__(self, n, datafile = "training"):
         if datafile == "training":
-            data, labels = self._load_data_and_label(self.training_data_files)
+            data, label = self._load_data_and_label(self.training_data_files)
         elif datafile == "validation":
-            data, labels = self._load_data_and_label(self.validation_data_files)
+            data, label = self._load_data_and_label(self.validation_data_files)
         elif datafile == "testing":
-            data, labels = self._load_data_and_label(self.testing_data_files)
+            data, label = self._load_data_and_label(self.testing_data_files)
         else:
             raise NameError("No such datafile, datafile must be training, validation or testing")
-        return data, labels
+        return data, label
     
 
 
@@ -704,8 +692,8 @@ class ImageDataProvider(BaseDataProvider):
     """
     Generic data provider for images, supports gray scale and colored images.
     Assumes that the data images and label images are stored in the same folder
-    and that the labels have a different file suffix 
-    e.g. 'train/fish_1.tif' and 'train/fish_1_mask.tif'
+    and that the labels have a different file suffix e.g. 'train/fish_1.tif' 
+    and 'train/fish_1_mask.tif'
     Usage:
     data_provider = ImageDataProvider("..fishes/train/*.tif")
         
@@ -722,7 +710,9 @@ class ImageDataProvider(BaseDataProvider):
     def __init__(self, search_path='', a_min=None, a_max=None, data_suffix=".tif", mask_suffix='_mask.tif'):
         super(ImageDataProvider, self).__init__(a_min, a_max)
         
-        self.file_idx = -1
+        self.trainingfile_idx = -1
+        self.validationfile_idx = -1
+        self.testingfile_idx = -1
         self.training_data_files, self.validation_data_files, self.testing_data_files = self._find_data_files() 
     
         assert len(self.training_data_files) > 0, "No training files"
@@ -740,15 +730,15 @@ class ImageDataProvider(BaseDataProvider):
         rootPath = "/home/ubuntu/ziyang/preprocessed_data/"
         dataPath = rootPath+"LabelMaps_1.00-1.00-1.00/"
 
-        trainingCases = loadCases("train.txt")
-        validationCases = loadCases("valid.txt")
+        trainingCases = loadCases("training.txt")
+        validationCases = loadCases("validation.txt")
         testingCases = loadCases("testing.txt")
         
         return [dataPath+name+'/case.nrrd' for name in trainingCases],[dataPath+name+'/case.nrrd' for name in validationCases],[dataPath+name+'/case.nrrd' for name in testingCases]
     
     
     def _load_file(self, path, dtype=np.float32):
-        tile = 148
+        tile = 148  ##
         zer = np.zeros((tile,tile,tile), dtype=dtype)
         data = nrrd.read(path)[0].astype(dtype)
         xmin = min(data.shape[0], tile)
@@ -756,19 +746,29 @@ class ImageDataProvider(BaseDataProvider):
         zmin = min(data.shape[2], tile)
         zer[:xmin, :ymin, :zmin] = data[:xmin, :ymin, :zmin]
         return zer
-
-    def _cycle_file(self,datafile):
-        self.file_idx += 1
-        if self.file_idx >= len(datafile):
-            self.file_idx = 0 
+        
         
     def _next_data(self,datafile):
-        self._cycle_file(datafile)
-        image_name = datafile[self.file_idx]
-        label_name = image_name.replace('case', 'labelmap')
-        
+        if datafile == self.training_data_files:
+            self.trainingfile_idx += 1
+            if self.trainingfile_idx >= len(datafile):
+                self.trainingfile_idx = 0
+            image_name = datafile[self.trainingfile_idx]
+        elif datafile == self.validation_data_files:
+            self.validationfile_idx += 1
+            if self.validationfile_idx >= len(datafile):
+                self.validationfile_idx = 0
+            image_name = datafile[self.validationfile_idx]
+        elif datafile == self.testing_data_files:
+            self.testingfile_idx += 1
+            if self.testingfile_idx >= len(datafile):
+                self.testingfile_idx = 0
+            image_name = datafile[self.testingfile_idx]
+        else:
+            raise ValueError("Datafile Not Recognized")
+            
         logging.info("Case: {}".format(image_name))
-             
+        label_name = image_name.replace('case', 'labelmap')    
         img = self._load_file(image_name, np.float32)
         label = self._load_file(label_name, np.bool)
     
@@ -777,7 +777,7 @@ class ImageDataProvider(BaseDataProvider):
 
 # ## setting up the unet
 
-# In[5]:
+# In[4]:
 
 net = Unet(channels=1, 
            n_class=2, 
@@ -788,10 +788,9 @@ net = Unet(channels=1,
 
 # ## training
 
-# In[ ]:
+# In[5]:
 
 data_provider = ImageDataProvider()
-
 trainer = Trainer(net, batch_size=1, optimizer="momentum", opt_kwargs=dict(momentum=0.2))
 path = trainer.train(data_provider, "./unet_trained", 
                      training_iters=37, 
@@ -800,30 +799,30 @@ path = trainer.train(data_provider, "./unet_trained",
                      display_step=1)
 
 
-# In[21]:
+# In[6]:
 
 img = ImageDataProvider()
 img._load_data_and_label(img.testing_data_files)[0].shape
 
 
-# In[23]:
+# In[7]:
 
 prediction = net.predict("./unet_trained/model.cpkt", img._load_data_and_label(img.testing_data_files)[0])
 
 
-# In[27]:
+# In[8]:
 
 print(prediction[0])
-res = prediction[0][:,:,:,1]
+res = prediction[0][:,:,:,0]
 
 
-# In[13]:
+# In[10]:
 
-rres = np.where(res>0.2)
+rres = np.where(res<0.5)
 print(len(rres[0]))
 
 
-# In[14]:
+# In[11]:
 
 get_ipython().magic('matplotlib notebook')
 xs,ys,zs = rres
@@ -833,8 +832,7 @@ ax.scatter(xs, ys, zs, marker='o', alpha=0.3, s=1)
 plt.show()
 
 
-# In[19]:
+# In[ ]:
 
-train = loadCases('train.txt')
-print(train)
+
 
