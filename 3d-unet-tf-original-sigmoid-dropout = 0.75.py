@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[7]:
+# In[1]:
 
 get_ipython().magic('matplotlib inline')
 import os
@@ -20,7 +20,7 @@ logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d %H:%M:%S", gmtim
 from syntheticdata import synthetic_generation
 
 
-# In[8]:
+# In[2]:
 
 def plot_prediction(x_test, y_test, prediction, save=False):
     import matplotlib
@@ -68,7 +68,39 @@ def crop_to_shape(data, shape):
     out = data[:, offset0:offset0+shape[1], offset1:offset1+shape[2], offset2:offset2+shape[3]]
     return out
 
-
+def reshape_to_shape(data, shape, padding):
+    """
+    Crops the array to the given image shape by removing the border (expects shape [nx, ny, nz])
+    :param data: the array to crop
+    :param shape: the target shape
+    """
+    print(data.shape)
+    print('*'*50)
+    
+    Tempshape = (319, 319, 255)    ## the max shape of original data
+    if padding == "noise":
+        std = np.std(data)
+        mean = np.mean(data)
+        temp = np.random.normal(std, mean, Tempshape)
+    elif padding == "zero":
+        temp = np.zeros(Tempshape, dtype = np.bool)
+    else:
+        raise ValueError("padding must be noise or zero")
+        
+    offset0 = (temp.shape[0] - data.shape[0])//2
+    offset1 = (temp.shape[1] - data.shape[1])//2
+    offset2 = (temp.shape[2] - data.shape[2])//2
+    temp[offset0:offset0+data.shape[0], offset1:offset1+data.shape[1], offset2:offset2+data.shape[2]] = data[:,:,:]
+    
+    offset0_ = (temp.shape[0] - shape[0])//2
+    offset1_ = (temp.shape[1] - shape[1])//2
+    offset2_ = (temp.shape[2] - shape[2])//2
+    out = temp[offset0_:offset0_+shape[0], offset1_:offset1_+shape[1], offset2_:offset2_+shape[2]]
+    
+    print(out.shape)
+    return out    
+    
+    
 def weight_variable(shape, stddev=0.1):
     initial = tf.truncated_normal(shape, stddev=stddev)
     return tf.Variable(initial)
@@ -123,7 +155,7 @@ def cross_entropy(y_,output_map):
 #   return tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(output_map), reduction_indices=[1]))
 
 
-# In[9]:
+# In[3]:
 
 def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3, pool_size=2, summaries=True):
     """
@@ -434,8 +466,7 @@ class Trainer(object):
     def _initialize(self, training_iters, output_path, restore):
         global_step = tf.Variable(0)
         
-        self.norm_gradients_node = tf.Variable(tf.constant(0.0, shape=[len(self.net.gradients_node)]))
-        
+        self.norm_gradients_node = tf.Variable(tf.constant(0.0, shape=[len(self.net.gradients_node)]))        
         if self.net.summaries:
             tf.summary.histogram('norm_grads', self.norm_gradients_node)
 
@@ -468,7 +499,7 @@ class Trainer(object):
         
         return init
 
-    def train(self, data_provider, output_path, training_array=None, validation_array=None, testing_array=None,              training_iters=50, epochs=100, dropout=0.5, display_step=1, restore=False):
+    def train(self, data_provider, output_path, training_array=None, validation_array=None, testing_array=None,              training_iters=50, epochs=100, dropout=0.75, display_step=1, restore=False):
         """
         Lauches the training process
         
@@ -480,7 +511,6 @@ class Trainer(object):
         :param display_step: number of steps till outputting stats
         :param restore: Flag if previous model should be restored 
         """
-        save_path = os.path.join(output_path, "model.cpkt")
         
         init = self._initialize(training_iters, output_path, restore)
         
@@ -492,8 +522,8 @@ class Trainer(object):
                 if ckpt and ckpt.model_checkpoint_path:
                     self.net.restore(sess, ckpt.model_checkpoint_path)
             
-            test_x, test_y = data_provider(validation_array,"validation")
-            pred_shape = self.store_prediction(sess, test_x, test_y, "_init")
+            val_x, val_y = data_provider(validation_array,"validation")
+            pred_shape = self.store_prediction(sess, val_x, val_y, "_init")
             print("pred_shape: ", pred_shape)
             
             summary_writer = tf.summary.FileWriter(output_path, graph=sess.graph)
@@ -511,8 +541,6 @@ class Trainer(object):
                                                                  self.net.keep_prob: dropout})
                     total_loss += loss                    
                     logging.info("Iter {:}, Minibatch Loss= {:.4f}, Accuracy= {:.4f}, Prediction= {}, Desired= {}".format(step, loss, acc, np.unique(prediction_labels, return_counts=True), np.unique(y, return_counts=True)))
-                                                                    #np.unique(prediction_labels[...,1],return_counts=True),
-                                                                    #np.unique(y[...,1],return_counts=True)))
                     
                     if avg_gradients is None:
                         avg_gradients = [np.zeros_like(gradient) for gradient in gradients]
@@ -523,11 +551,10 @@ class Trainer(object):
                     self.norm_gradients_node.assign(norm_gradients).eval()
                                       
                     
-                #print("epoch stats")
                 self.output_epoch_stats(epoch, total_loss, training_iters, lr)
-                #print("store predictions")
-                self.store_prediction(sess, test_x, test_y, "epoch_%s"%epoch)
-                    
+                self.store_prediction(sess, val_x, val_y, "epoch_%s"%epoch)  
+                
+                save_path = os.path.join(output_path, "model {}.cpkt".format(epoch))
                 save_path = self.net.save(sess, save_path)
                 
             logging.info("Optimization Finished!")
@@ -535,7 +562,6 @@ class Trainer(object):
             return save_path
         
     def store_prediction(self, sess, batch_x, batch_y, name):
-        #logging.info("Storing prediction")
         prediction = sess.run(self.net.predicter, feed_dict={self.net.x: batch_x, 
                                                              self.net.y: batch_y, 
                                                              self.net.keep_prob: 1.})
@@ -545,7 +571,7 @@ class Trainer(object):
                                                        self.net.y: crop_to_shape(batch_y, pred_shape), 
                                                        self.net.keep_prob: 1.})
         
-        logging.info("Validation Accuracy= %.1f, Validation Loss= %.4f" % (acc, loss))
+        logging.info("Validation Accuracy= %.4f, Validation Loss= %.4f" % (acc, loss))
         
         return pred_shape
     
@@ -712,7 +738,7 @@ class ImageDataProvider(BaseDataProvider):
         self.validationfile_idx = -1
         self.testingfile_idx = -1
         
-        if array == True:
+        if array == True: 
             pass
         
         else:
@@ -729,7 +755,7 @@ class ImageDataProvider(BaseDataProvider):
         
         
     def _find_data_files(self):
-        rootPath = "~/ziyang/preprocessed_data/"
+        rootPath = "/home/ubuntu/ziyang/preprocessed_data/"
         dataPath = rootPath+"LabelMaps_1.00-1.00-1.00/"
 
         trainingCases = loadCases("training.txt")
@@ -739,14 +765,11 @@ class ImageDataProvider(BaseDataProvider):
         return [dataPath+name+'/case.nrrd' for name in trainingCases],[dataPath+name+'/case.nrrd' for name in validationCases],[dataPath+name+'/case.nrrd' for name in testingCases]
     
     
-    def _load_file(self, path, dtype=np.float32):
+    def _load_file(self, path, dtype=np.float32, padding=None):
         tile = 148  ##
         zer = np.zeros((tile,tile,tile), dtype=dtype)
         data = nrrd.read(path)[0].astype(dtype)
-        xmin = min(data.shape[0], tile)
-        ymin = min(data.shape[1], tile)
-        zmin = min(data.shape[2], tile)
-        zer[:xmin, :ymin, :zmin] = data[:xmin, :ymin, :zmin]
+        zer = reshape_to_shape(data, (tile, tile, tile), padding)
         return zer
         
         
@@ -771,15 +794,15 @@ class ImageDataProvider(BaseDataProvider):
             
         logging.info("Case: {}".format(image_name))
         label_name = image_name.replace('case', 'labelmap')    
-        img = self._load_file(image_name, np.float32)
-        label = self._load_file(label_name, np.bool)
+        img = self._load_file(image_name, np.float32, padding="noise")
+        label = self._load_file(label_name, np.bool, padding="zero")
     
         return img,label
 
 
 # ## setting up the unet
 
-# In[10]:
+# In[4]:
 
 net = Unet(channels=1, 
            n_class=1, 
@@ -790,52 +813,42 @@ net = Unet(channels=1,
 
 # ## training
 
-# In[11]:
-
-Num_Training = 50
-Num_Validation = 5
-Num_Testing = 5
-
-training_array = []
-validation_array = []
-testing_array = []
-
-LOADPATH = "/home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00_synthetic/numpy/"
-for num in range(Num_Training):
-    case = np.load(LOADPATH + "training_case{}.npy".format(num+1))
-    labelmap = np.load(LOADPATH + "training_labelmap{}.npy".format(num+1))
-    training_array.append([case, labelmap])
-
-for num in range(Num_Validation):
-    case = np.load(LOADPATH + "validation_case{}.npy".format(num+1))
-    labelmap = np.load(LOADPATH + "validation_labelmap{}.npy".format(num+1))
-    validation_array.append([case, labelmap])
-    
-for num in range(Num_Testing):
-    case = np.load(LOADPATH + "testing_case{}.npy".format(num+1))
-    labelmap = np.load(LOADPATH + "testing_labelmap{}.npy".format(num+1))
-    testing_array.append([case, labelmap])    
-    
-    
-
-
 # In[ ]:
 
-data_provider = ImageDataProvider(array=True)
-
+data_provider = ImageDataProvider(array=False)
 trainer = Trainer(net, batch_size=1, optimizer="adam")
 path = trainer.train(data_provider, 
                      "./unet_trained",
-                     training_array = training_array,
-                     validation_array = validation_array,
+                     training_array = None,
+                     validation_array = None,
                      testing_array = None,
-                     training_iters=50, 
-                     epochs=60, 
-                     dropout=0.5, 
+                     training_iters=37, 
+                     epochs=50, 
+                     dropout=0.75, 
                      display_step=1)
+
+
+# ## Predict
+
+# In[ ]:
+
+testingdata_provider = ImageDataProvider(array=False)
+x, y = testingdata_provider(testing_array,"testing")
+prediction = net.predict("./unet_trained/model 18.cpkt", x)[0][:,:,:,0]
 
 
 # In[ ]:
 
+print(np.unique(prediction, return_counts=True))
+print(prediction.shape)
 
+
+# In[ ]:
+
+get_ipython().magic('matplotlib notebook')
+xs,ys,zs = np.where(prediction == 1)
+fig = plt.figure(figsize=(6,6))
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(xs, ys, zs, marker='o', alpha=0.3, s=1)
+plt.show()
 

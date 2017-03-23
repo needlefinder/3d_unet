@@ -1,0 +1,1050 @@
+2017-03-23 04:45:44,487 Layers: 3, FeaturesRoot: 16, ConvolutionSize: 3*3*3, PoolingSize: 2*2*2
+2017-03-23 04:45:44,552 Down Convoltion Layer: 0 Size: (?, ?, ?, ?, 16)
+2017-03-23 04:45:44,611 Down Convoltion Layer: 1 Size: (?, ?, ?, ?, 32)
+2017-03-23 04:45:44,670 Down Convoltion Layer: 2 Size: (?, ?, ?, ?, 64)
+2017-03-23 04:45:44,861 Up Convoltion Layer: 1 Size: (?, ?, ?, ?, 32)
+2017-03-23 04:45:45,053 Up Convoltion Layer: 0 Size: (?, ?, ?, ?, 16)
+2017-03-23 04:45:45,128 Actual Output Shape: (?, ?, ?, ?, 1)
+2017-03-23 04:45:45,128 Desired Output Shape: (?, ?, ?, ?, 1)
+2017-03-23 04:45:45,139 **************************************************
+2017-03-23 04:45:45,139 getting cost
+2017-03-23 04:45:45,139 Logits: (?, ?, ?, ?, 1)
+2017-03-23 04:45:45,139 Y: (?, ?, ?, ?, 1)
+2017-03-23 04:45:48,226 Removing '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-23 04:45:48,226 Removing '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-23 04:45:48,239 Allocating '/home/ubuntu/ziyang/3d_unet/prediction'
+2017-03-23 04:45:48,240 Allocating '/home/ubuntu/ziyang/3d_unet/unet_trained'
+2017-03-23 04:45:52,192 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/070/case.nrrd
+2017-03-23 04:45:55,696 Validation Accuracy= 0.0088, Validation Loss= 0.9827
+2017-03-23 04:45:58,328 Start optimization
+2017-03-23 04:45:58,329 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 04:46:12,296 Iter 0, Minibatch Loss= 0.9927, Accuracy= 0.0037, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 04:46:12,336 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 04:46:26,090 Iter 1, Minibatch Loss= 0.9949, Accuracy= 0.0025, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 04:46:26,132 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 04:46:39,862 Iter 2, Minibatch Loss= 0.9935, Accuracy= 0.0033, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 04:46:39,903 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 04:46:53,695 Iter 3, Minibatch Loss= 0.9967, Accuracy= 0.0017, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 04:46:53,737 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 04:47:07,598 Iter 4, Minibatch Loss= 0.9939, Accuracy= 0.0031, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 04:47:07,640 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 04:47:21,369 Iter 5, Minibatch Loss= 0.9976, Accuracy= 0.0012, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 04:47:21,411 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 04:47:35,643 Iter 6, Minibatch Loss= 0.9901, Accuracy= 0.0050, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 04:47:35,685 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 04:47:49,805 Iter 7, Minibatch Loss= 0.9876, Accuracy= 0.0063, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 04:47:49,847 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 04:48:03,817 Iter 8, Minibatch Loss= 0.9945, Accuracy= 0.0028, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 04:48:03,859 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 04:48:17,952 Iter 9, Minibatch Loss= 0.9931, Accuracy= 0.0035, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 04:48:17,996 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 04:48:32,316 Iter 10, Minibatch Loss= 0.9811, Accuracy= 0.0096, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 04:48:32,358 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 04:48:46,157 Iter 11, Minibatch Loss= 0.9981, Accuracy= 0.0009, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 04:48:46,200 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 04:49:00,314 Iter 12, Minibatch Loss= 0.9938, Accuracy= 0.0031, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 04:49:00,357 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 04:49:14,456 Iter 13, Minibatch Loss= 0.9876, Accuracy= 0.0063, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 04:49:14,499 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 04:49:28,908 Iter 14, Minibatch Loss= 0.9824, Accuracy= 0.0089, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 04:49:28,950 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 04:49:43,131 Iter 15, Minibatch Loss= 0.9934, Accuracy= 0.0033, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 04:49:43,174 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 04:49:56,987 Iter 16, Minibatch Loss= 0.9941, Accuracy= 0.0029, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 04:49:57,030 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 04:50:11,234 Iter 17, Minibatch Loss= 0.9769, Accuracy= 0.0118, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 04:50:11,277 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 04:50:25,314 Iter 18, Minibatch Loss= 0.9935, Accuracy= 0.0033, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 04:50:25,356 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 04:50:39,625 Iter 19, Minibatch Loss= 0.9886, Accuracy= 0.0058, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 04:50:39,668 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 04:50:53,741 Iter 20, Minibatch Loss= 0.9836, Accuracy= 0.0083, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 04:50:53,784 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 04:51:07,853 Iter 21, Minibatch Loss= 0.9881, Accuracy= 0.0060, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 04:51:07,896 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 04:51:22,069 Iter 22, Minibatch Loss= 0.9607, Accuracy= 0.0205, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 04:51:22,111 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 04:51:35,987 Iter 23, Minibatch Loss= 0.9885, Accuracy= 0.0058, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 04:51:36,029 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 04:51:50,157 Iter 24, Minibatch Loss= 0.9857, Accuracy= 0.0072, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 04:51:50,198 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 04:52:04,355 Iter 25, Minibatch Loss= 0.9860, Accuracy= 0.0071, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 04:52:04,397 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 04:52:18,766 Iter 26, Minibatch Loss= 0.9754, Accuracy= 0.0126, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 04:52:18,808 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 04:52:33,029 Iter 27, Minibatch Loss= 0.9881, Accuracy= 0.0060, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 04:52:33,071 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 04:52:47,242 Iter 28, Minibatch Loss= 0.9758, Accuracy= 0.0124, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 04:52:47,283 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 04:53:01,423 Iter 29, Minibatch Loss= 0.9913, Accuracy= 0.0044, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 04:53:01,465 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 04:53:15,663 Iter 30, Minibatch Loss= 0.9880, Accuracy= 0.0061, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 04:53:15,705 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 04:53:29,909 Iter 31, Minibatch Loss= 0.9914, Accuracy= 0.0043, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 04:53:29,950 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 04:53:44,260 Iter 32, Minibatch Loss= 0.9550, Accuracy= 0.0235, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 04:53:44,302 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 04:53:58,337 Iter 33, Minibatch Loss= 0.9881, Accuracy= 0.0060, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 04:53:58,379 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 04:54:12,704 Iter 34, Minibatch Loss= 0.9682, Accuracy= 0.0164, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 04:54:12,745 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 04:54:26,933 Iter 35, Minibatch Loss= 0.9739, Accuracy= 0.0134, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 04:54:26,975 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 04:54:41,144 Iter 36, Minibatch Loss= 0.9558, Accuracy= 0.0230, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 04:54:41,186 Epoch 0, Average loss: 0.9856, Learning rate: 0.0010
+2017-03-23 04:54:42,165 Validation Accuracy= 0.0088, Validation Loss= 0.9827
+2017-03-23 04:54:44,581 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 04:54:58,594 Iter 37, Minibatch Loss= 0.9927, Accuracy= 0.0037, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 04:54:58,640 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 04:55:12,403 Iter 38, Minibatch Loss= 0.9949, Accuracy= 0.0025, Prediction= (array([ 1.], dtype=float32), array([1259712])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 04:55:12,450 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 04:55:26,206 Iter 39, Minibatch Loss= 0.9934, Accuracy= 0.0033, Prediction= (array([ 0.,  1.], dtype=float32), array([     14, 1259698])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 04:55:26,254 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 04:55:40,056 Iter 40, Minibatch Loss= 0.9965, Accuracy= 0.0043, Prediction= (array([ 0.,  1.], dtype=float32), array([   3315, 1256397])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 04:55:40,103 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 04:55:53,935 Iter 41, Minibatch Loss= 0.9939, Accuracy= 0.0668, Prediction= (array([ 0.,  1.], dtype=float32), array([  80596, 1179116])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 04:55:53,982 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 04:56:07,710 Iter 42, Minibatch Loss= 0.9976, Accuracy= 0.1509, Prediction= (array([ 0.,  1.], dtype=float32), array([ 188689, 1071023])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 04:56:07,757 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 04:56:21,991 Iter 43, Minibatch Loss= 0.9899, Accuracy= 0.5083, Prediction= (array([ 0.,  1.], dtype=float32), array([638963, 620749])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 04:56:22,039 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 04:56:36,161 Iter 44, Minibatch Loss= 0.9867, Accuracy= 0.3217, Prediction= (array([ 0.,  1.], dtype=float32), array([398261, 861451])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 04:56:36,207 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 04:56:49,923 Iter 45, Minibatch Loss= 0.9938, Accuracy= 0.0399, Prediction= (array([ 0.,  1.], dtype=float32), array([  46796, 1212916])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 04:56:49,970 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 04:57:04,014 Iter 46, Minibatch Loss= 0.9921, Accuracy= 0.6240, Prediction= (array([ 0.,  1.], dtype=float32), array([784610, 475102])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 04:57:04,061 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 04:57:18,370 Iter 47, Minibatch Loss= 0.9792, Accuracy= 0.4445, Prediction= (array([ 0.,  1.], dtype=float32), array([551852, 707860])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 04:57:18,416 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 04:57:32,238 Iter 48, Minibatch Loss= 0.9977, Accuracy= 0.1236, Prediction= (array([ 0.,  1.], dtype=float32), array([ 154536, 1105176])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 04:57:32,286 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 04:57:46,370 Iter 49, Minibatch Loss= 0.9924, Accuracy= 0.2921, Prediction= (array([ 0.,  1.], dtype=float32), array([364190, 895522])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 04:57:46,417 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 04:58:00,568 Iter 50, Minibatch Loss= 0.9864, Accuracy= 0.5761, Prediction= (array([ 0.,  1.], dtype=float32), array([723202, 536510])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 04:58:00,615 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 04:58:15,005 Iter 51, Minibatch Loss= 0.9793, Accuracy= 0.2797, Prediction= (array([ 0.,  1.], dtype=float32), array([341875, 917837])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 04:58:15,053 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 04:58:29,212 Iter 52, Minibatch Loss= 0.9929, Accuracy= 0.1571, Prediction= (array([ 0.,  1.], dtype=float32), array([ 193763, 1065949])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 04:58:29,259 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 04:58:43,033 Iter 53, Minibatch Loss= 0.9939, Accuracy= 0.0107, Prediction= (array([ 0.,  1.], dtype=float32), array([   9756, 1249956])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 04:58:43,080 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 04:58:57,256 Iter 54, Minibatch Loss= 0.9728, Accuracy= 0.1659, Prediction= (array([ 0.,  1.], dtype=float32), array([ 194084, 1065628])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 04:58:57,303 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 04:59:11,325 Iter 55, Minibatch Loss= 0.9929, Accuracy= 0.0991, Prediction= (array([ 0.,  1.], dtype=float32), array([ 120841, 1138871])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 04:59:11,372 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 04:59:25,652 Iter 56, Minibatch Loss= 0.9876, Accuracy= 0.1120, Prediction= (array([ 0.,  1.], dtype=float32), array([ 133903, 1125809])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 04:59:25,698 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 04:59:39,732 Iter 57, Minibatch Loss= 0.9802, Accuracy= 0.4695, Prediction= (array([ 0.,  1.], dtype=float32), array([585079, 674633])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 04:59:39,780 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 04:59:53,838 Iter 58, Minibatch Loss= 0.9879, Accuracy= 0.0131, Prediction= (array([ 0.,  1.], dtype=float32), array([   8948, 1250764])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 04:59:53,886 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:00:07,978 Iter 59, Minibatch Loss= 0.9537, Accuracy= 0.4193, Prediction= (array([ 0.,  1.], dtype=float32), array([512076, 747636])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:00:08,026 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:00:21,867 Iter 60, Minibatch Loss= 0.9820, Accuracy= 0.6416, Prediction= (array([ 0.,  1.], dtype=float32), array([802735, 456977])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:00:21,916 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:00:36,006 Iter 61, Minibatch Loss= 0.9863, Accuracy= 0.7112, Prediction= (array([ 0.,  1.], dtype=float32), array([900355, 359357])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:00:36,054 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:00:50,185 Iter 62, Minibatch Loss= 0.9847, Accuracy= 0.7967, Prediction= (array([ 0.,  1.], dtype=float32), array([1007021,  252691])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:00:50,232 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:01:04,553 Iter 63, Minibatch Loss= 0.9748, Accuracy= 0.5627, Prediction= (array([ 0.,  1.], dtype=float32), array([709876, 549836])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:01:04,602 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:01:18,808 Iter 64, Minibatch Loss= 0.9880, Accuracy= 0.6701, Prediction= (array([ 0.,  1.], dtype=float32), array([846459, 413253])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:01:18,855 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:01:32,958 Iter 65, Minibatch Loss= 0.9743, Accuracy= 0.6930, Prediction= (array([ 0.,  1.], dtype=float32), array([877357, 382355])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:01:33,006 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:01:47,120 Iter 66, Minibatch Loss= 0.9902, Accuracy= 0.8067, Prediction= (array([ 0.,  1.], dtype=float32), array([1018380,  241332])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:01:47,167 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:02:01,383 Iter 67, Minibatch Loss= 0.9850, Accuracy= 0.5769, Prediction= (array([ 0.,  1.], dtype=float32), array([723947, 535765])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:02:01,430 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:02:15,604 Iter 68, Minibatch Loss= 0.9897, Accuracy= 0.7203, Prediction= (array([ 0.,  1.], dtype=float32), array([907763, 351949])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:02:15,652 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:02:29,963 Iter 69, Minibatch Loss= 0.9447, Accuracy= 0.2952, Prediction= (array([ 0.,  1.], dtype=float32), array([344358, 915354])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:02:30,010 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:02:44,085 Iter 70, Minibatch Loss= 0.9870, Accuracy= 0.1673, Prediction= (array([ 0.,  1.], dtype=float32), array([ 204026, 1055686])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:02:44,132 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:02:58,440 Iter 71, Minibatch Loss= 0.9668, Accuracy= 0.0544, Prediction= (array([ 0.,  1.], dtype=float32), array([  47870, 1211842])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:02:58,488 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:03:12,668 Iter 72, Minibatch Loss= 0.9719, Accuracy= 0.1388, Prediction= (array([ 0.,  1.], dtype=float32), array([ 160164, 1099548])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:03:12,716 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:03:26,851 Iter 73, Minibatch Loss= 0.9501, Accuracy= 0.1720, Prediction= (array([ 0.,  1.], dtype=float32), array([ 188942, 1070770])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:03:26,900 Epoch 1, Average loss: 0.9839, Learning rate: 0.0010
+2017-03-23 05:03:27,880 Validation Accuracy= 0.1385, Validation Loss= 0.9820
+2017-03-23 05:03:30,516 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:03:44,542 Iter 74, Minibatch Loss= 0.9910, Accuracy= 0.5016, Prediction= (array([ 0.,  1.], dtype=float32), array([629651, 630061])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:03:44,596 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:03:58,344 Iter 75, Minibatch Loss= 0.9931, Accuracy= 0.8188, Prediction= (array([ 0.,  1.], dtype=float32), array([1031971,  227741])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:03:58,397 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:04:12,167 Iter 76, Minibatch Loss= 0.9903, Accuracy= 0.8648, Prediction= (array([ 0.,  1.], dtype=float32), array([1089799,  169913])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:04:12,222 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:04:26,029 Iter 77, Minibatch Loss= 0.9931, Accuracy= 0.9036, Prediction= (array([ 0.,  1.], dtype=float32), array([1137461,  122251])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:04:26,082 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:04:39,945 Iter 78, Minibatch Loss= 0.9939, Accuracy= 0.7785, Prediction= (array([ 0.,  1.], dtype=float32), array([982785, 276927])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:04:40,000 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:04:53,718 Iter 79, Minibatch Loss= 0.9973, Accuracy= 0.7544, Prediction= (array([ 0.,  1.], dtype=float32), array([950821, 308891])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:04:53,771 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:05:08,002 Iter 80, Minibatch Loss= 0.9907, Accuracy= 0.7968, Prediction= (array([ 0.,  1.], dtype=float32), array([1007869,  251843])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:05:08,056 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:05:22,189 Iter 81, Minibatch Loss= 0.9875, Accuracy= 0.8691, Prediction= (array([ 0.,  1.], dtype=float32), array([1100469,  159243])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:05:22,242 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:05:35,976 Iter 82, Minibatch Loss= 0.9903, Accuracy= 0.9239, Prediction= (array([ 0.,  1.], dtype=float32), array([1163957,   95755])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:05:36,030 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:05:50,090 Iter 83, Minibatch Loss= 0.9909, Accuracy= 0.8841, Prediction= (array([ 0.,  1.], dtype=float32), array([1115573,  144139])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:05:50,144 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:06:04,456 Iter 84, Minibatch Loss= 0.9784, Accuracy= 0.8114, Prediction= (array([ 0.,  1.], dtype=float32), array([1027475,  232237])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:06:04,509 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:06:18,309 Iter 85, Minibatch Loss= 0.9963, Accuracy= 0.8216, Prediction= (array([ 0.,  1.], dtype=float32), array([1034270,  225442])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:06:18,364 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:06:32,466 Iter 86, Minibatch Loss= 0.9934, Accuracy= 0.9205, Prediction= (array([ 0.,  1.], dtype=float32), array([1162633,   97079])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:06:32,520 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:06:46,683 Iter 87, Minibatch Loss= 0.9878, Accuracy= 0.9374, Prediction= (array([ 0.,  1.], dtype=float32), array([1187791,   71921])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:06:46,736 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:07:01,126 Iter 88, Minibatch Loss= 0.9803, Accuracy= 0.8944, Prediction= (array([ 0.,  1.], dtype=float32), array([1134119,  125593])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:07:01,180 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 05:07:15,395 Iter 89, Minibatch Loss= 0.9949, Accuracy= 0.8150, Prediction= (array([ 0.,  1.], dtype=float32), array([1030370,  229342])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 05:07:15,449 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 05:07:29,226 Iter 90, Minibatch Loss= 0.9874, Accuracy= 0.8834, Prediction= (array([ 0.,  1.], dtype=float32), array([1111180,  148532])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 05:07:29,280 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 05:07:43,479 Iter 91, Minibatch Loss= 0.9667, Accuracy= 0.8330, Prediction= (array([ 0.,  1.], dtype=float32), array([1051679,  208033])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 05:07:43,533 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 05:07:57,616 Iter 92, Minibatch Loss= 0.9913, Accuracy= 0.5255, Prediction= (array([ 0.,  1.], dtype=float32), array([659633, 600079])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 05:07:57,670 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 05:08:11,936 Iter 93, Minibatch Loss= 0.9870, Accuracy= 0.1725, Prediction= (array([ 0.,  1.], dtype=float32), array([ 210123, 1049589])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 05:08:11,991 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 05:08:26,052 Iter 94, Minibatch Loss= 0.9771, Accuracy= 0.4835, Prediction= (array([ 0.,  1.], dtype=float32), array([601337, 658375])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 05:08:26,108 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 05:08:40,171 Iter 95, Minibatch Loss= 0.9878, Accuracy= 0.0207, Prediction= (array([ 0.,  1.], dtype=float32), array([  18481, 1241231])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 05:08:40,226 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:08:54,373 Iter 96, Minibatch Loss= 0.9439, Accuracy= 0.5298, Prediction= (array([ 0.,  1.], dtype=float32), array([649883, 609829])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:08:54,429 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:09:08,272 Iter 97, Minibatch Loss= 0.9781, Accuracy= 0.7030, Prediction= (array([ 0.,  1.], dtype=float32), array([879781, 379931])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:09:08,327 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:09:22,457 Iter 98, Minibatch Loss= 0.9815, Accuracy= 0.7335, Prediction= (array([ 0.,  1.], dtype=float32), array([924836, 334876])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:09:22,512 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:09:36,648 Iter 99, Minibatch Loss= 0.9753, Accuracy= 0.7638, Prediction= (array([ 0.,  1.], dtype=float32), array([958690, 301022])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:09:36,702 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:09:51,036 Iter 100, Minibatch Loss= 0.9663, Accuracy= 0.5646, Prediction= (array([ 0.,  1.], dtype=float32), array([703975, 555737])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:09:51,091 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:10:05,338 Iter 101, Minibatch Loss= 0.9799, Accuracy= 0.6778, Prediction= (array([ 0.,  1.], dtype=float32), array([849680, 410032])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:10:05,393 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:10:19,546 Iter 102, Minibatch Loss= 0.9557, Accuracy= 0.7005, Prediction= (array([ 0.,  1.], dtype=float32), array([872256, 387456])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:10:19,600 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:10:33,712 Iter 103, Minibatch Loss= 0.9816, Accuracy= 0.8182, Prediction= (array([ 0.,  1.], dtype=float32), array([1027936,  231776])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:10:33,766 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:10:48,013 Iter 104, Minibatch Loss= 0.9772, Accuracy= 0.7233, Prediction= (array([ 0.,  1.], dtype=float32), array([906450, 353262])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:10:48,069 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:11:02,288 Iter 105, Minibatch Loss= 0.9788, Accuracy= 0.8440, Prediction= (array([ 0.,  1.], dtype=float32), array([1059386,  200326])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:11:02,343 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:11:16,684 Iter 106, Minibatch Loss= 0.8822, Accuracy= 0.8956, Prediction= (array([ 0.,  1.], dtype=float32), array([1108260,  151452])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:11:16,740 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:11:30,792 Iter 107, Minibatch Loss= 0.9673, Accuracy= 0.9714, Prediction= (array([ 0.,  1.], dtype=float32), array([1221846,   37866])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:11:30,847 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:11:45,156 Iter 108, Minibatch Loss= 0.9595, Accuracy= 0.9817, Prediction= (array([ 0.,  1.], dtype=float32), array([1253169,    6543])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:11:45,212 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:11:59,388 Iter 109, Minibatch Loss= 0.9279, Accuracy= 0.9724, Prediction= (array([ 0.,  1.], dtype=float32), array([1220887,   38825])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:11:59,443 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:12:13,570 Iter 110, Minibatch Loss= 0.8920, Accuracy= 0.9507, Prediction= (array([ 0.,  1.], dtype=float32), array([1192903,   66809])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:12:13,625 Epoch 2, Average loss: 0.9755, Learning rate: 0.0010
+2017-03-23 05:12:14,606 Validation Accuracy= 0.9567, Validation Loss= 0.9404
+2017-03-23 05:12:17,891 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:12:31,903 Iter 111, Minibatch Loss= 0.9830, Accuracy= 0.7983, Prediction= (array([ 0.,  1.], dtype=float32), array([1002466,  257246])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:12:31,963 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:12:45,718 Iter 112, Minibatch Loss= 0.9906, Accuracy= 0.5851, Prediction= (array([ 0.,  1.], dtype=float32), array([734071, 525641])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:12:45,779 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:12:59,555 Iter 113, Minibatch Loss= 0.9885, Accuracy= 0.5573, Prediction= (array([ 0.,  1.], dtype=float32), array([698166, 561546])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:12:59,617 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:13:13,435 Iter 114, Minibatch Loss= 0.9935, Accuracy= 0.6501, Prediction= (array([ 0.,  1.], dtype=float32), array([817206, 442506])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:13:13,496 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:13:27,362 Iter 115, Minibatch Loss= 0.9886, Accuracy= 0.5904, Prediction= (array([ 0.,  1.], dtype=float32), array([740223, 519489])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:13:27,424 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:13:41,164 Iter 116, Minibatch Loss= 0.9959, Accuracy= 0.5532, Prediction= (array([ 0.,  1.], dtype=float32), array([695558, 564154])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:13:41,225 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:13:55,483 Iter 117, Minibatch Loss= 0.9791, Accuracy= 0.7032, Prediction= (array([ 0.,  1.], dtype=float32), array([880735, 378977])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:13:55,545 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:14:09,682 Iter 118, Minibatch Loss= 0.9732, Accuracy= 0.7761, Prediction= (array([ 0.,  1.], dtype=float32), array([973327, 286385])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:14:09,742 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:14:23,472 Iter 119, Minibatch Loss= 0.9824, Accuracy= 0.8793, Prediction= (array([ 0.,  1.], dtype=float32), array([1104843,  154869])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:14:23,534 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:14:37,593 Iter 120, Minibatch Loss= 0.9827, Accuracy= 0.8008, Prediction= (array([ 0.,  1.], dtype=float32), array([1005803,  253909])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:14:37,655 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:14:51,976 Iter 121, Minibatch Loss= 0.9567, Accuracy= 0.7775, Prediction= (array([ 0.,  1.], dtype=float32), array([971758, 287954])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:14:52,039 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:15:05,850 Iter 122, Minibatch Loss= 0.9946, Accuracy= 0.8173, Prediction= (array([ 0.,  1.], dtype=float32), array([1028568,  231144])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:15:05,912 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:15:20,036 Iter 123, Minibatch Loss= 0.9840, Accuracy= 0.8543, Prediction= (array([ 0.,  1.], dtype=float32), array([1074405,  185307])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:15:20,099 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:15:34,221 Iter 124, Minibatch Loss= 0.9643, Accuracy= 0.8935, Prediction= (array([ 0.,  1.], dtype=float32), array([1121786,  137926])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:15:34,283 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:15:48,681 Iter 125, Minibatch Loss= 0.9493, Accuracy= 0.8690, Prediction= (array([ 0.,  1.], dtype=float32), array([1087670,  172042])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:15:48,744 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 05:16:02,964 Iter 126, Minibatch Loss= 0.9842, Accuracy= 0.7838, Prediction= (array([ 0.,  1.], dtype=float32), array([984663, 275049])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 05:16:03,025 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 05:16:16,817 Iter 127, Minibatch Loss= 0.9790, Accuracy= 0.8838, Prediction= (array([ 0.,  1.], dtype=float32), array([1109954,  149758])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 05:16:16,879 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 05:16:31,066 Iter 128, Minibatch Loss= 0.9366, Accuracy= 0.8284, Prediction= (array([ 0.,  1.], dtype=float32), array([1032798,  226914])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 05:16:31,129 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 05:16:45,181 Iter 129, Minibatch Loss= 0.9849, Accuracy= 0.7360, Prediction= (array([ 0.,  1.], dtype=float32), array([923912, 335800])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 05:16:45,242 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 05:16:59,515 Iter 130, Minibatch Loss= 0.9691, Accuracy= 0.8520, Prediction= (array([ 0.,  1.], dtype=float32), array([1069488,  190224])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 05:16:59,576 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 05:17:13,650 Iter 131, Minibatch Loss= 0.9560, Accuracy= 0.8583, Prediction= (array([ 0.,  1.], dtype=float32), array([1076277,  183435])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 05:17:13,713 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 05:17:27,749 Iter 132, Minibatch Loss= 0.9688, Accuracy= 0.7488, Prediction= (array([ 0.,  1.], dtype=float32), array([935947, 323765])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 05:17:27,812 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:17:41,948 Iter 133, Minibatch Loss= 0.9040, Accuracy= 0.8296, Prediction= (array([ 0.,  1.], dtype=float32), array([1032429,  227283])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:17:42,011 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:17:55,860 Iter 134, Minibatch Loss= 0.9614, Accuracy= 0.9239, Prediction= (array([ 0.,  1.], dtype=float32), array([1160684,   99028])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:17:55,922 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:18:10,076 Iter 135, Minibatch Loss= 0.9443, Accuracy= 0.9330, Prediction= (array([ 0.,  1.], dtype=float32), array([1169293,   90419])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:18:10,140 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:18:24,295 Iter 136, Minibatch Loss= 0.9484, Accuracy= 0.9168, Prediction= (array([ 0.,  1.], dtype=float32), array([1149281,  110431])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:18:24,357 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:18:38,671 Iter 137, Minibatch Loss= 0.9162, Accuracy= 0.8826, Prediction= (array([ 0.,  1.], dtype=float32), array([1100146,  159566])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:18:38,734 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:18:52,965 Iter 138, Minibatch Loss= 0.9479, Accuracy= 0.9212, Prediction= (array([ 0.,  1.], dtype=float32), array([1153623,  106089])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:18:53,026 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:19:07,206 Iter 139, Minibatch Loss= 0.8988, Accuracy= 0.9159, Prediction= (array([ 0.,  1.], dtype=float32), array([1139577,  120135])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:19:07,269 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:19:21,413 Iter 140, Minibatch Loss= 0.9624, Accuracy= 0.9630, Prediction= (array([ 0.,  1.], dtype=float32), array([1210656,   49056])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:19:21,475 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:19:35,720 Iter 141, Minibatch Loss= 0.9487, Accuracy= 0.9761, Prediction= (array([ 0.,  1.], dtype=float32), array([1227297,   32415])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:19:35,782 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:19:50,000 Iter 142, Minibatch Loss= 0.9577, Accuracy= 0.9511, Prediction= (array([ 0.,  1.], dtype=float32), array([1194043,   65669])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:19:50,063 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:20:04,410 Iter 143, Minibatch Loss= 0.8171, Accuracy= 0.9500, Prediction= (array([ 0.,  1.], dtype=float32), array([1179780,   79932])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:20:04,473 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:20:18,522 Iter 144, Minibatch Loss= 0.9408, Accuracy= 0.9618, Prediction= (array([ 0.,  1.], dtype=float32), array([1206828,   52884])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:20:18,583 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:20:32,890 Iter 145, Minibatch Loss= 0.8996, Accuracy= 0.9742, Prediction= (array([ 0.,  1.], dtype=float32), array([1230270,   29442])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:20:32,952 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:20:47,173 Iter 146, Minibatch Loss= 0.8826, Accuracy= 0.9262, Prediction= (array([ 0.,  1.], dtype=float32), array([1153235,  106477])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:20:47,235 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:21:01,380 Iter 147, Minibatch Loss= 0.8233, Accuracy= 0.9296, Prediction= (array([ 0.,  1.], dtype=float32), array([1153237,  106475])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:21:01,443 Epoch 3, Average loss: 0.9524, Learning rate: 0.0010
+2017-03-23 05:21:02,429 Validation Accuracy= 0.8807, Validation Loss= 0.9384
+2017-03-23 05:21:05,716 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:21:19,749 Iter 148, Minibatch Loss= 0.9645, Accuracy= 0.9330, Prediction= (array([ 0.,  1.], dtype=float32), array([1172116,   87596])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:21:19,817 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:21:33,549 Iter 149, Minibatch Loss= 0.9743, Accuracy= 0.9152, Prediction= (array([ 0.,  1.], dtype=float32), array([1149919,  109793])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:21:33,616 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:21:47,412 Iter 150, Minibatch Loss= 0.9671, Accuracy= 0.9249, Prediction= (array([ 0.,  1.], dtype=float32), array([1161851,   97861])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:21:47,481 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:22:01,286 Iter 151, Minibatch Loss= 0.9886, Accuracy= 0.9696, Prediction= (array([ 0.,  1.], dtype=float32), array([1221879,   37833])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:22:01,354 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:22:15,206 Iter 152, Minibatch Loss= 0.9605, Accuracy= 0.9810, Prediction= (array([ 0.,  1.], dtype=float32), array([1233535,   26177])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:22:15,274 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:22:29,014 Iter 153, Minibatch Loss= 0.9855, Accuracy= 0.9766, Prediction= (array([ 0.,  1.], dtype=float32), array([1229614,   30098])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:22:29,082 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:22:43,354 Iter 154, Minibatch Loss= 0.9370, Accuracy= 0.9697, Prediction= (array([ 0.,  1.], dtype=float32), array([1217279,   42433])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:22:43,422 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:22:57,544 Iter 155, Minibatch Loss= 0.9623, Accuracy= 0.9807, Prediction= (array([ 0.,  1.], dtype=float32), array([1238764,   20948])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:22:57,613 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:23:11,363 Iter 156, Minibatch Loss= 0.9753, Accuracy= 0.9892, Prediction= (array([ 0.,  1.], dtype=float32), array([1246556,   13156])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:23:11,431 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:23:25,486 Iter 157, Minibatch Loss= 0.9930, Accuracy= 0.0079, Prediction= (array([ 0.,  1.], dtype=float32), array([   5593, 1254119])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:23:25,554 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:23:39,880 Iter 158, Minibatch Loss= 0.9038, Accuracy= 0.9159, Prediction= (array([ 0.,  1.], dtype=float32), array([1143642,  116070])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:23:39,950 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:23:53,740 Iter 159, Minibatch Loss= 0.9910, Accuracy= 0.9668, Prediction= (array([ 0.,  1.], dtype=float32), array([1217692,   42020])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:23:53,808 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:24:07,933 Iter 160, Minibatch Loss= 0.9679, Accuracy= 0.9000, Prediction= (array([ 0.,  1.], dtype=float32), array([1130207,  129505])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:24:08,003 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:24:22,164 Iter 161, Minibatch Loss= 0.9468, Accuracy= 0.8552, Prediction= (array([ 0.,  1.], dtype=float32), array([1069793,  189919])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:24:22,232 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:24:36,624 Iter 162, Minibatch Loss= 0.9111, Accuracy= 0.9155, Prediction= (array([ 0.,  1.], dtype=float32), array([1144843,  114869])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:24:36,695 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 05:24:50,918 Iter 163, Minibatch Loss= 0.9614, Accuracy= 0.9232, Prediction= (array([ 0.,  1.], dtype=float32), array([1159329,  100383])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 05:24:50,987 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 05:25:04,787 Iter 164, Minibatch Loss= 0.9515, Accuracy= 0.9892, Prediction= (array([ 0.,  1.], dtype=float32), array([1243948,   15764])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 05:25:04,855 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 05:25:19,037 Iter 165, Minibatch Loss= 0.8971, Accuracy= 0.9445, Prediction= (array([ 0.,  1.], dtype=float32), array([1186484,   73228])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 05:25:19,105 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 05:25:33,151 Iter 166, Minibatch Loss= 0.9597, Accuracy= 0.9803, Prediction= (array([ 0.,  1.], dtype=float32), array([1234057,   25655])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 05:25:33,219 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 05:25:47,519 Iter 167, Minibatch Loss= 0.9876, Accuracy= 0.9918, Prediction= (array([ 0.,  1.], dtype=float32), array([1256385,    3327])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 05:25:47,587 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 05:26:01,630 Iter 168, Minibatch Loss= 0.9313, Accuracy= 0.9770, Prediction= (array([ 0.,  1.], dtype=float32), array([1233133,   26579])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 05:26:01,699 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 05:26:15,765 Iter 169, Minibatch Loss= 0.9814, Accuracy= 0.9934, Prediction= (array([ 0.,  1.], dtype=float32), array([1258223,    1489])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 05:26:15,833 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:26:29,962 Iter 170, Minibatch Loss= 0.7806, Accuracy= 0.9711, Prediction= (array([ 0.,  1.], dtype=float32), array([1214505,   45207])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:26:30,030 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:26:43,890 Iter 171, Minibatch Loss= 0.9306, Accuracy= 0.9487, Prediction= (array([ 0.,  1.], dtype=float32), array([1191190,   68522])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:26:43,958 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:26:58,099 Iter 172, Minibatch Loss= 0.9120, Accuracy= 0.9186, Prediction= (array([ 0.,  1.], dtype=float32), array([1148477,  111235])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:26:58,169 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:27:12,332 Iter 173, Minibatch Loss= 0.9319, Accuracy= 0.8710, Prediction= (array([ 0.,  1.], dtype=float32), array([1088598,  171114])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:27:12,400 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:27:26,737 Iter 174, Minibatch Loss= 0.8874, Accuracy= 0.8679, Prediction= (array([ 0.,  1.], dtype=float32), array([1078507,  181205])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:27:26,806 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:27:41,054 Iter 175, Minibatch Loss= 0.9385, Accuracy= 0.8764, Prediction= (array([ 0.,  1.], dtype=float32), array([1096523,  163189])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:27:41,123 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:27:55,288 Iter 176, Minibatch Loss= 0.8816, Accuracy= 0.8742, Prediction= (array([ 0.,  1.], dtype=float32), array([1085941,  173771])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:27:55,358 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:28:09,516 Iter 177, Minibatch Loss= 0.9370, Accuracy= 0.9435, Prediction= (array([ 0.,  1.], dtype=float32), array([1184125,   75587])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:28:09,584 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:28:23,813 Iter 178, Minibatch Loss= 0.9018, Accuracy= 0.9701, Prediction= (array([ 0.,  1.], dtype=float32), array([1217252,   42460])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:28:23,882 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:28:38,073 Iter 179, Minibatch Loss= 0.9296, Accuracy= 0.9556, Prediction= (array([ 0.,  1.], dtype=float32), array([1199304,   60408])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:28:38,141 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:28:52,472 Iter 180, Minibatch Loss= 0.8156, Accuracy= 0.8980, Prediction= (array([ 0.,  1.], dtype=float32), array([1117220,  142492])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:28:52,541 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:29:06,632 Iter 181, Minibatch Loss= 0.9006, Accuracy= 0.9743, Prediction= (array([ 0.,  1.], dtype=float32), array([1223389,   36323])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:29:06,701 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:29:21,036 Iter 182, Minibatch Loss= 0.8734, Accuracy= 0.9806, Prediction= (array([ 0.,  1.], dtype=float32), array([1243822,   15890])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:29:21,105 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:29:35,319 Iter 183, Minibatch Loss= 0.8021, Accuracy= 0.9637, Prediction= (array([ 0.,  1.], dtype=float32), array([1202741,   56971])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:29:35,388 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:29:49,538 Iter 184, Minibatch Loss= 0.7198, Accuracy= 0.9671, Prediction= (array([ 0.,  1.], dtype=float32), array([1205791,   53921])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:29:49,608 Epoch 4, Average loss: 0.9254, Learning rate: 0.0010
+2017-03-23 05:29:50,590 Validation Accuracy= 0.9845, Validation Loss= 0.7907
+2017-03-23 05:29:54,554 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:30:08,619 Iter 185, Minibatch Loss= 0.9407, Accuracy= 0.9583, Prediction= (array([ 0.,  1.], dtype=float32), array([1204435,   55277])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:30:08,694 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:30:22,434 Iter 186, Minibatch Loss= 0.9584, Accuracy= 0.9359, Prediction= (array([ 0.,  1.], dtype=float32), array([1175996,   83716])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:30:22,510 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:30:36,297 Iter 187, Minibatch Loss= 0.9523, Accuracy= 0.9244, Prediction= (array([ 0.,  1.], dtype=float32), array([1160787,   98925])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:30:36,374 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:30:50,177 Iter 188, Minibatch Loss= 0.9811, Accuracy= 0.9390, Prediction= (array([ 0.,  1.], dtype=float32), array([1182481,   77231])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:30:50,253 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:31:04,140 Iter 189, Minibatch Loss= 0.9397, Accuracy= 0.9588, Prediction= (array([ 0.,  1.], dtype=float32), array([1204479,   55233])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:31:04,218 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:31:17,965 Iter 190, Minibatch Loss= 0.9793, Accuracy= 0.9438, Prediction= (array([ 0.,  1.], dtype=float32), array([1187779,   71933])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:31:18,040 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:31:32,306 Iter 191, Minibatch Loss= 0.9252, Accuracy= 0.9263, Prediction= (array([ 0.,  1.], dtype=float32), array([1161168,   98544])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:31:32,382 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:31:46,479 Iter 192, Minibatch Loss= 0.9099, Accuracy= 0.9537, Prediction= (array([ 0.,  1.], dtype=float32), array([1198111,   61601])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:31:46,555 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:32:00,290 Iter 193, Minibatch Loss= 0.9438, Accuracy= 0.9746, Prediction= (array([ 0.,  1.], dtype=float32), array([1226026,   33686])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:32:00,368 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:32:14,441 Iter 194, Minibatch Loss= 0.9520, Accuracy= 0.9267, Prediction= (array([ 0.,  1.], dtype=float32), array([1164497,   95215])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:32:14,517 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:32:28,825 Iter 195, Minibatch Loss= 0.8596, Accuracy= 0.9371, Prediction= (array([ 0.,  1.], dtype=float32), array([1171221,   88491])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:32:28,903 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:32:42,685 Iter 196, Minibatch Loss= 0.9896, Accuracy= 0.9871, Prediction= (array([ 0.,  1.], dtype=float32), array([1243996,   15716])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:32:42,760 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:32:56,886 Iter 197, Minibatch Loss= 0.9280, Accuracy= 0.9877, Prediction= (array([ 0.,  1.], dtype=float32), array([1242974,   16738])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:32:56,963 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:33:11,127 Iter 198, Minibatch Loss= 0.8932, Accuracy= 0.9451, Prediction= (array([ 0.,  1.], dtype=float32), array([1184338,   75374])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:33:11,202 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:33:25,582 Iter 199, Minibatch Loss= 0.8477, Accuracy= 0.9696, Prediction= (array([ 0.,  1.], dtype=float32), array([1217120,   42592])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:33:25,659 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 05:33:39,831 Iter 200, Minibatch Loss= 0.9195, Accuracy= 0.9786, Prediction= (array([ 0.,  1.], dtype=float32), array([1230256,   29456])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 05:33:39,907 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 05:33:53,708 Iter 201, Minibatch Loss= 0.9351, Accuracy= 0.9967, Prediction= (array([ 0.,  1.], dtype=float32), array([1255760,    3952])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 05:33:53,785 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 05:34:07,959 Iter 202, Minibatch Loss= 0.8504, Accuracy= 0.9745, Prediction= (array([ 0.,  1.], dtype=float32), array([1229189,   30523])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 05:34:08,037 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 05:34:22,088 Iter 203, Minibatch Loss= 0.9474, Accuracy= 0.9915, Prediction= (array([ 0.,  1.], dtype=float32), array([1250011,    9701])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 05:34:22,166 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 05:34:36,477 Iter 204, Minibatch Loss= 0.9892, Accuracy= 0.9937, Prediction= (array([ 0.,  1.], dtype=float32), array([1258921,     791])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 05:34:36,554 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 05:34:50,640 Iter 205, Minibatch Loss= 0.8741, Accuracy= 0.9859, Prediction= (array([ 0.,  1.], dtype=float32), array([1243829,   15883])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 05:34:50,716 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 05:35:04,812 Iter 206, Minibatch Loss= 0.9871, Accuracy= 0.9936, Prediction= (array([ 0.,  1.], dtype=float32), array([1259148,     564])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 05:35:04,888 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:35:19,058 Iter 207, Minibatch Loss= 0.6705, Accuracy= 0.9792, Prediction= (array([ 0.,  1.], dtype=float32), array([1226118,   33594])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:35:19,136 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:35:33,019 Iter 208, Minibatch Loss= 0.8928, Accuracy= 0.9698, Prediction= (array([ 0.,  1.], dtype=float32), array([1219588,   40124])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:35:33,098 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:35:47,259 Iter 209, Minibatch Loss= 0.8522, Accuracy= 0.9523, Prediction= (array([ 0.,  1.], dtype=float32), array([1191334,   68378])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:35:47,335 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:36:01,504 Iter 210, Minibatch Loss= 0.8952, Accuracy= 0.9133, Prediction= (array([ 0.,  1.], dtype=float32), array([1142107,  117605])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:36:01,581 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:36:15,930 Iter 211, Minibatch Loss= 0.8286, Accuracy= 0.9158, Prediction= (array([ 0.,  1.], dtype=float32), array([1139869,  119843])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:36:16,006 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:36:30,244 Iter 212, Minibatch Loss= 0.9089, Accuracy= 0.9101, Prediction= (array([ 0.,  1.], dtype=float32), array([1139010,  120702])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:36:30,321 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:36:44,498 Iter 213, Minibatch Loss= 0.8351, Accuracy= 0.9045, Prediction= (array([ 0.,  1.], dtype=float32), array([1124390,  135322])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:36:44,574 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:36:58,704 Iter 214, Minibatch Loss= 0.9020, Accuracy= 0.9589, Prediction= (array([ 0.,  1.], dtype=float32), array([1203811,   55901])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:36:58,781 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:37:13,016 Iter 215, Minibatch Loss= 0.8393, Accuracy= 0.9792, Prediction= (array([ 0.,  1.], dtype=float32), array([1229239,   30473])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:37:13,094 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:37:27,278 Iter 216, Minibatch Loss= 0.8890, Accuracy= 0.9648, Prediction= (array([ 0.,  1.], dtype=float32), array([1210867,   48845])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:37:27,355 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:37:41,671 Iter 217, Minibatch Loss= 0.6463, Accuracy= 0.9701, Prediction= (array([ 0.,  1.], dtype=float32), array([1212964,   46748])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:37:41,748 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:37:55,803 Iter 218, Minibatch Loss= 0.8381, Accuracy= 0.9866, Prediction= (array([ 0.,  1.], dtype=float32), array([1240586,   19126])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:37:55,880 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:38:10,193 Iter 219, Minibatch Loss= 0.9562, Accuracy= 0.9836, Prediction= (array([ 0.,  1.], dtype=float32), array([1258331,    1381])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:38:10,272 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:38:24,474 Iter 220, Minibatch Loss= 0.7815, Accuracy= 0.9876, Prediction= (array([ 0.,  1.], dtype=float32), array([1248127,   11585])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:38:24,553 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:38:38,711 Iter 221, Minibatch Loss= 0.8648, Accuracy= 0.9788, Prediction= (array([ 0.,  1.], dtype=float32), array([1254475,    5237])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:38:38,788 Epoch 5, Average loss: 0.8947, Learning rate: 0.0010
+2017-03-23 05:38:39,770 Validation Accuracy= 0.9915, Validation Loss= 0.9406
+2017-03-23 05:38:43,751 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:38:57,817 Iter 222, Minibatch Loss= 0.9263, Accuracy= 0.9912, Prediction= (array([ 0.,  1.], dtype=float32), array([1250050,    9662])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:38:57,899 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:39:11,648 Iter 223, Minibatch Loss= 0.9132, Accuracy= 0.9781, Prediction= (array([ 0.,  1.], dtype=float32), array([1229826,   29886])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:39:11,731 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:39:25,489 Iter 224, Minibatch Loss= 0.8999, Accuracy= 0.9748, Prediction= (array([ 0.,  1.], dtype=float32), array([1225299,   34413])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:39:25,573 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:39:39,401 Iter 225, Minibatch Loss= 0.9751, Accuracy= 0.9802, Prediction= (array([ 0.,  1.], dtype=float32), array([1235560,   24152])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:39:39,484 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:39:53,345 Iter 226, Minibatch Loss= 0.8976, Accuracy= 0.9760, Prediction= (array([ 0.,  1.], dtype=float32), array([1226571,   33141])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:39:53,428 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:40:07,168 Iter 227, Minibatch Loss= 0.9668, Accuracy= 0.9609, Prediction= (array([ 0.,  1.], dtype=float32), array([1209390,   50322])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:40:07,251 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:40:21,475 Iter 228, Minibatch Loss= 0.9009, Accuracy= 0.9346, Prediction= (array([ 0.,  1.], dtype=float32), array([1171634,   88078])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:40:21,559 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:40:35,682 Iter 229, Minibatch Loss= 0.8767, Accuracy= 0.9519, Prediction= (array([ 0.,  1.], dtype=float32), array([1194764,   64948])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:40:35,766 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:40:49,500 Iter 230, Minibatch Loss= 0.9283, Accuracy= 0.9593, Prediction= (array([ 0.,  1.], dtype=float32), array([1205820,   53892])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:40:49,583 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:41:03,657 Iter 231, Minibatch Loss= 0.9485, Accuracy= 0.9067, Prediction= (array([ 0.,  1.], dtype=float32), array([1138791,  120921])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:41:03,741 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:41:18,038 Iter 232, Minibatch Loss= 0.8599, Accuracy= 0.9103, Prediction= (array([ 0.,  1.], dtype=float32), array([1136526,  123186])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:41:18,124 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:41:31,925 Iter 233, Minibatch Loss= 0.9792, Accuracy= 0.9778, Prediction= (array([ 0.,  1.], dtype=float32), array([1231802,   27910])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:41:32,010 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:41:46,107 Iter 234, Minibatch Loss= 0.8856, Accuracy= 0.9782, Prediction= (array([ 0.,  1.], dtype=float32), array([1229496,   30216])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:41:46,193 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:42:00,324 Iter 235, Minibatch Loss= 0.8909, Accuracy= 0.9200, Prediction= (array([ 0.,  1.], dtype=float32), array([1151633,  108079])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:42:00,410 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:42:14,799 Iter 236, Minibatch Loss= 0.8249, Accuracy= 0.9476, Prediction= (array([ 0.,  1.], dtype=float32), array([1186010,   73702])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:42:14,883 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 05:42:29,048 Iter 237, Minibatch Loss= 0.9082, Accuracy= 0.9570, Prediction= (array([ 0.,  1.], dtype=float32), array([1201889,   57823])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 05:42:29,132 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 05:42:42,905 Iter 238, Minibatch Loss= 0.8474, Accuracy= 0.9934, Prediction= (array([ 0.,  1.], dtype=float32), array([1249401,   10311])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 05:42:42,989 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 05:42:57,155 Iter 239, Minibatch Loss= 0.7829, Accuracy= 0.9679, Prediction= (array([ 0.,  1.], dtype=float32), array([1216897,   42815])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 05:42:57,239 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 05:43:11,293 Iter 240, Minibatch Loss= 0.9010, Accuracy= 0.9909, Prediction= (array([ 0.,  1.], dtype=float32), array([1248716,   10996])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 05:43:11,377 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 05:43:25,645 Iter 241, Minibatch Loss= 0.9910, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259293,     419])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 05:43:25,728 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 05:43:39,803 Iter 242, Minibatch Loss= 0.8751, Accuracy= 0.9895, Prediction= (array([ 0.,  1.], dtype=float32), array([1252355,    7357])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 05:43:39,887 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 05:43:53,935 Iter 243, Minibatch Loss= 0.9910, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259594,     118])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 05:43:54,018 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:44:08,150 Iter 244, Minibatch Loss= 0.7600, Accuracy= 0.9822, Prediction= (array([ 0.,  1.], dtype=float32), array([1250291,    9421])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:44:08,234 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:44:22,086 Iter 245, Minibatch Loss= 0.9078, Accuracy= 0.9907, Prediction= (array([ 0.,  1.], dtype=float32), array([1252287,    7425])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:44:22,169 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:44:36,310 Iter 246, Minibatch Loss= 0.7273, Accuracy= 0.9878, Prediction= (array([ 0.,  1.], dtype=float32), array([1240157,   19555])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:44:36,395 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:44:50,518 Iter 247, Minibatch Loss= 0.8035, Accuracy= 0.9671, Prediction= (array([ 0.,  1.], dtype=float32), array([1212237,   47475])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:44:50,602 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:45:04,945 Iter 248, Minibatch Loss= 0.7120, Accuracy= 0.9641, Prediction= (array([ 0.,  1.], dtype=float32), array([1204298,   55414])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:45:05,033 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:45:19,307 Iter 249, Minibatch Loss= 0.8502, Accuracy= 0.9483, Prediction= (array([ 0.,  1.], dtype=float32), array([1187386,   72326])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:45:19,394 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:45:33,553 Iter 250, Minibatch Loss= 0.7742, Accuracy= 0.9323, Prediction= (array([ 0.,  1.], dtype=float32), array([1159959,   99753])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:45:33,637 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:45:47,747 Iter 251, Minibatch Loss= 0.8645, Accuracy= 0.9661, Prediction= (array([ 0.,  1.], dtype=float32), array([1212977,   46735])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:45:47,832 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:46:02,035 Iter 252, Minibatch Loss= 0.8028, Accuracy= 0.9735, Prediction= (array([ 0.,  1.], dtype=float32), array([1221398,   38314])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:46:02,119 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:46:16,346 Iter 253, Minibatch Loss= 0.8853, Accuracy= 0.9508, Prediction= (array([ 0.,  1.], dtype=float32), array([1192851,   66861])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:46:16,432 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:46:30,770 Iter 254, Minibatch Loss= 0.6167, Accuracy= 0.9513, Prediction= (array([ 0.,  1.], dtype=float32), array([1179444,   80268])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:46:30,855 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:46:44,901 Iter 255, Minibatch Loss= 0.7874, Accuracy= 0.9747, Prediction= (array([ 0.,  1.], dtype=float32), array([1222335,   37377])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:46:44,985 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:46:59,303 Iter 256, Minibatch Loss= 0.8016, Accuracy= 0.9830, Prediction= (array([ 0.,  1.], dtype=float32), array([1250176,    9536])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:46:59,389 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:47:13,592 Iter 257, Minibatch Loss= 0.6225, Accuracy= 0.9813, Prediction= (array([ 0.,  1.], dtype=float32), array([1228976,   30736])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:47:13,677 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:47:27,832 Iter 258, Minibatch Loss= 0.6540, Accuracy= 0.9802, Prediction= (array([ 0.,  1.], dtype=float32), array([1242934,   16778])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:47:27,917 Epoch 6, Average loss: 0.8524, Learning rate: 0.0010
+2017-03-23 05:47:28,897 Validation Accuracy= 0.9921, Validation Loss= 0.8084
+2017-03-23 05:47:33,550 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:47:47,577 Iter 259, Minibatch Loss= 0.8776, Accuracy= 0.9891, Prediction= (array([ 0.,  1.], dtype=float32), array([1246613,   13099])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:47:47,667 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:48:01,390 Iter 260, Minibatch Loss= 0.8751, Accuracy= 0.9825, Prediction= (array([ 0.,  1.], dtype=float32), array([1235579,   24133])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:48:01,481 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:48:15,275 Iter 261, Minibatch Loss= 0.8529, Accuracy= 0.9843, Prediction= (array([ 0.,  1.], dtype=float32), array([1237990,   21722])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:48:15,368 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:48:29,172 Iter 262, Minibatch Loss= 0.9698, Accuracy= 0.9913, Prediction= (array([ 0.,  1.], dtype=float32), array([1250137,    9575])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:48:29,263 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:48:43,139 Iter 263, Minibatch Loss= 0.8479, Accuracy= 0.9893, Prediction= (array([ 0.,  1.], dtype=float32), array([1245185,   14527])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:48:43,230 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:48:56,976 Iter 264, Minibatch Loss= 0.9318, Accuracy= 0.9866, Prediction= (array([ 0.,  1.], dtype=float32), array([1242099,   17613])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:48:57,066 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:49:11,296 Iter 265, Minibatch Loss= 0.8174, Accuracy= 0.9741, Prediction= (array([ 0.,  1.], dtype=float32), array([1222981,   36731])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:49:11,388 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:49:25,522 Iter 266, Minibatch Loss= 0.8090, Accuracy= 0.9842, Prediction= (array([ 0.,  1.], dtype=float32), array([1239951,   19761])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:49:25,611 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:49:39,365 Iter 267, Minibatch Loss= 0.8844, Accuracy= 0.9903, Prediction= (array([ 0.,  1.], dtype=float32), array([1247678,   12034])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:49:39,455 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:49:53,536 Iter 268, Minibatch Loss= 0.8979, Accuracy= 0.9635, Prediction= (array([ 0.,  1.], dtype=float32), array([1211491,   48221])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:49:53,626 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:50:07,961 Iter 269, Minibatch Loss= 0.7738, Accuracy= 0.9560, Prediction= (array([ 0.,  1.], dtype=float32), array([1196615,   63097])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:50:08,053 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:50:21,864 Iter 270, Minibatch Loss= 0.9767, Accuracy= 0.9914, Prediction= (array([ 0.,  1.], dtype=float32), array([1249503,   10209])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:50:21,955 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:50:36,076 Iter 271, Minibatch Loss= 0.8208, Accuracy= 0.9895, Prediction= (array([ 0.,  1.], dtype=float32), array([1244910,   14802])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:50:36,169 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:50:50,311 Iter 272, Minibatch Loss= 0.8415, Accuracy= 0.9482, Prediction= (array([ 0.,  1.], dtype=float32), array([1187792,   71920])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:50:50,401 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:51:04,788 Iter 273, Minibatch Loss= 0.7648, Accuracy= 0.9637, Prediction= (array([ 0.,  1.], dtype=float32), array([1207624,   52088])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:51:04,880 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 05:51:19,073 Iter 274, Minibatch Loss= 0.8670, Accuracy= 0.9694, Prediction= (array([ 0.,  1.], dtype=float32), array([1217665,   42047])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 05:51:19,164 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 05:51:32,940 Iter 275, Minibatch Loss= 0.7742, Accuracy= 0.9957, Prediction= (array([ 0.,  1.], dtype=float32), array([1253141,    6571])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 05:51:33,031 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 05:51:47,216 Iter 276, Minibatch Loss= 0.7353, Accuracy= 0.9711, Prediction= (array([ 0.,  1.], dtype=float32), array([1221315,   38397])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 05:51:47,308 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 05:52:01,388 Iter 277, Minibatch Loss= 0.8534, Accuracy= 0.9915, Prediction= (array([ 0.,  1.], dtype=float32), array([1249467,   10245])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 05:52:01,484 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 05:52:15,758 Iter 278, Minibatch Loss= 0.9805, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259120,     592])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 05:52:15,849 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 05:52:29,935 Iter 279, Minibatch Loss= 0.7554, Accuracy= 0.9898, Prediction= (array([ 0.,  1.], dtype=float32), array([1249982,    9730])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 05:52:30,026 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 05:52:44,084 Iter 280, Minibatch Loss= 0.9929, Accuracy= 0.9938, Prediction= (array([ 0.,  1.], dtype=float32), array([1259531,     181])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 05:52:44,175 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 05:52:58,326 Iter 281, Minibatch Loss= 0.5894, Accuracy= 0.9844, Prediction= (array([ 0.,  1.], dtype=float32), array([1245568,   14144])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 05:52:58,418 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 05:53:12,308 Iter 282, Minibatch Loss= 0.8320, Accuracy= 0.9898, Prediction= (array([ 0.,  1.], dtype=float32), array([1249728,    9984])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 05:53:12,399 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 05:53:26,542 Iter 283, Minibatch Loss= 0.7556, Accuracy= 0.9662, Prediction= (array([ 0.,  1.], dtype=float32), array([1209153,   50559])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 05:53:26,633 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 05:53:40,792 Iter 284, Minibatch Loss= 0.7756, Accuracy= 0.9642, Prediction= (array([ 0.,  1.], dtype=float32), array([1207711,   52001])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 05:53:40,883 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 05:53:55,219 Iter 285, Minibatch Loss= 0.6352, Accuracy= 0.9739, Prediction= (array([ 0.,  1.], dtype=float32), array([1218363,   41349])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 05:53:55,310 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 05:54:09,535 Iter 286, Minibatch Loss= 0.7848, Accuracy= 0.9657, Prediction= (array([ 0.,  1.], dtype=float32), array([1209661,   50051])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 05:54:09,626 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 05:54:23,784 Iter 287, Minibatch Loss= 0.6718, Accuracy= 0.9610, Prediction= (array([ 0.,  1.], dtype=float32), array([1197821,   61891])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 05:54:23,875 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 05:54:38,029 Iter 288, Minibatch Loss= 0.7798, Accuracy= 0.9838, Prediction= (array([ 0.,  1.], dtype=float32), array([1236502,   23210])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 05:54:38,121 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 05:54:52,352 Iter 289, Minibatch Loss= 0.6911, Accuracy= 0.9895, Prediction= (array([ 0.,  1.], dtype=float32), array([1244227,   15485])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 05:54:52,445 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 05:55:06,671 Iter 290, Minibatch Loss= 0.8075, Accuracy= 0.9749, Prediction= (array([ 0.,  1.], dtype=float32), array([1223990,   35722])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 05:55:06,763 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 05:55:21,093 Iter 291, Minibatch Loss= 0.5249, Accuracy= 0.9720, Prediction= (array([ 0.,  1.], dtype=float32), array([1214675,   45037])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 05:55:21,185 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 05:55:35,252 Iter 292, Minibatch Loss= 0.6969, Accuracy= 0.9866, Prediction= (array([ 0.,  1.], dtype=float32), array([1239415,   20297])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 05:55:35,346 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 05:55:49,665 Iter 293, Minibatch Loss= 0.8939, Accuracy= 0.9837, Prediction= (array([ 0.,  1.], dtype=float32), array([1256730,    2982])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 05:55:49,756 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 05:56:03,954 Iter 294, Minibatch Loss= 0.5627, Accuracy= 0.9877, Prediction= (array([ 0.,  1.], dtype=float32), array([1242870,   16842])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 05:56:04,045 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 05:56:18,207 Iter 295, Minibatch Loss= 0.7276, Accuracy= 0.9798, Prediction= (array([ 0.,  1.], dtype=float32), array([1251334,    8378])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 05:56:18,298 Epoch 7, Average loss: 0.8008, Learning rate: 0.0010
+2017-03-23 05:56:19,283 Validation Accuracy= 0.9918, Validation Loss= 0.8714
+2017-03-23 05:56:24,136 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 05:56:38,172 Iter 296, Minibatch Loss= 0.8401, Accuracy= 0.9929, Prediction= (array([ 0.,  1.], dtype=float32), array([1252299,    7413])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 05:56:38,271 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 05:56:52,035 Iter 297, Minibatch Loss= 0.8257, Accuracy= 0.9876, Prediction= (array([ 0.,  1.], dtype=float32), array([1242472,   17240])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 05:56:52,134 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 05:57:05,886 Iter 298, Minibatch Loss= 0.7999, Accuracy= 0.9889, Prediction= (array([ 0.,  1.], dtype=float32), array([1244578,   15134])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 05:57:05,985 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 05:57:19,787 Iter 299, Minibatch Loss= 0.9553, Accuracy= 0.9927, Prediction= (array([ 0.,  1.], dtype=float32), array([1251886,    7826])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 05:57:19,886 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 05:57:33,732 Iter 300, Minibatch Loss= 0.7986, Accuracy= 0.9922, Prediction= (array([ 0.,  1.], dtype=float32), array([1249445,   10267])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 05:57:33,830 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 05:57:47,568 Iter 301, Minibatch Loss= 0.9104, Accuracy= 0.9871, Prediction= (array([ 0.,  1.], dtype=float32), array([1242672,   17040])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 05:57:47,667 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 05:58:01,913 Iter 302, Minibatch Loss= 0.7825, Accuracy= 0.9756, Prediction= (array([ 0.,  1.], dtype=float32), array([1224725,   34987])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 05:58:02,015 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 05:58:16,119 Iter 303, Minibatch Loss= 0.7560, Accuracy= 0.9834, Prediction= (array([ 0.,  1.], dtype=float32), array([1237715,   21997])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 05:58:16,217 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 05:58:29,984 Iter 304, Minibatch Loss= 0.8421, Accuracy= 0.9893, Prediction= (array([ 0.,  1.], dtype=float32), array([1245987,   13725])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 05:58:30,082 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 05:58:44,142 Iter 305, Minibatch Loss= 0.8880, Accuracy= 0.9637, Prediction= (array([ 0.,  1.], dtype=float32), array([1211805,   47907])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 05:58:44,241 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 05:58:58,554 Iter 306, Minibatch Loss= 0.7540, Accuracy= 0.9578, Prediction= (array([ 0.,  1.], dtype=float32), array([1199309,   60403])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 05:58:58,655 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 05:59:12,476 Iter 307, Minibatch Loss= 0.9688, Accuracy= 0.9904, Prediction= (array([ 0.,  1.], dtype=float32), array([1248263,   11449])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 05:59:12,574 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 05:59:26,695 Iter 308, Minibatch Loss= 0.7584, Accuracy= 0.9912, Prediction= (array([ 0.,  1.], dtype=float32), array([1247079,   12633])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 05:59:26,793 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 05:59:40,928 Iter 309, Minibatch Loss= 0.8083, Accuracy= 0.9567, Prediction= (array([ 0.,  1.], dtype=float32), array([1198639,   61073])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 05:59:41,026 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 05:59:55,395 Iter 310, Minibatch Loss= 0.7225, Accuracy= 0.9690, Prediction= (array([ 0.,  1.], dtype=float32), array([1214708,   45004])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 05:59:55,494 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 06:00:09,670 Iter 311, Minibatch Loss= 0.8256, Accuracy= 0.9763, Prediction= (array([ 0.,  1.], dtype=float32), array([1226501,   33211])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 06:00:09,768 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 06:00:23,562 Iter 312, Minibatch Loss= 0.7103, Accuracy= 0.9972, Prediction= (array([ 0.,  1.], dtype=float32), array([1256030,    3682])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 06:00:23,663 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 06:00:37,840 Iter 313, Minibatch Loss= 0.6803, Accuracy= 0.9776, Prediction= (array([ 0.,  1.], dtype=float32), array([1230538,   29174])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 06:00:37,939 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 06:00:51,982 Iter 314, Minibatch Loss= 0.8112, Accuracy= 0.9934, Prediction= (array([ 0.,  1.], dtype=float32), array([1252356,    7356])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 06:00:52,080 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 06:01:06,342 Iter 315, Minibatch Loss= 0.9879, Accuracy= 0.9940, Prediction= (array([ 0.,  1.], dtype=float32), array([1259302,     410])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 06:01:06,441 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 06:01:20,483 Iter 316, Minibatch Loss= 0.7260, Accuracy= 0.9911, Prediction= (array([ 0.,  1.], dtype=float32), array([1252773,    6939])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 06:01:20,582 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 06:01:34,639 Iter 317, Minibatch Loss= 0.9950, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259634,      78])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 06:01:34,740 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 06:01:48,910 Iter 318, Minibatch Loss= 0.6057, Accuracy= 0.9842, Prediction= (array([ 0.,  1.], dtype=float32), array([1249615,   10097])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 06:01:49,010 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 06:02:02,902 Iter 319, Minibatch Loss= 0.8599, Accuracy= 0.9925, Prediction= (array([ 0.,  1.], dtype=float32), array([1255300,    4412])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 06:02:03,001 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 06:02:17,129 Iter 320, Minibatch Loss= 0.5649, Accuracy= 0.9914, Prediction= (array([ 0.,  1.], dtype=float32), array([1245706,   14006])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 06:02:17,229 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 06:02:31,374 Iter 321, Minibatch Loss= 0.7115, Accuracy= 0.9769, Prediction= (array([ 0.,  1.], dtype=float32), array([1225698,   34014])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 06:02:31,473 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 06:02:45,780 Iter 322, Minibatch Loss= 0.5788, Accuracy= 0.9789, Prediction= (array([ 0.,  1.], dtype=float32), array([1225941,   33771])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 06:02:45,880 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 06:03:00,100 Iter 323, Minibatch Loss= 0.7625, Accuracy= 0.9673, Prediction= (array([ 0.,  1.], dtype=float32), array([1211813,   47899])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 06:03:00,199 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 06:03:14,328 Iter 324, Minibatch Loss= 0.6646, Accuracy= 0.9591, Prediction= (array([ 0.,  1.], dtype=float32), array([1195419,   64293])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 06:03:14,427 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 06:03:28,571 Iter 325, Minibatch Loss= 0.7591, Accuracy= 0.9814, Prediction= (array([ 0.,  1.], dtype=float32), array([1232898,   26814])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 06:03:28,670 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 06:03:42,882 Iter 326, Minibatch Loss= 0.6601, Accuracy= 0.9864, Prediction= (array([ 0.,  1.], dtype=float32), array([1239014,   20698])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 06:03:42,983 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 06:03:57,193 Iter 327, Minibatch Loss= 0.8118, Accuracy= 0.9697, Prediction= (array([ 0.,  1.], dtype=float32), array([1217039,   42673])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 06:03:57,292 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 06:04:11,635 Iter 328, Minibatch Loss= 0.5172, Accuracy= 0.9668, Prediction= (array([ 0.,  1.], dtype=float32), array([1204403,   55309])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 06:04:11,737 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 06:04:25,825 Iter 329, Minibatch Loss= 0.6628, Accuracy= 0.9841, Prediction= (array([ 0.,  1.], dtype=float32), array([1234837,   24875])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 06:04:25,924 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 06:04:40,238 Iter 330, Minibatch Loss= 0.7931, Accuracy= 0.9840, Prediction= (array([ 0.,  1.], dtype=float32), array([1253988,    5724])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 06:04:40,339 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 06:04:54,514 Iter 331, Minibatch Loss= 0.4908, Accuracy= 0.9871, Prediction= (array([ 0.,  1.], dtype=float32), array([1239099,   20613])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 06:04:54,614 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 06:05:08,777 Iter 332, Minibatch Loss= 0.6469, Accuracy= 0.9804, Prediction= (array([ 0.,  1.], dtype=float32), array([1248530,   11182])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 06:05:08,879 Epoch 8, Average loss: 0.7632, Learning rate: 0.0010
+2017-03-23 06:05:09,861 Validation Accuracy= 0.9920, Validation Loss= 0.8198
+2017-03-23 06:05:14,824 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 06:05:28,867 Iter 333, Minibatch Loss= 0.7920, Accuracy= 0.9936, Prediction= (array([ 0.,  1.], dtype=float32), array([1253134,    6578])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 06:05:28,973 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 06:05:42,706 Iter 334, Minibatch Loss= 0.7884, Accuracy= 0.9892, Prediction= (array([ 0.,  1.], dtype=float32), array([1244611,   15101])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 06:05:42,812 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 06:05:56,558 Iter 335, Minibatch Loss= 0.7645, Accuracy= 0.9906, Prediction= (array([ 0.,  1.], dtype=float32), array([1247087,   12625])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 06:05:56,664 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 06:06:10,478 Iter 336, Minibatch Loss= 0.9550, Accuracy= 0.9956, Prediction= (array([ 0.,  1.], dtype=float32), array([1255819,    3893])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 06:06:10,584 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 06:06:24,441 Iter 337, Minibatch Loss= 0.7829, Accuracy= 0.9947, Prediction= (array([ 0.,  1.], dtype=float32), array([1253988,    5724])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 06:06:24,548 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 06:06:38,310 Iter 338, Minibatch Loss= 0.8711, Accuracy= 0.9921, Prediction= (array([ 0.,  1.], dtype=float32), array([1249257,   10455])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 06:06:38,416 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 06:06:52,670 Iter 339, Minibatch Loss= 0.6973, Accuracy= 0.9863, Prediction= (array([ 0.,  1.], dtype=float32), array([1239604,   20108])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 06:06:52,778 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 06:07:06,912 Iter 340, Minibatch Loss= 0.7202, Accuracy= 0.9891, Prediction= (array([ 0.,  1.], dtype=float32), array([1247043,   12669])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 06:07:07,018 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 06:07:20,758 Iter 341, Minibatch Loss= 0.7914, Accuracy= 0.9946, Prediction= (array([ 0.,  1.], dtype=float32), array([1253570,    6142])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 06:07:20,866 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 06:07:34,933 Iter 342, Minibatch Loss= 0.8431, Accuracy= 0.9781, Prediction= (array([ 0.,  1.], dtype=float32), array([1230601,   29111])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 06:07:35,039 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 06:07:49,361 Iter 343, Minibatch Loss= 0.6941, Accuracy= 0.9720, Prediction= (array([ 0.,  1.], dtype=float32), array([1219405,   40307])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 06:07:49,468 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 06:08:03,258 Iter 344, Minibatch Loss= 0.9747, Accuracy= 0.9946, Prediction= (array([ 0.,  1.], dtype=float32), array([1253864,    5848])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 06:08:03,365 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 06:08:17,486 Iter 345, Minibatch Loss= 0.6797, Accuracy= 0.9942, Prediction= (array([ 0.,  1.], dtype=float32), array([1251192,    8520])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 06:08:17,593 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 06:08:31,736 Iter 346, Minibatch Loss= 0.7552, Accuracy= 0.9687, Prediction= (array([ 0.,  1.], dtype=float32), array([1214193,   45519])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 06:08:31,842 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 06:08:46,256 Iter 347, Minibatch Loss= 0.6764, Accuracy= 0.9754, Prediction= (array([ 0.,  1.], dtype=float32), array([1223524,   36188])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 06:08:46,362 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 06:09:00,542 Iter 348, Minibatch Loss= 0.7736, Accuracy= 0.9824, Prediction= (array([ 0.,  1.], dtype=float32), array([1234249,   25463])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 06:09:00,651 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 06:09:14,414 Iter 349, Minibatch Loss= 0.6647, Accuracy= 0.9972, Prediction= (array([ 0.,  1.], dtype=float32), array([1256449,    3263])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 06:09:14,522 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 06:09:28,713 Iter 350, Minibatch Loss= 0.6360, Accuracy= 0.9811, Prediction= (array([ 0.,  1.], dtype=float32), array([1235382,   24330])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 06:09:28,821 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 06:09:42,894 Iter 351, Minibatch Loss= 0.7731, Accuracy= 0.9941, Prediction= (array([ 0.,  1.], dtype=float32), array([1253336,    6376])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 06:09:43,000 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 06:09:57,265 Iter 352, Minibatch Loss= 0.9620, Accuracy= 0.9942, Prediction= (array([ 0.,  1.], dtype=float32), array([1259220,     492])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 06:09:57,372 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 06:10:11,474 Iter 353, Minibatch Loss= 0.6524, Accuracy= 0.9915, Prediction= (array([ 0.,  1.], dtype=float32), array([1252251,    7461])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 06:10:11,582 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 06:10:25,664 Iter 354, Minibatch Loss= 0.9965, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259633,      79])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 06:10:25,772 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 06:10:39,934 Iter 355, Minibatch Loss= 0.5087, Accuracy= 0.9855, Prediction= (array([ 0.,  1.], dtype=float32), array([1246886,   12826])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 06:10:40,040 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 06:10:53,903 Iter 356, Minibatch Loss= 0.8153, Accuracy= 0.9927, Prediction= (array([ 0.,  1.], dtype=float32), array([1255129,    4583])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 06:10:54,011 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 06:11:08,162 Iter 357, Minibatch Loss= 0.6343, Accuracy= 0.9840, Prediction= (array([ 0.,  1.], dtype=float32), array([1235374,   24338])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 06:11:08,270 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 06:11:22,394 Iter 358, Minibatch Loss= 0.6861, Accuracy= 0.9781, Prediction= (array([ 0.,  1.], dtype=float32), array([1227101,   32611])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 06:11:22,499 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 06:11:36,823 Iter 359, Minibatch Loss= 0.5470, Accuracy= 0.9811, Prediction= (array([ 0.,  1.], dtype=float32), array([1229631,   30081])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 06:11:36,929 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 06:11:51,170 Iter 360, Minibatch Loss= 0.7226, Accuracy= 0.9731, Prediction= (array([ 0.,  1.], dtype=float32), array([1219230,   40482])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 06:11:51,277 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 06:12:05,452 Iter 361, Minibatch Loss= 0.6139, Accuracy= 0.9674, Prediction= (array([ 0.,  1.], dtype=float32), array([1206593,   53119])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 06:12:05,558 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 06:12:19,667 Iter 362, Minibatch Loss= 0.7065, Accuracy= 0.9860, Prediction= (array([ 0.,  1.], dtype=float32), array([1239090,   20622])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 06:12:19,775 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 06:12:34,021 Iter 363, Minibatch Loss= 0.5822, Accuracy= 0.9907, Prediction= (array([ 0.,  1.], dtype=float32), array([1245302,   14410])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 06:12:34,129 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 06:12:48,316 Iter 364, Minibatch Loss= 0.7483, Accuracy= 0.9799, Prediction= (array([ 0.,  1.], dtype=float32), array([1230403,   29309])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 06:12:48,422 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 06:13:02,735 Iter 365, Minibatch Loss= 0.4697, Accuracy= 0.9746, Prediction= (array([ 0.,  1.], dtype=float32), array([1218211,   41501])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 06:13:02,842 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 06:13:16,895 Iter 366, Minibatch Loss= 0.5762, Accuracy= 0.9899, Prediction= (array([ 0.,  1.], dtype=float32), array([1243275,   16437])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 06:13:17,003 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 06:13:31,319 Iter 367, Minibatch Loss= 0.8513, Accuracy= 0.9841, Prediction= (array([ 0.,  1.], dtype=float32), array([1256538,    3174])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 06:13:31,426 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 06:13:45,629 Iter 368, Minibatch Loss= 0.4489, Accuracy= 0.9902, Prediction= (array([ 0.,  1.], dtype=float32), array([1245930,   13782])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 06:13:45,737 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 06:13:59,895 Iter 369, Minibatch Loss= 0.7046, Accuracy= 0.9801, Prediction= (array([ 0.,  1.], dtype=float32), array([1252236,    7476])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 06:14:00,005 Epoch 9, Average loss: 0.7259, Learning rate: 0.0010
+2017-03-23 06:14:00,992 Validation Accuracy= 0.9917, Validation Loss= 0.8709
+2017-03-23 06:14:06,660 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 06:14:20,699 Iter 370, Minibatch Loss= 0.7738, Accuracy= 0.9956, Prediction= (array([ 0.,  1.], dtype=float32), array([1256484,    3228])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 06:14:20,812 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 06:14:34,565 Iter 371, Minibatch Loss= 0.7229, Accuracy= 0.9930, Prediction= (array([ 0.,  1.], dtype=float32), array([1249704,   10008])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 06:14:34,677 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 06:14:48,428 Iter 372, Minibatch Loss= 0.7253, Accuracy= 0.9927, Prediction= (array([ 0.,  1.], dtype=float32), array([1250177,    9535])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 06:14:48,542 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 06:15:02,329 Iter 373, Minibatch Loss= 0.9493, Accuracy= 0.9964, Prediction= (array([ 0.,  1.], dtype=float32), array([1256934,    2778])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 06:15:02,445 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 06:15:16,283 Iter 374, Minibatch Loss= 0.7437, Accuracy= 0.9951, Prediction= (array([ 0.,  1.], dtype=float32), array([1254411,    5301])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 06:15:16,398 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 06:15:30,121 Iter 375, Minibatch Loss= 0.8545, Accuracy= 0.9922, Prediction= (array([ 0.,  1.], dtype=float32), array([1249274,   10438])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 06:15:30,233 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 06:15:44,453 Iter 376, Minibatch Loss= 0.6736, Accuracy= 0.9866, Prediction= (array([ 0.,  1.], dtype=float32), array([1239775,   19937])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 06:15:44,568 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 06:15:58,693 Iter 377, Minibatch Loss= 0.6839, Accuracy= 0.9879, Prediction= (array([ 0.,  1.], dtype=float32), array([1244300,   15412])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 06:15:58,807 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 06:16:12,537 Iter 378, Minibatch Loss= 0.7681, Accuracy= 0.9931, Prediction= (array([ 0.,  1.], dtype=float32), array([1251054,    8658])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 06:16:12,650 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 06:16:26,734 Iter 379, Minibatch Loss= 0.8350, Accuracy= 0.9786, Prediction= (array([ 0.,  1.], dtype=float32), array([1231383,   28329])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 06:16:26,848 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 06:16:41,176 Iter 380, Minibatch Loss= 0.6614, Accuracy= 0.9760, Prediction= (array([ 0.,  1.], dtype=float32), array([1224921,   34791])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 06:16:41,292 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 06:16:55,117 Iter 381, Minibatch Loss= 0.9692, Accuracy= 0.9962, Prediction= (array([ 0.,  1.], dtype=float32), array([1255943,    3769])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 06:16:55,229 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 06:17:09,338 Iter 382, Minibatch Loss= 0.6380, Accuracy= 0.9953, Prediction= (array([ 0.,  1.], dtype=float32), array([1253261,    6451])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 06:17:09,452 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 06:17:23,592 Iter 383, Minibatch Loss= 0.6732, Accuracy= 0.9800, Prediction= (array([ 0.,  1.], dtype=float32), array([1229128,   30584])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 06:17:23,705 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 06:17:38,071 Iter 384, Minibatch Loss= 0.6178, Accuracy= 0.9825, Prediction= (array([ 0.,  1.], dtype=float32), array([1233883,   25829])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 06:17:38,185 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 06:17:52,362 Iter 385, Minibatch Loss= 0.6656, Accuracy= 0.9907, Prediction= (array([ 0.,  1.], dtype=float32), array([1245187,   14525])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 06:17:52,474 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 06:18:06,247 Iter 386, Minibatch Loss= 0.6792, Accuracy= 0.9975, Prediction= (array([ 0.,  1.], dtype=float32), array([1257856,    1856])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 06:18:06,360 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 06:18:20,548 Iter 387, Minibatch Loss= 0.6104, Accuracy= 0.9862, Prediction= (array([ 0.,  1.], dtype=float32), array([1244758,   14954])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 06:18:20,665 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 06:18:34,727 Iter 388, Minibatch Loss= 0.7673, Accuracy= 0.9956, Prediction= (array([ 0.,  1.], dtype=float32), array([1256069,    3643])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 06:18:34,840 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 06:18:49,121 Iter 389, Minibatch Loss= 0.9885, Accuracy= 0.9942, Prediction= (array([ 0.,  1.], dtype=float32), array([1259577,     135])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 06:18:49,236 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 06:19:03,285 Iter 390, Minibatch Loss= 0.6682, Accuracy= 0.9919, Prediction= (array([ 0.,  1.], dtype=float32), array([1253938,    5774])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 06:19:03,400 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 06:19:17,449 Iter 391, Minibatch Loss= 0.9975, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259672,      40])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 06:19:17,564 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 06:19:31,719 Iter 392, Minibatch Loss= 0.5258, Accuracy= 0.9852, Prediction= (array([ 0.,  1.], dtype=float32), array([1248478,   11234])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 06:19:31,833 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 06:19:45,743 Iter 393, Minibatch Loss= 0.8412, Accuracy= 0.9930, Prediction= (array([ 0.,  1.], dtype=float32), array([1256212,    3500])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 06:19:45,856 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 06:20:00,015 Iter 394, Minibatch Loss= 0.4718, Accuracy= 0.9930, Prediction= (array([ 0.,  1.], dtype=float32), array([1247934,   11778])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 06:20:00,132 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 06:20:14,285 Iter 395, Minibatch Loss= 0.6370, Accuracy= 0.9823, Prediction= (array([ 0.,  1.], dtype=float32), array([1232644,   27068])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 06:20:14,399 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 06:20:28,725 Iter 396, Minibatch Loss= 0.5175, Accuracy= 0.9834, Prediction= (array([ 0.,  1.], dtype=float32), array([1233397,   26315])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 06:20:28,843 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 06:20:43,067 Iter 397, Minibatch Loss= 0.6976, Accuracy= 0.9758, Prediction= (array([ 0.,  1.], dtype=float32), array([1222719,   36993])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 06:20:43,180 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 06:20:57,356 Iter 398, Minibatch Loss= 0.5958, Accuracy= 0.9691, Prediction= (array([ 0.,  1.], dtype=float32), array([1208770,   50942])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 06:20:57,471 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 06:21:11,630 Iter 399, Minibatch Loss= 0.6872, Accuracy= 0.9862, Prediction= (array([ 0.,  1.], dtype=float32), array([1239041,   20671])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 06:21:11,747 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 06:21:25,997 Iter 400, Minibatch Loss= 0.5645, Accuracy= 0.9900, Prediction= (array([ 0.,  1.], dtype=float32), array([1243546,   16166])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 06:21:26,112 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 06:21:40,322 Iter 401, Minibatch Loss= 0.7537, Accuracy= 0.9778, Prediction= (array([ 0.,  1.], dtype=float32), array([1227360,   32352])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 06:21:40,437 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 06:21:54,758 Iter 402, Minibatch Loss= 0.4757, Accuracy= 0.9715, Prediction= (array([ 0.,  1.], dtype=float32), array([1211936,   47776])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 06:21:54,873 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 06:22:08,940 Iter 403, Minibatch Loss= 0.5657, Accuracy= 0.9886, Prediction= (array([ 0.,  1.], dtype=float32), array([1240454,   19258])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 06:22:09,058 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 06:22:23,408 Iter 404, Minibatch Loss= 0.7559, Accuracy= 0.9845, Prediction= (array([ 0.,  1.], dtype=float32), array([1254073,    5639])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 06:22:23,522 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 06:22:37,729 Iter 405, Minibatch Loss= 0.4075, Accuracy= 0.9899, Prediction= (array([ 0.,  1.], dtype=float32), array([1242882,   16830])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 06:22:37,843 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 06:22:52,010 Iter 406, Minibatch Loss= 0.6362, Accuracy= 0.9804, Prediction= (array([ 0.,  1.], dtype=float32), array([1249214,   10498])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 06:22:52,124 Epoch 10, Average loss: 0.6973, Learning rate: 0.0010
+2017-03-23 06:22:53,110 Validation Accuracy= 0.9920, Validation Loss= 0.8122
+2017-03-23 06:22:59,043 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 06:23:13,130 Iter 407, Minibatch Loss= 0.7091, Accuracy= 0.9957, Prediction= (array([ 0.,  1.], dtype=float32), array([1256051,    3661])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 06:23:13,252 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 06:23:27,008 Iter 408, Minibatch Loss= 0.6854, Accuracy= 0.9937, Prediction= (array([ 0.,  1.], dtype=float32), array([1250604,    9108])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 06:23:27,129 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 06:23:40,903 Iter 409, Minibatch Loss= 0.6928, Accuracy= 0.9933, Prediction= (array([ 0.,  1.], dtype=float32), array([1250878,    8834])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 06:23:41,025 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 06:23:54,840 Iter 410, Minibatch Loss= 0.9345, Accuracy= 0.9970, Prediction= (array([ 0.,  1.], dtype=float32), array([1257647,    2065])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 06:23:54,962 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 06:24:08,840 Iter 411, Minibatch Loss= 0.7580, Accuracy= 0.9960, Prediction= (array([ 0.,  1.], dtype=float32), array([1256386,    3326])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 06:24:08,960 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 06:24:22,703 Iter 412, Minibatch Loss= 0.7728, Accuracy= 0.9963, Prediction= (array([ 0.,  1.], dtype=float32), array([1254807,    4905])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 06:24:22,823 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 06:24:37,082 Iter 413, Minibatch Loss= 0.5799, Accuracy= 0.9931, Prediction= (array([ 0.,  1.], dtype=float32), array([1249882,    9830])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 06:24:37,203 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 06:24:51,312 Iter 414, Minibatch Loss= 0.7048, Accuracy= 0.9918, Prediction= (array([ 0.,  1.], dtype=float32), array([1252279,    7433])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 06:24:51,435 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 06:25:05,184 Iter 415, Minibatch Loss= 0.6707, Accuracy= 0.9969, Prediction= (array([ 0.,  1.], dtype=float32), array([1256705,    3007])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 06:25:05,307 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 06:25:19,373 Iter 416, Minibatch Loss= 0.7832, Accuracy= 0.9871, Prediction= (array([ 0.,  1.], dtype=float32), array([1242892,   16820])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 06:25:19,493 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 06:25:33,850 Iter 417, Minibatch Loss= 0.6206, Accuracy= 0.9811, Prediction= (array([ 0.,  1.], dtype=float32), array([1232481,   27231])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 06:25:33,971 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 06:25:47,800 Iter 418, Minibatch Loss= 0.9767, Accuracy= 0.9962, Prediction= (array([ 0.,  1.], dtype=float32), array([1256015,    3697])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 06:25:47,920 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 06:26:02,055 Iter 419, Minibatch Loss= 0.6057, Accuracy= 0.9952, Prediction= (array([ 0.,  1.], dtype=float32), array([1252778,    6934])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 06:26:02,187 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 06:26:16,337 Iter 420, Minibatch Loss= 0.6780, Accuracy= 0.9780, Prediction= (array([ 0.,  1.], dtype=float32), array([1225923,   33789])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 06:26:16,459 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 06:26:30,842 Iter 421, Minibatch Loss= 0.6236, Accuracy= 0.9792, Prediction= (array([ 0.,  1.], dtype=float32), array([1228047,   31665])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 06:26:30,965 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 06:26:45,133 Iter 422, Minibatch Loss= 0.7182, Accuracy= 0.9858, Prediction= (array([ 0.,  1.], dtype=float32), array([1238369,   21343])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 06:26:45,253 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 06:26:59,069 Iter 423, Minibatch Loss= 0.5784, Accuracy= 0.9972, Prediction= (array([ 0.,  1.], dtype=float32), array([1256276,    3436])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 06:26:59,191 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 06:27:13,396 Iter 424, Minibatch Loss= 0.5936, Accuracy= 0.9828, Prediction= (array([ 0.,  1.], dtype=float32), array([1237291,   22421])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 06:27:13,518 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 06:27:27,594 Iter 425, Minibatch Loss= 0.7142, Accuracy= 0.9943, Prediction= (array([ 0.,  1.], dtype=float32), array([1253293,    6419])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 06:27:27,716 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 06:27:42,005 Iter 426, Minibatch Loss= 0.8893, Accuracy= 0.9943, Prediction= (array([ 0.,  1.], dtype=float32), array([1258833,     879])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 06:27:42,127 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 06:27:56,192 Iter 427, Minibatch Loss= 0.5249, Accuracy= 0.9922, Prediction= (array([ 0.,  1.], dtype=float32), array([1250387,    9325])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 06:27:56,316 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 06:28:10,392 Iter 428, Minibatch Loss= 0.9983, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259627,      85])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 06:28:10,515 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 06:28:24,690 Iter 429, Minibatch Loss= 0.3997, Accuracy= 0.9871, Prediction= (array([ 0.,  1.], dtype=float32), array([1242929,   16783])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 06:28:24,811 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 06:28:38,661 Iter 430, Minibatch Loss= 0.7815, Accuracy= 0.9925, Prediction= (array([ 0.,  1.], dtype=float32), array([1254554,    5158])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 06:28:38,783 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 06:28:52,909 Iter 431, Minibatch Loss= 0.4466, Accuracy= 0.9928, Prediction= (array([ 0.,  1.], dtype=float32), array([1247013,   12699])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 06:28:53,031 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 06:29:07,186 Iter 432, Minibatch Loss= 0.6006, Accuracy= 0.9844, Prediction= (array([ 0.,  1.], dtype=float32), array([1234981,   24731])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 06:29:07,307 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 06:29:21,624 Iter 433, Minibatch Loss= 0.4880, Accuracy= 0.9856, Prediction= (array([ 0.,  1.], dtype=float32), array([1237121,   22591])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 06:29:21,747 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 06:29:35,966 Iter 434, Minibatch Loss= 0.6440, Accuracy= 0.9813, Prediction= (array([ 0.,  1.], dtype=float32), array([1230080,   29632])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 06:29:36,089 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 06:29:50,239 Iter 435, Minibatch Loss= 0.5269, Accuracy= 0.9779, Prediction= (array([ 0.,  1.], dtype=float32), array([1221263,   38449])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 06:29:50,360 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 06:30:04,480 Iter 436, Minibatch Loss= 0.6221, Accuracy= 0.9910, Prediction= (array([ 0.,  1.], dtype=float32), array([1246219,   13493])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 06:30:04,603 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 06:30:18,831 Iter 437, Minibatch Loss= 0.5079, Accuracy= 0.9933, Prediction= (array([ 0.,  1.], dtype=float32), array([1249616,   10096])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 06:30:18,953 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 06:30:33,133 Iter 438, Minibatch Loss= 0.6572, Accuracy= 0.9874, Prediction= (array([ 0.,  1.], dtype=float32), array([1240296,   19416])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 06:30:33,257 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 06:30:47,560 Iter 439, Minibatch Loss= 0.4536, Accuracy= 0.9773, Prediction= (array([ 0.,  1.], dtype=float32), array([1224740,   34972])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 06:30:47,681 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 06:31:01,728 Iter 440, Minibatch Loss= 0.4634, Accuracy= 0.9933, Prediction= (array([ 0.,  1.], dtype=float32), array([1247752,   11960])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 06:31:01,854 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 06:31:16,184 Iter 441, Minibatch Loss= 0.8198, Accuracy= 0.9844, Prediction= (array([ 0.,  1.], dtype=float32), array([1256188,    3524])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 06:31:16,308 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 06:31:30,542 Iter 442, Minibatch Loss= 0.4011, Accuracy= 0.9912, Prediction= (array([ 0.,  1.], dtype=float32), array([1247264,   12448])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 06:31:30,664 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 06:31:44,831 Iter 443, Minibatch Loss= 0.6874, Accuracy= 0.9799, Prediction= (array([ 0.,  1.], dtype=float32), array([1251592,    8120])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 06:31:44,954 Epoch 11, Average loss: 0.6571, Learning rate: 0.0010
+2017-03-23 06:31:45,938 Validation Accuracy= 0.9920, Validation Loss= 0.8103
+2017-03-23 06:31:52,123 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 06:32:06,209 Iter 444, Minibatch Loss= 0.6715, Accuracy= 0.9964, Prediction= (array([ 0.,  1.], dtype=float32), array([1257105,    2607])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 06:32:06,339 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 06:32:20,072 Iter 445, Minibatch Loss= 0.6637, Accuracy= 0.9940, Prediction= (array([ 0.,  1.], dtype=float32), array([1250925,    8787])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 06:32:20,202 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 06:32:33,951 Iter 446, Minibatch Loss= 0.6654, Accuracy= 0.9938, Prediction= (array([ 0.,  1.], dtype=float32), array([1251581,    8131])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 06:32:34,087 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 06:32:47,879 Iter 447, Minibatch Loss= 0.9210, Accuracy= 0.9969, Prediction= (array([ 0.,  1.], dtype=float32), array([1257535,    2177])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 06:32:48,009 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 06:33:01,863 Iter 448, Minibatch Loss= 0.7323, Accuracy= 0.9960, Prediction= (array([ 0.,  1.], dtype=float32), array([1256336,    3376])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 06:33:01,993 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 06:33:15,716 Iter 449, Minibatch Loss= 0.7827, Accuracy= 0.9952, Prediction= (array([ 0.,  1.], dtype=float32), array([1253227,    6485])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 06:33:15,844 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 06:33:30,090 Iter 450, Minibatch Loss= 0.5529, Accuracy= 0.9926, Prediction= (array([ 0.,  1.], dtype=float32), array([1248288,   11424])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 06:33:30,219 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 06:33:44,349 Iter 451, Minibatch Loss= 0.6487, Accuracy= 0.9909, Prediction= (array([ 0.,  1.], dtype=float32), array([1249347,   10365])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 06:33:44,478 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 06:33:58,203 Iter 452, Minibatch Loss= 0.6525, Accuracy= 0.9960, Prediction= (array([ 0.,  1.], dtype=float32), array([1254978,    4734])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 06:33:58,333 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 06:34:12,387 Iter 453, Minibatch Loss= 0.7805, Accuracy= 0.9862, Prediction= (array([ 0.,  1.], dtype=float32), array([1241576,   18136])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 06:34:12,515 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 06:34:26,820 Iter 454, Minibatch Loss= 0.6138, Accuracy= 0.9812, Prediction= (array([ 0.,  1.], dtype=float32), array([1232553,   27159])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 06:34:26,949 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 06:34:40,736 Iter 455, Minibatch Loss= 0.9665, Accuracy= 0.9968, Prediction= (array([ 0.,  1.], dtype=float32), array([1256703,    3009])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 06:34:40,863 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 06:34:54,970 Iter 456, Minibatch Loss= 0.5812, Accuracy= 0.9958, Prediction= (array([ 0.,  1.], dtype=float32), array([1253755,    5957])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 06:34:55,099 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 06:35:09,251 Iter 457, Minibatch Loss= 0.6119, Accuracy= 0.9841, Prediction= (array([ 0.,  1.], dtype=float32), array([1234287,   25425])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 06:35:09,379 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 06:35:23,775 Iter 458, Minibatch Loss= 0.5760, Accuracy= 0.9838, Prediction= (array([ 0.,  1.], dtype=float32), array([1234896,   24816])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 06:35:23,906 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 06:35:38,105 Iter 459, Minibatch Loss= 0.6321, Accuracy= 0.9910, Prediction= (array([ 0.,  1.], dtype=float32), array([1245264,   14448])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 06:35:38,236 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 06:35:52,030 Iter 460, Minibatch Loss= 0.5413, Accuracy= 0.9976, Prediction= (array([ 0.,  1.], dtype=float32), array([1256990,    2722])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 06:35:52,160 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 06:36:06,333 Iter 461, Minibatch Loss= 0.5826, Accuracy= 0.9862, Prediction= (array([ 0.,  1.], dtype=float32), array([1244101,   15611])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 06:36:06,461 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 06:36:20,535 Iter 462, Minibatch Loss= 0.6765, Accuracy= 0.9955, Prediction= (array([ 0.,  1.], dtype=float32), array([1255053,    4659])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 06:36:20,666 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 06:36:34,960 Iter 463, Minibatch Loss= 0.9273, Accuracy= 0.9943, Prediction= (array([ 0.,  1.], dtype=float32), array([1259238,     474])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 06:36:35,091 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 06:36:49,159 Iter 464, Minibatch Loss= 0.5654, Accuracy= 0.9921, Prediction= (array([ 0.,  1.], dtype=float32), array([1252017,    7695])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 06:36:49,289 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd
+2017-03-23 06:37:03,331 Iter 465, Minibatch Loss= 0.9984, Accuracy= 0.9939, Prediction= (array([ 0.,  1.], dtype=float32), array([1259645,      67])), Desired= (array([ 0.,  1.], dtype=float32), array([1252099,    7613]))
+2017-03-23 06:37:03,462 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/041/case.nrrd
+2017-03-23 06:37:17,581 Iter 466, Minibatch Loss= 0.3881, Accuracy= 0.9874, Prediction= (array([ 0.,  1.], dtype=float32), array([1243258,   16454])), Desired= (array([ 0.,  1.], dtype=float32), array([1233934,   25778]))
+2017-03-23 06:37:17,711 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/042/case.nrrd
+2017-03-23 06:37:31,593 Iter 467, Minibatch Loss= 0.7615, Accuracy= 0.9927, Prediction= (array([ 0.,  1.], dtype=float32), array([1254624,    5088])), Desired= (array([ 0.,  1.], dtype=float32), array([1252403,    7309]))
+2017-03-23 06:37:31,723 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/044/case.nrrd
+2017-03-23 06:37:45,862 Iter 468, Minibatch Loss= 0.4344, Accuracy= 0.9933, Prediction= (array([ 0.,  1.], dtype=float32), array([1248155,   11557])), Desired= (array([ 0.,  1.], dtype=float32), array([1250607,    9105]))
+2017-03-23 06:37:45,993 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/045/case.nrrd
+2017-03-23 06:38:00,157 Iter 469, Minibatch Loss= 0.5717, Accuracy= 0.9858, Prediction= (array([ 0.,  1.], dtype=float32), array([1236731,   22981])), Desired= (array([ 0.,  1.], dtype=float32), array([1250757,    8955]))
+2017-03-23 06:38:00,288 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/048/case.nrrd
+2017-03-23 06:38:14,637 Iter 470, Minibatch Loss= 0.4800, Accuracy= 0.9859, Prediction= (array([ 0.,  1.], dtype=float32), array([1237437,   22275])), Desired= (array([ 0.,  1.], dtype=float32), array([1243863,   15849]))
+2017-03-23 06:38:14,767 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/049/case.nrrd
+2017-03-23 06:38:28,992 Iter 471, Minibatch Loss= 0.6381, Accuracy= 0.9815, Prediction= (array([ 0.,  1.], dtype=float32), array([1230166,   29546])), Desired= (array([ 0.,  1.], dtype=float32), array([1252104,    7608]))
+2017-03-23 06:38:29,123 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/050/case.nrrd
+2017-03-23 06:38:43,278 Iter 472, Minibatch Loss= 0.5233, Accuracy= 0.9777, Prediction= (array([ 0.,  1.], dtype=float32), array([1220715,   38997])), Desired= (array([ 0.,  1.], dtype=float32), array([1244070,   15642]))
+2017-03-23 06:38:43,409 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/053/case.nrrd
+2017-03-23 06:38:57,558 Iter 473, Minibatch Loss= 0.6172, Accuracy= 0.9903, Prediction= (array([ 0.,  1.], dtype=float32), array([1244909,   14803])), Desired= (array([ 0.,  1.], dtype=float32), array([1254208,    5504]))
+2017-03-23 06:38:57,695 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/056/case.nrrd
+2017-03-23 06:39:11,941 Iter 474, Minibatch Loss= 0.4986, Accuracy= 0.9926, Prediction= (array([ 0.,  1.], dtype=float32), array([1247848,   11864])), Desired= (array([ 0.,  1.], dtype=float32), array([1252070,    7642]))
+2017-03-23 06:39:12,071 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/058/case.nrrd
+2017-03-23 06:39:26,275 Iter 475, Minibatch Loss= 0.6605, Accuracy= 0.9861, Prediction= (array([ 0.,  1.], dtype=float32), array([1238261,   21451])), Desired= (array([ 0.,  1.], dtype=float32), array([1254272,    5440]))
+2017-03-23 06:39:26,406 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/059/case.nrrd
+2017-03-23 06:39:40,736 Iter 476, Minibatch Loss= 0.4480, Accuracy= 0.9757, Prediction= (array([ 0.,  1.], dtype=float32), array([1220051,   39661])), Desired= (array([ 0.,  1.], dtype=float32), array([1230094,   29618]))
+2017-03-23 06:39:40,867 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/060/case.nrrd
+2017-03-23 06:39:54,933 Iter 477, Minibatch Loss= 0.4609, Accuracy= 0.9926, Prediction= (array([ 0.,  1.], dtype=float32), array([1245940,   13772])), Desired= (array([ 0.,  1.], dtype=float32), array([1252142,    7570]))
+2017-03-23 06:39:55,064 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/063/case.nrrd
+2017-03-23 06:40:09,382 Iter 478, Minibatch Loss= 0.7448, Accuracy= 0.9847, Prediction= (array([ 0.,  1.], dtype=float32), array([1254180,    5532])), Desired= (array([ 0.,  1.], dtype=float32), array([1239068,   20644]))
+2017-03-23 06:40:09,515 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/064/case.nrrd
+2017-03-23 06:40:23,728 Iter 479, Minibatch Loss= 0.3709, Accuracy= 0.9911, Prediction= (array([ 0.,  1.], dtype=float32), array([1244981,   14731])), Desired= (array([ 0.,  1.], dtype=float32), array([1242888,   16824]))
+2017-03-23 06:40:23,859 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/069/case.nrrd
+2017-03-23 06:40:38,002 Iter 480, Minibatch Loss= 0.6220, Accuracy= 0.9806, Prediction= (array([ 0.,  1.], dtype=float32), array([1249111,   10601])), Desired= (array([ 0.,  1.], dtype=float32), array([1230679,   29033]))
+2017-03-23 06:40:38,133 Epoch 12, Average loss: 0.6369, Learning rate: 0.0010
+2017-03-23 06:40:39,118 Validation Accuracy= 0.9923, Validation Loss= 0.7551
+2017-03-23 06:40:45,912 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/007/case.nrrd
+2017-03-23 06:40:59,977 Iter 481, Minibatch Loss= 0.6490, Accuracy= 0.9965, Prediction= (array([ 0.,  1.], dtype=float32), array([1257081,    2631])), Desired= (array([ 0.,  1.], dtype=float32), array([1255060,    4652]))
+2017-03-23 06:41:00,115 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/008/case.nrrd
+2017-03-23 06:41:13,850 Iter 482, Minibatch Loss= 0.6146, Accuracy= 0.9953, Prediction= (array([ 0.,  1.], dtype=float32), array([1252761,    6951])), Desired= (array([ 0.,  1.], dtype=float32), array([1256508,    3204]))
+2017-03-23 06:41:13,987 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/012/case.nrrd
+2017-03-23 06:41:27,761 Iter 483, Minibatch Loss= 0.6226, Accuracy= 0.9947, Prediction= (array([ 0.,  1.], dtype=float32), array([1252614,    7098])), Desired= (array([ 0.,  1.], dtype=float32), array([1255600,    4112]))
+2017-03-23 06:41:27,900 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/014/case.nrrd
+2017-03-23 06:41:41,696 Iter 484, Minibatch Loss= 0.9331, Accuracy= 0.9973, Prediction= (array([ 0.,  1.], dtype=float32), array([1258155,    1557])), Desired= (array([ 0.,  1.], dtype=float32), array([1257605,    2107]))
+2017-03-23 06:41:41,834 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/016/case.nrrd
+2017-03-23 06:41:55,677 Iter 485, Minibatch Loss= 0.7157, Accuracy= 0.9960, Prediction= (array([ 0.,  1.], dtype=float32), array([1256280,    3432])), Desired= (array([ 0.,  1.], dtype=float32), array([1255846,    3866]))
+2017-03-23 06:41:55,814 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/021/case.nrrd
+2017-03-23 06:42:09,519 Iter 486, Minibatch Loss= 0.7373, Accuracy= 0.9963, Prediction= (array([ 0.,  1.], dtype=float32), array([1254647,    5065])), Desired= (array([ 0.,  1.], dtype=float32), array([1258185,    1527]))
+2017-03-23 06:42:09,657 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/022/case.nrrd
+2017-03-23 06:42:23,911 Iter 487, Minibatch Loss= 0.5092, Accuracy= 0.9941, Prediction= (array([ 0.,  1.], dtype=float32), array([1250603,    9109])), Desired= (array([ 0.,  1.], dtype=float32), array([1253426,    6286]))
+2017-03-23 06:42:24,048 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/023/case.nrrd
+2017-03-23 06:42:38,185 Iter 488, Minibatch Loss= 0.6532, Accuracy= 0.9920, Prediction= (array([ 0.,  1.], dtype=float32), array([1251721,    7991])), Desired= (array([ 0.,  1.], dtype=float32), array([1251833,    7879]))
+2017-03-23 06:42:38,319 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/024/case.nrrd
+2017-03-23 06:42:52,064 Iter 489, Minibatch Loss= 0.6466, Accuracy= 0.9971, Prediction= (array([ 0.,  1.], dtype=float32), array([1257156,    2556])), Desired= (array([ 0.,  1.], dtype=float32), array([1256235,    3477]))
+2017-03-23 06:42:52,201 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/025/case.nrrd
+2017-03-23 06:43:06,284 Iter 490, Minibatch Loss= 0.7626, Accuracy= 0.9880, Prediction= (array([ 0.,  1.], dtype=float32), array([1244047,   15665])), Desired= (array([ 0.,  1.], dtype=float32), array([1255334,    4378]))
+2017-03-23 06:43:06,419 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/026/case.nrrd
+2017-03-23 06:43:20,743 Iter 491, Minibatch Loss= 0.6045, Accuracy= 0.9819, Prediction= (array([ 0.,  1.], dtype=float32), array([1233584,   26128])), Desired= (array([ 0.,  1.], dtype=float32), array([1247591,   12121]))
+2017-03-23 06:43:20,881 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/027/case.nrrd
+2017-03-23 06:43:34,698 Iter 492, Minibatch Loss= 0.9681, Accuracy= 0.9961, Prediction= (array([ 0.,  1.], dtype=float32), array([1255798,    3914])), Desired= (array([ 0.,  1.], dtype=float32), array([1258541,    1171]))
+2017-03-23 06:43:34,834 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/029/case.nrrd
+2017-03-23 06:43:48,962 Iter 493, Minibatch Loss= 0.5542, Accuracy= 0.9956, Prediction= (array([ 0.,  1.], dtype=float32), array([1253029,    6683])), Desired= (array([ 0.,  1.], dtype=float32), array([1255752,    3960]))
+2017-03-23 06:43:49,100 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/030/case.nrrd
+2017-03-23 06:44:03,234 Iter 494, Minibatch Loss= 0.6329, Accuracy= 0.9819, Prediction= (array([ 0.,  1.], dtype=float32), array([1231007,   28705])), Desired= (array([ 0.,  1.], dtype=float32), array([1251834,    7878]))
+2017-03-23 06:44:03,369 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/031/case.nrrd
+2017-03-23 06:44:17,786 Iter 495, Minibatch Loss= 0.5869, Accuracy= 0.9816, Prediction= (array([ 0.,  1.], dtype=float32), array([1230957,   28755])), Desired= (array([ 0.,  1.], dtype=float32), array([1248461,   11251]))
+2017-03-23 06:44:17,925 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/033/case.nrrd
+2017-03-23 06:44:32,114 Iter 496, Minibatch Loss= 0.6807, Accuracy= 0.9878, Prediction= (array([ 0.,  1.], dtype=float32), array([1240955,   18757])), Desired= (array([ 0.,  1.], dtype=float32), array([1255543,    4169]))
+2017-03-23 06:44:32,252 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/034/case.nrrd
+2017-03-23 06:44:46,039 Iter 497, Minibatch Loss= 0.5592, Accuracy= 0.9972, Prediction= (array([ 0.,  1.], dtype=float32), array([1256646,    3066])), Desired= (array([ 0.,  1.], dtype=float32), array([1256000,    3712]))
+2017-03-23 06:44:46,178 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/035/case.nrrd
+2017-03-23 06:45:00,360 Iter 498, Minibatch Loss= 0.5741, Accuracy= 0.9841, Prediction= (array([ 0.,  1.], dtype=float32), array([1239157,   20555])), Desired= (array([ 0.,  1.], dtype=float32), array([1244819,   14893]))
+2017-03-23 06:45:00,499 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/037/case.nrrd
+2017-03-23 06:45:14,532 Iter 499, Minibatch Loss= 0.6623, Accuracy= 0.9945, Prediction= (array([ 0.,  1.], dtype=float32), array([1253041,    6671])), Desired= (array([ 0.,  1.], dtype=float32), array([1255613,    4099]))
+2017-03-23 06:45:14,674 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/038/case.nrrd
+2017-03-23 06:45:28,946 Iter 500, Minibatch Loss= 0.7800, Accuracy= 0.9947, Prediction= (array([ 0.,  1.], dtype=float32), array([1258205,    1507])), Desired= (array([ 0.,  1.], dtype=float32), array([1252465,    7247]))
+2017-03-23 06:45:29,082 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/039/case.nrrd
+2017-03-23 06:45:43,128 Iter 501, Minibatch Loss= 0.4820, Accuracy= 0.9923, Prediction= (array([ 0.,  1.], dtype=float32), array([1249447,   10265])), Desired= (array([ 0.,  1.], dtype=float32), array([1249212,   10500]))
+2017-03-23 06:45:43,267 Case: /home/ubuntu/ziyang/preprocessed_data/LabelMaps_1.00-1.00-1.00/040/case.nrrd

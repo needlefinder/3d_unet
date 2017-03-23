@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[7]:
+# In[1]:
 
 get_ipython().magic('matplotlib inline')
 import os
@@ -20,7 +20,7 @@ logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d %H:%M:%S", gmtim
 from syntheticdata import synthetic_generation
 
 
-# In[8]:
+# In[2]:
 
 def plot_prediction(x_test, y_test, prediction, save=False):
     import matplotlib
@@ -123,7 +123,7 @@ def cross_entropy(y_,output_map):
 #   return tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(output_map), reduction_indices=[1]))
 
 
-# In[9]:
+# In[3]:
 
 def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3, pool_size=2, summaries=True):
     """
@@ -434,8 +434,7 @@ class Trainer(object):
     def _initialize(self, training_iters, output_path, restore):
         global_step = tf.Variable(0)
         
-        self.norm_gradients_node = tf.Variable(tf.constant(0.0, shape=[len(self.net.gradients_node)]))
-        
+        self.norm_gradients_node = tf.Variable(tf.constant(0.0, shape=[len(self.net.gradients_node)]))        
         if self.net.summaries:
             tf.summary.histogram('norm_grads', self.norm_gradients_node)
 
@@ -468,7 +467,7 @@ class Trainer(object):
         
         return init
 
-    def train(self, data_provider, output_path, training_array=None, validation_array=None, testing_array=None,              training_iters=50, epochs=100, dropout=0.5, display_step=1, restore=False):
+    def train(self, data_provider, output_path, training_array=None, validation_array=None, testing_array=None,              training_iters=50, epochs=100, dropout=0.75, display_step=1, restore=False):
         """
         Lauches the training process
         
@@ -480,7 +479,6 @@ class Trainer(object):
         :param display_step: number of steps till outputting stats
         :param restore: Flag if previous model should be restored 
         """
-        save_path = os.path.join(output_path, "model.cpkt")
         
         init = self._initialize(training_iters, output_path, restore)
         
@@ -492,8 +490,8 @@ class Trainer(object):
                 if ckpt and ckpt.model_checkpoint_path:
                     self.net.restore(sess, ckpt.model_checkpoint_path)
             
-            test_x, test_y = data_provider(validation_array,"validation")
-            pred_shape = self.store_prediction(sess, test_x, test_y, "_init")
+            val_x, val_y = data_provider(validation_array,"validation")
+            pred_shape = self.store_prediction(sess, val_x, val_y, "_init")
             print("pred_shape: ", pred_shape)
             
             summary_writer = tf.summary.FileWriter(output_path, graph=sess.graph)
@@ -511,8 +509,6 @@ class Trainer(object):
                                                                  self.net.keep_prob: dropout})
                     total_loss += loss                    
                     logging.info("Iter {:}, Minibatch Loss= {:.4f}, Accuracy= {:.4f}, Prediction= {}, Desired= {}".format(step, loss, acc, np.unique(prediction_labels, return_counts=True), np.unique(y, return_counts=True)))
-                                                                    #np.unique(prediction_labels[...,1],return_counts=True),
-                                                                    #np.unique(y[...,1],return_counts=True)))
                     
                     if avg_gradients is None:
                         avg_gradients = [np.zeros_like(gradient) for gradient in gradients]
@@ -523,11 +519,10 @@ class Trainer(object):
                     self.norm_gradients_node.assign(norm_gradients).eval()
                                       
                     
-                #print("epoch stats")
                 self.output_epoch_stats(epoch, total_loss, training_iters, lr)
-                #print("store predictions")
-                self.store_prediction(sess, test_x, test_y, "epoch_%s"%epoch)
-                    
+                self.store_prediction(sess, val_x, val_y, "epoch_%s"%epoch)  
+                
+                save_path = os.path.join(output_path, "model {}.cpkt".format(epoch))
                 save_path = self.net.save(sess, save_path)
                 
             logging.info("Optimization Finished!")
@@ -535,7 +530,6 @@ class Trainer(object):
             return save_path
         
     def store_prediction(self, sess, batch_x, batch_y, name):
-        #logging.info("Storing prediction")
         prediction = sess.run(self.net.predicter, feed_dict={self.net.x: batch_x, 
                                                              self.net.y: batch_y, 
                                                              self.net.keep_prob: 1.})
@@ -545,7 +539,7 @@ class Trainer(object):
                                                        self.net.y: crop_to_shape(batch_y, pred_shape), 
                                                        self.net.keep_prob: 1.})
         
-        logging.info("Validation Accuracy= %.1f, Validation Loss= %.4f" % (acc, loss))
+        logging.info("Validation Accuracy= %.4f, Validation Loss= %.4f" % (acc, loss))
         
         return pred_shape
     
@@ -779,7 +773,7 @@ class ImageDataProvider(BaseDataProvider):
 
 # ## setting up the unet
 
-# In[10]:
+# In[4]:
 
 net = Unet(channels=1, 
            n_class=1, 
@@ -790,7 +784,7 @@ net = Unet(channels=1,
 
 # ## training
 
-# In[11]:
+# In[5]:
 
 Num_Training = 50
 Num_Validation = 5
@@ -819,10 +813,9 @@ for num in range(Num_Testing):
     
 
 
-# In[ ]:
+# In[6]:
 
 data_provider = ImageDataProvider(array=True)
-
 trainer = Trainer(net, batch_size=1, optimizer="adam")
 path = trainer.train(data_provider, 
                      "./unet_trained",
@@ -830,9 +823,34 @@ path = trainer.train(data_provider,
                      validation_array = validation_array,
                      testing_array = None,
                      training_iters=50, 
-                     epochs=60, 
-                     dropout=0.5, 
+                     epochs=50, 
+                     dropout=0.75, 
                      display_step=1)
+
+
+# ## Predict
+
+# In[13]:
+
+testingdata_provider = ImageDataProvider(array=True)
+x, y = testingdata_provider(testing_array,"testing")
+prediction = net.predict("./unet_trained/model 18.cpkt", x)[0][:,:,:,0]
+
+
+# In[14]:
+
+print(np.unique(prediction, return_counts=True))
+print(prediction.shape)
+
+
+# In[15]:
+
+get_ipython().magic('matplotlib notebook')
+xs,ys,zs = np.where(prediction == 1)
+fig = plt.figure(figsize=(6,6))
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(xs, ys, zs, marker='o', alpha=0.3, s=1)
+plt.show()
 
 
 # In[ ]:
