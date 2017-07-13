@@ -1,0 +1,2 @@
+model_checkpoint_path: "4-layers-16-features_u-net.pkl"
+all_model_checkpoint_paths: "4-layers-16-features_u-net.pkl"
