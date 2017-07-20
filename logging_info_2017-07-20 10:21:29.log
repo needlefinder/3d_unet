@@ -616,3 +616,28 @@
 2017-07-20 12:00:14,862 Iter 297, Minibatch Loss= 1.0000, Accuracy= 0.0000
 2017-07-20 12:00:18,064 Iter 297, Minibatch Loss= 1.0000, Training Accuracy= 0.0000, Minibatch error= 95.0%
 2017-07-20 12:00:22,014 Iter 298, Minibatch Loss= 0.9915, Accuracy= 0.0042
+2017-07-20 12:00:25,245 Iter 298, Minibatch Loss= 0.9915, Training Accuracy= 0.0042, Minibatch error= 95.1%
+2017-07-20 12:00:28,900 Iter 299, Minibatch Loss= 1.0000, Accuracy= 0.0000
+2017-07-20 12:00:32,093 Iter 299, Minibatch Loss= 1.0000, Training Accuracy= 0.0000, Minibatch error= 95.0%
+2017-07-20 12:00:38,288 Iter 300, Minibatch Loss= 0.9900, Accuracy= 0.0050
+2017-07-20 12:00:41,479 Iter 300, Minibatch Loss= 0.9900, Training Accuracy= 0.0050, Minibatch error= 95.1%
+2017-07-20 12:00:48,033 Iter 301, Minibatch Loss= 1.0000, Accuracy= 0.0000
+2017-07-20 12:00:51,259 Iter 301, Minibatch Loss= 1.0000, Training Accuracy= 0.0000, Minibatch error= 95.0%
+2017-07-20 12:01:00,020 Iter 302, Minibatch Loss= 0.9499, Accuracy= 0.0257
+2017-07-20 12:01:03,298 Iter 302, Minibatch Loss= 0.9499, Training Accuracy= 0.0257, Minibatch error= 95.3%
+2017-07-20 12:01:13,734 Iter 303, Minibatch Loss= 1.0000, Accuracy= 0.0000
+2017-07-20 12:01:17,169 Iter 303, Minibatch Loss= 1.0000, Training Accuracy= 0.0000, Minibatch error= 95.0%
+2017-07-20 12:01:24,831 Iter 304, Minibatch Loss= 0.9959, Accuracy= 0.0020
+2017-07-20 12:01:28,024 Iter 304, Minibatch Loss= 0.9959, Training Accuracy= 0.0020, Minibatch error= 95.1%
+2017-07-20 12:01:32,199 Iter 305, Minibatch Loss= 0.9875, Accuracy= 0.0063
+2017-07-20 12:01:35,459 Iter 305, Minibatch Loss= 0.9875, Training Accuracy= 0.0063, Minibatch error= 95.1%
+2017-07-20 12:01:39,513 Iter 306, Minibatch Loss= 1.0000, Accuracy= 0.0000
+2017-07-20 12:01:42,749 Iter 306, Minibatch Loss= 1.0000, Training Accuracy= 0.0000, Minibatch error= 95.0%
+2017-07-20 12:01:55,550 Iter 307, Minibatch Loss= 0.9995, Accuracy= 0.0003
+2017-07-20 12:01:58,765 Iter 307, Minibatch Loss= 0.9995, Training Accuracy= 0.0003, Minibatch error= 95.0%
+2017-07-20 12:02:02,088 Iter 308, Minibatch Loss= 1.0000, Accuracy= 0.0000
+2017-07-20 12:02:05,615 Iter 308, Minibatch Loss= 1.0000, Training Accuracy= 0.0000, Minibatch error= 95.0%
+2017-07-20 12:02:14,751 Iter 309, Minibatch Loss= 0.9982, Accuracy= 0.0009
+2017-07-20 12:02:17,941 Iter 309, Minibatch Loss= 0.9982, Training Accuracy= 0.0009, Minibatch error= 95.0%
+2017-07-20 12:02:22,844 Iter 310, Minibatch Loss= 0.9402, Accuracy= 0.0308
+2017-07-20 12:02:26,047 Iter 310, Minibatch Loss= 0.9402, Training Accuracy= 0.0308, Minibatch error= 95.5%

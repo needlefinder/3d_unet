@@ -1,6 +1,6 @@
 fns/__pycache__/
-*/__pycache__/
-*/logging_*
+__pycache__/
+logging_*
 old_models/
 unet_trained/
 models/
