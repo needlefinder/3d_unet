@@ -1,0 +1,15 @@
+2017-07-20 10:32:50,801 Layers: 4, FeaturesRoot: 16, ConvolutionSize: 3*3*3, PoolingSize: 2*2*2
+2017-07-20 10:32:50,858 Down Convoltion Layer: 0 Size: (?, ?, ?, ?, 16)
+2017-07-20 10:32:50,900 Down Convoltion Layer: 1 Size: (?, ?, ?, ?, 32)
+2017-07-20 10:32:50,936 Down Convoltion Layer: 2 Size: (?, ?, ?, ?, 64)
+2017-07-20 10:32:50,967 Down Convoltion Layer: 3 Size: (?, ?, ?, ?, 128)
+2017-07-20 10:32:51,048 Up Convoltion Layer: 2 Size: Tensor("going_up/layer_up_2/Shape_3:0", shape=(5,), dtype=int32)
+2017-07-20 10:32:51,170 Up Convoltion Layer: 1 Size: Tensor("going_up/layer_up_1/Shape_3:0", shape=(5,), dtype=int32)
+2017-07-20 10:32:51,241 Up Convoltion Layer: 0 Size: Tensor("going_up/layer_up_0/Shape_3:0", shape=(5,), dtype=int32)
+2017-07-20 10:32:51,248 Output map shape (?, ?, ?, ?, 1), offset 88
+2017-07-20 10:32:51,248 Actual Output Shape: (?, ?, ?, ?, 1)
+2017-07-20 10:32:51,248 Desired Output Shape: (?, ?, ?, ?, 1)
+2017-07-20 10:32:51,253 **************************************************
+2017-07-20 10:32:51,253 getting cost
+2017-07-20 10:32:51,253 Logits: (?, ?, ?, ?, 1)
+2017-07-20 10:32:51,253 Y: (?, ?, ?, ?, 1)

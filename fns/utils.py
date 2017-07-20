@@ -14,6 +14,8 @@ from PIL import Image
 from tqdm import tnrange, trange
 import seaborn as sns
 import pandas as pd
+from skimage import measure
+from skimage import filters
 
 logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d %H:%M:%S", gmtime())+".log",level=logging.DEBUG, format='%(asctime)s %(message)s')
 

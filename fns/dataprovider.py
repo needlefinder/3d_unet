@@ -20,6 +20,19 @@ class BaseDataProvider(object):
     def __init__(self, a_min=None, a_max=None):
         self.a_min = a_min if a_min is not None else -np.inf
         self.a_max = a_max if a_min is not None else np.inf
+        ### minimum number of label voxel set to 1
+        self.thresh = 2500
+        
+    def _count_valid_training(self, datafile, debug=False):
+        c=0
+        vals = []
+        for i in trange(len(datafile)):
+            label = self._next_data_label(datafile)
+            sum_label = np.sum(label)
+            vals.append(sum_label)
+            if sum_label > self.thresh:
+                c +=1
+        return c, vals
 
     def _load_data_and_label(self, datafile, batch_size=1):
         if batch_size == 1:
@@ -38,8 +51,11 @@ class BaseDataProvider(object):
         else:
             data_ = []
             label_ = []
+            data, label = [1],[1]
             for i in range(batch_size):
-                data, label = self._next_data(datafile)
+                while np.sum(label) < self.thresh:
+                    data, label = self._next_data(datafile)
+                
 
                 data = self._process_data(data)
                 label = self._process_labels(label)
@@ -195,10 +211,24 @@ class ImageDataProvider(BaseDataProvider):
         trainingCases = loadCases("training.txt")
         validationCases = loadCases("validation.txt")
         testingCases = loadCases("testing.txt")
+        
+        files_training = [claheDataPath + name + '/case.nrrd' for name in trainingCases]
+        files_validation = [claheDataPath + name + '/case.nrrd' for name in validationCases]
+        files_testing = [claheDataPath + name + '/case.nrrd' for name in testingCases]
+        
+        with open('training_subvolumes.txt', 'r') as f:
+            training_cases = f.read().splitlines()
+        with open('validation_subvolumes.txt', 'r') as f:
+            validation_cases = f.read().splitlines()
+        with open('testing_subvolumes.txt', 'r') as f:
+            testing_cases = f.read().splitlines()
+            
+        np.random.shuffle(training_cases)
+        np.random.shuffle(validation_cases)
+        np.random.shuffle(testing_cases)
 
-        return [claheDataPath + name + '/case.nrrd' for name in trainingCases], [claheDataPath + name + '/case.nrrd' for name in
-                                                                            validationCases], [
-                   claheDataPath + name + '/case.nrrd' for name in testingCases]
+        return training_cases, validation_cases, testing_cases
+
 
     def _load_file(self, path, dtype=np.float32, padding=None):
         tile = 148  ##
@@ -230,6 +260,31 @@ class ImageDataProvider(BaseDataProvider):
         label_name = image_name.replace('case', 'needles')
         label_name = label_name.replace('_clahe', '')
         img = self._load_file(image_name, np.float32, padding="noise")
-        label = self._load_file(label_name, np.bool, padding="zero")
+        label = self._load_file(label_name, np.uint16, padding="zero")
 
         return img, label
+    
+    def _next_data_label(self, datafile):
+        if datafile == self.training_data_files:
+            self.trainingfile_idx += 1
+            if self.trainingfile_idx >= len(datafile):
+                self.trainingfile_idx = 0
+            image_name = datafile[self.trainingfile_idx]
+        elif datafile == self.validation_data_files:
+            self.validationfile_idx += 1
+            if self.validationfile_idx >= len(datafile):
+                self.validationfile_idx = 0
+            image_name = datafile[self.validationfile_idx]
+        elif datafile == self.testing_data_files:
+            self.testingfile_idx += 1
+            if self.testingfile_idx >= len(datafile):
+                self.testingfile_idx = 0
+            image_name = datafile[self.testingfile_idx]
+        else:
+            raise ValueError("Datafile Not Recognized")
+
+        # logging.info("Case: {}".format(image_name))
+        label_name = image_name.replace('case', 'needles')
+        label_name = label_name.replace('_clahe', '')
+        label = self._load_file(label_name, np.uint16, padding="zero")
+        return label

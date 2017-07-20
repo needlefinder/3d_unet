@@ -60,6 +60,8 @@ def reshape_to_shape(data, shape, padding):
         temp = np.random.normal(std, mean, Tempshape)
     elif padding == "zero":
         temp = np.zeros(Tempshape, dtype=np.bool)
+    elif padding == "ones":
+        temp = np.ones(Tempshape, dtype=np.bool)
     else:
         raise ValueError("padding must be noise or zero")
 
@@ -178,3 +180,112 @@ def error_rate(predictions, labels):
         100.0 *
         np.sum(np.argmax(predictions, 3) == np.argmax(labels, 3)) /
         (predictions.shape[1] * predictions.shape[2] * predictions.shape[3]))
+
+def cutVolume(data, tile_in=60, tile=148):
+    '''
+    Cut the volume in smaller volumes, overlaping so the FOV of the unet (60x60x60) is cover in every location of the 
+    original volume, padded on the boundaries
+    '''
+    
+    ### pad volume
+    print("Original input shape", data.shape)
+    data = np.pad(data,((44,44),(44,44), (44,44)), mode='mean')
+
+    Mx, My, Mz = data.shape
+    kx = Mx//tile_in + 1*((Mx%tile_in)>0)
+    ky = Mx//tile_in + 1*((My%tile_in)>0)
+    kz = Mz//tile_in + 1*((Mz%tile_in)>0)
+    print('Padded input shape:', data.shape)
+    print('# of parts', kx,ky,kz)
+
+    off_x = 60
+    off_y = 60
+    off_z = 60
+
+    arr_data = []
+    nbTiles = 0
+    for i in range(kx):
+        for j in range(ky):
+            for k in range(kz):
+                # to not go over the boundaries
+                x = min(off_x*i, Mx - tile)
+                y = min(off_y*j, My - tile)
+                z = min(off_z*k, Mz - tile)
+                x = np.int(x)
+                y = np.int(y)
+                z = np.int(z)
+                # print(x,y,z)
+                data_s = data[x : x + tile, y : y + tile, z : z + tile ]
+                arr_data.append(data_s)
+                nbTiles += 1
+                # stop cutting if next part is over the boundaries
+                if (off_z*(k+1)) > (Mz - tile):
+                    break
+            if (off_y*(j+1)) > (My - tile):
+                    break
+        if (off_x*(i+1)) > (Mx - tile):
+                    break
+    print("number of tiles: %d " % nbTiles)
+    arr_data = np.array(arr_data)
+    return arr_data
+
+def predict_full_volume(arr_data, model_path="./unet_trained/model 6.cpkt"):
+    '''
+    Perform inference on subvolumes
+    '''
+    arr_out = []
+    for i in trange(arr_data.shape[0]):
+        img = arr_data[i]
+        img = img[np.newaxis,...,np.newaxis]
+        #input shape size required 1,148,148,148,1
+        out = net.predict(model_path, img)[0][:,:,:,0]
+        # out = np.ones((60,60,60))*i
+        out_p = np.pad(out,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
+        arr_out.append(out_p)
+    return arr_out
+
+def recombine(arr_out, data, tile_in=60, tile=148):
+    '''
+    Recombine subvolume into original shape
+    '''
+    data = np.pad(data,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
+    Mx, My, Mz = data.shape
+    kx = Mx//tile_in + 1*((Mx%tile_in)>0)
+    ky = Mx//tile_in + 1*((My%tile_in)>0)
+    kz = Mz//tile_in + 1*((Mz%tile_in)>0)
+    off_x = 60
+    off_y = 60
+    off_z = 60
+    data = np.zeros((Mx, My, Mz))
+    l=-1   
+    print('-'*50)
+    print('Padded input shape:', data.shape)
+    print('# of parts', kx,ky,kz)
+
+    for i in range(kx):
+        for j in range(ky):
+            for k in range(kz):
+                l+=1
+                x = min(off_x*i, Mx - tile)
+                y = min(off_y*j, My - tile)
+                z = min(off_z*k, Mz - tile)
+                x = np.int(x)
+                y = np.int(y)
+                z = np.int(z)
+                data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
+                if (off_z*(k+1)) > (Mz - tile):
+                    break
+            if (off_y*(j+1)) > (My - tile):
+                    break
+        if (off_x*(i+1)) > (Mx - tile):
+                    break
+
+    print("# of subvolumes merged: ", l+1)
+    data = np.array(data)
+    # data[np.where(data<l//2)]=0
+    # data[np.where(data>=l//2)]=1
+    data = data.astype(np.int8)
+    data=data[44:-44,44:-44,44:-44]
+    print(np.unique(data, return_counts=True))
+    print(data.shape)
+    return data

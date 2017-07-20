@@ -4,6 +4,8 @@
 # In[1]:
 
 get_ipython().magic('matplotlib inline')
+get_ipython().magic('load_ext autoreload')
+get_ipython().magic('autoreload 2')
 from fns import *
 from syntheticdata import synthetic_generation
 
@@ -297,74 +299,85 @@ net = Unet(channels=1,
 
 # In[5]:
 
-# data_provider = ImageDataProvider(array=False)
-# trainer = Trainer(net, batch_size=3, optimizer="adam")
-# path = trainer.train(data_provider, 
-#                      "./unet_trained",
-#                      training_array = None,
-#                      validation_array = None,
-#                      testing_array = None,
-#                      training_iters=37, 
-#                      epochs=100, 
-#                      dropout=0.6, 
-#                      restore= True,
-#                      display_step=1)
+provider = ImageDataProvider()
+count, vals = provider._count_valid_training(provider.training_data_files)
+
+
+# In[6]:
+
+plt.hist(vals, 30)
+print(count)
+
+
+# In[ ]:
+
+data_provider = ImageDataProvider(array=False)
+trainer = Trainer(net, batch_size=3, optimizer="adam")
+path = trainer.train(data_provider, 
+                     "./unet_trained",
+                     training_array = None,
+                     validation_array = None,
+                     testing_array = None,
+                     training_iters=count, 
+                     epochs=100, 
+                     dropout=0.75, 
+                     restore= False,
+                     display_step=1)
 
 
 # ### Predict
 
-# In[18]:
+# In[6]:
 
 provider = ImageDataProvider()
 # testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,3)
 
-testing_data, label_data = provider._load_data_and_label(provider.training_data_files,10)
+testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,2)
 
 
-# In[19]:
+# In[7]:
 
 testing_data.shape
 
 
-# In[20]:
+# In[8]:
 
-provider.testing_data_files
+provider.testing_data_files[:2]
 
 
-# In[38]:
+# In[17]:
 
-i = 8
+i = 0
 prediction = net.predict("./unet_trained/model 6.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
 
 
-# In[41]:
+# In[18]:
 
 print(np.unique(prediction, return_counts=True))
 print(prediction.shape)
 print(label_data.shape)
 
 
-# In[40]:
+# In[19]:
 
 get_ipython().magic('matplotlib notebook')
 xs,ys,zs = np.where(prediction == 1)
 
 fig = plt.figure(figsize=(6,6))
 ax = fig.add_subplot(111, projection='3d')
-ax.scatter(xs+44, ys+44, zs+44, marker='o', alpha=0.3, s=5)
+ax.scatter(xs, ys, zs, marker='o', alpha=0.3, s=5)
 plt.show()
 
 # fig = plt.figure(figsize=(6,6))
 # ax = fig.add_subplot(111, projection='3d')
-xs,ys,zs = np.where(label_data[i, ...,0] == 1)
+xs,ys,zs = np.where(label_data[i, 44:-44,44:-44,44:-44,0] == 1)
 ax.scatter(xs, ys, zs, marker='o',color='g', alpha=0.1, s=5)
 plt.show()
 
 
 # In[77]:
 
-from skimage import measure
-from skimage import filters
+
 
 
 # In[29]:
@@ -428,17 +441,17 @@ np.array(predval).shape
 
 
 
-# In[264]:
+# In[29]:
 
-image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/070/case.nrrd'
-label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/070/needles.nrrd'
+image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/074/case.nrrd'
+label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/074/needles.nrrd'
 # img = provider._load_file(image_name, np.float32, padding="noise")
 label = provider._load_file(label_name, np.bool, padding="zero")
 
 # data = provider._process_data(img)
-label = provider._process_labels(label)
+# label = provider._process_labels(label)
 
-data, label = provider._post_process(data, label)
+# data, label = provider._post_process(data, label)
 
 # nx = data.shape[0]
 # ny = data.shape[1]
@@ -447,24 +460,24 @@ data, label = provider._post_process(data, label)
 # data, label = data.reshape(1, nx, ny, nz, provider.channels), label.reshape(1, nx, ny, nz, provider.n_class)
 
 
-# In[265]:
+# In[30]:
 
 # print(img.shape)
 # print(data.shape)
 
 
-# In[266]:
+# In[31]:
 
 # data.shape
 
 
-# In[267]:
+# In[32]:
 
 tiles = (148,148,148)
 tile = 148
 
 
-# In[268]:
+# In[33]:
 
 data, options = nrrd.read(image_name)
 data = data.astype(np.float32)
@@ -476,194 +489,130 @@ print(data.shape)
 print(options)
 
 
-# In[269]:
+# In[34]:
 
-def getpad(size,block):
-    if size%block:
-        pad = block*(size//block+1) - size
-    else:
-        pad = 0
-    return pad
+def cutVolume(data, tile_in=60, tile=148):
+    '''
+    Cut the volume in smaller volumes, overlaping so the FOV of the unet (60x60x60) is cover in every location of the 
+    original volume, padded on the boundaries
+    '''
+    
+    ### pad volume
+    print("Original input shape", data.shape)
+    data = np.pad(data,((44,44),(44,44), (44,44)), mode='mean')
 
-def getpads(sizes, blocks):
-    pads = []
-    for i in range(3):
-        print(sizes, blocks)
-        pads.append([0,getpad(sizes[i], blocks[i])])
-    return pads
+    Mx, My, Mz = data.shape
+    kx = Mx//tile_in + 1*((Mx%tile_in)>0)
+    ky = Mx//tile_in + 1*((My%tile_in)>0)
+    kz = Mz//tile_in + 1*((Mz%tile_in)>0)
+    print('Padded input shape:', data.shape)
+    print('# of parts', kx,ky,kz)
 
-def tiler(input, tile_shape):
-    input = input[np.newaxis,...]
-    ts = tile_shape
-    input_shape = input.get_shape().as_list()
-    print(input_shape)
-    paddings = getpads(input_shape[:], tile_shape)
-    batch = tf.space_to_batch_nd(input, tile_shape, paddings, name=None)
-    batch = tf.transpose(batch, [3,1,2,0,4])
-    batch = tf.reshape(batch, (-1, ts[0], ts[1], ts[2], input_shape[-1]))
-    return batch
+    off_x = 60
+    off_y = 60
+    off_z = 60
 
+    arr_data = []
+    nbTiles = 0
+    for i in range(kx):
+        for j in range(ky):
+            for k in range(kz):
+                # to not go over the boundaries
+                x = min(off_x*i, Mx - tile)
+                y = min(off_y*j, My - tile)
+                z = min(off_z*k, Mz - tile)
+                x = np.int(x)
+                y = np.int(y)
+                z = np.int(z)
+                # print(x,y,z)
+                data_s = data[x : x + tile, y : y + tile, z : z + tile ]
+                arr_data.append(data_s)
+                nbTiles += 1
+                # stop cutting if next part is over the boundaries
+                if (off_z*(k+1)) > (Mz - tile):
+                    break
+            if (off_y*(j+1)) > (My - tile):
+                    break
+        if (off_x*(i+1)) > (Mx - tile):
+                    break
+    print("number of tiles: %d " % nbTiles)
+    arr_data = np.array(arr_data)
+    return arr_data
 
-def reshapeData(batch_x, batch_y, tile_shape=(148,148,148), keepNoNeedle=True, start=0, data_provider=ImageDataProvider()):
-    logits, labels = [], []
-    tf.reset_default_graph()
-    with tf.Session() as sess:
-        # initialize the graph
-        batch_x = tf.Variable(batch_x)
-        batch_y = tf.Variable(batch_y)
-        tf.global_variables_initializer().run()
+def predict_full_volume(arr_data, model_path="./unet_trained/model 6.cpkt"):
+    '''
+    Perform inference on subvolumes
+    '''
+    arr_out = []
+    for i in trange(arr_data.shape[0]):
+        img = arr_data[i]
+        img = img[np.newaxis,...,np.newaxis]
+        #input shape size required 1,148,148,148,1
+        out = net.predict(model_path, img)[0][:,:,:,0]
+        # out = np.ones((60,60,60))*i
+        out_p = np.pad(out,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
+        arr_out.append(out_p)
+    return arr_out
 
-        resx = tiler(batch_x, tile_shape).eval()
-        resy = tiler(batch_y, tile_shape).eval()
-        if keepNoNeedle or np.max(resy)!=0:
-            logits.append(resx)
-            labels.append(resy)
-    logits = np.array(logits)
-    labels = np.array(labels)
-    return np.concatenate(logits, axis=0), np.concatenate(labels, axis=0)
+def recombine(arr_out, data, tile_in=60, tile=148):
+    '''
+    Recombine subvolume into original shape
+    '''
+    data = np.pad(data,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
+    Mx, My, Mz = data.shape
+    kx = Mx//tile_in + 1*((Mx%tile_in)>0)
+    ky = Mx//tile_in + 1*((My%tile_in)>0)
+    kz = Mz//tile_in + 1*((Mz%tile_in)>0)
+    off_x = 60
+    off_y = 60
+    off_z = 60
+    data = np.zeros((Mx, My, Mz))
+    l=-1   
+    print('-'*50)
+    print('Padded input shape:', data.shape)
+    print('# of parts', kx,ky,kz)
 
-def reshapeDataset(nbOfCases, tile_shape=(100,100,100), keepNoNeedle=False, start=0, data_provider=ImageDataProvider()):
-    logits, labels = [], []
-    tf.reset_default_graph()
-    with tf.Session() as sess:
-        # initialize the graph
-        for i in range(nbOfCases):
-            batch_x, batch_y = data_provider(1)
-            batch_x = tf.Variable(batch_x)
-            batch_y = tf.Variable(batch_y)
-            tf.global_variables_initializer().run()
+    for i in range(kx):
+        for j in range(ky):
+            for k in range(kz):
+                l+=1
+                x = min(off_x*i, Mx - tile)
+                y = min(off_y*j, My - tile)
+                z = min(off_z*k, Mz - tile)
+                x = np.int(x)
+                y = np.int(y)
+                z = np.int(z)
+                data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
+                if (off_z*(k+1)) > (Mz - tile):
+                    break
+            if (off_y*(j+1)) > (My - tile):
+                    break
+        if (off_x*(i+1)) > (Mx - tile):
+                    break
 
-            resx = tiler(batch_x, (100,100,100)).eval()
-            resy = tiler(batch_y, (100,100,100)).eval()
-            if keepNoNeedle or np.max(resy)!=0:
-                logits.append(resx)
-                labels.append(resy)
-    logits = np.array(logits)
-    labels = np.array(labels)
-    return np.concatenate(logits, axis=0), np.concatenate(labels, axis=0)
-
-
-# In[270]:
-
-data.shape
-data = np.pad(data,((44,44),(44,44), (44,44)), mode='mean')
-data.shape
-
-
-# In[271]:
-
-Mx, My, Mz = data.shape
-# Mx,My,Mz=150,150,150
-tile_in = 60
-kx = Mx//tile_in + 1*((Mx%tile_in)>0)
-ky = Mx//tile_in + 1*((My%tile_in)>0)
-kz = Mz//tile_in + 1*((Mz%tile_in)>0)
-print(Mx,My,Mz)
-print(kx,ky,kz)
-
-
-# In[273]:
-
-off_x = 60
-off_y = 60
-off_z = 60
-
-
-print(off_x, off_y, off_z)
-
-arr_data = []
-nbTiles = 0
-for i in range(kx):
-    for j in range(ky):
-        for k in range(kz):
-            x = min(off_x*i, Mx - tile)
-            y = min(off_y*j, My - tile)
-            z = min(off_z*k, Mz - tile)
-            x = np.int(x)
-            y = np.int(y)
-            z = np.int(z)
-            print(x,y,z)
-            data_s = data[x : x + tile, y : y + tile, z : z + tile ]
-#             print(data_s.shape)
-            arr_data.append(data_s)
-            nbTiles += 1
-            if (off_z*k+1) > (Mz - tile):
-                break
-        if (off_y*j+1) > (My - tile):
-                break
-    if (off_x*i+1) > (Mx - tile):
-                break
-print("number of tiles: %d " % nbTiles)
-arr_data = np.array(arr_data)            
+    print("# of subvolumes merged: ", l+1)
+    data = np.array(data)
+    # data[np.where(data<l//2)]=0
+    # data[np.where(data>=l//2)]=1
+    data = data.astype(np.int8)
+    data=data[44:-44,44:-44,44:-44]
+    print(np.unique(data, return_counts=True))
+    print(data.shape)
+    return data
 
 
-# In[274]:
+# ## Inference pipeline
 
-arr_data[1].shape
-#input shape size required 1,148,148,148,1
+# In[28]:
 
-
-# In[275]:
-
-arr_out = []
-for i in trange(arr_data.shape[0]):
-    img = arr_data[i]
-    img = img[np.newaxis,...,np.newaxis]
-    out = net.predict("./unet_trained/model 6.cpkt", img)[0][:,:,:,0]
-    out_p = np.pad(out,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
-    arr_out.append(out_p)
+arr_data = cutVolume(data)
+arr_pred = predict_full_volume(arr_data, model_path="./unet_trained/model 13.cpkt")
+full_pred = recombine(arr_pred, data)
 
 
-# In[276]:
+# In[30]:
 
-data = np.zeros((Mx, My, Mz))
-l=-1
-# for i in range(kx):
-#     for j in range(ky):
-#         for k in range(kz):
-#             l+=1
-#             x = tile*i - off_x*i
-#             y = tile*j - off_y*j
-#             z = tile*k - off_z*k
-#             x = np.int(x)
-#             y = np.int(y)
-#             z = np.int(z)
-#             data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
-            
-            
-            
-            
-for i in range(kx):
-    for j in range(ky):
-        for k in range(kz):
-            l+=1
-            x = min(off_x*i, Mx - tile)
-            y = min(off_y*j, My - tile)
-            z = min(off_z*k, Mz - tile)
-            x = np.int(x)
-            y = np.int(y)
-            z = np.int(z)
-            data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
-            if (off_z*k+1) > (Mz - tile):
-                break
-        if (off_y*j+1) > (My - tile):
-                break
-    if (off_x*i+1) > (Mx - tile):
-                break
-            
-            
-data = np.array(data)
-# data[np.where(data<l//2)]=0
-# data[np.where(data>=l//2)]=1
-data = data.astype(np.int8)
-data=data[44:-44,44:-44,44:-44]
-print(np.unique(data, return_counts=True))
-print(data.shape)
-
-
-# In[195]:
-
-islands = measure.label(data)
+islands = measure.label(full_pred)
 K = np.max(islands)
 cp =sns.color_palette("Set2", K)
 fig = plt.figure(figsize=(6,6))
@@ -674,14 +623,32 @@ for j in range(1,K):
 plt.show()
 
 
-# In[277]:
+# In[87]:
 
-nrrd.write('test70.nrrd', data, options=options)
+nrrd.write('test74.nrrd', full_pred, options=options)
 
 
-# In[197]:
+# In[74]:
 
-data.shape
+full_pred.shape
+
+
+# In[37]:
+
+image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/074/needles.nrrd'
+data, options = nrrd.read(image_name)
+data = data.astype(np.int8)
+
+
+# In[38]:
+
+arr_labels = cutVolume(data)
+
+
+# In[39]:
+
+for d in data:
+    print(np.sum(d))
 
 
 # In[ ]:

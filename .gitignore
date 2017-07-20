@@ -3,4 +3,5 @@ fns/__pycache__/
 */logging_*
 old_models/
 unet_trained/
+models/
 real/

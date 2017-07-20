@@ -161,7 +161,7 @@ class Unet(object):
     :param cost_kwargs: (optional) kwargs passed to the cost function. See Unet._get_cost for more options
     """
 
-    def __init__(self, channels=1, n_class=1, cost="dice_coefficient", cost_kwargs={}, **kwargs):
+    def __init__(self, channels=1, n_class=1, cost="dice_coefficient", predict_thresh=0.5, cost_kwargs={}, **kwargs):
         tf.reset_default_graph()
 
         self.n_class = n_class
@@ -177,7 +177,7 @@ class Unet(object):
 
         self.logits = logits
         self.predicter = self.logits
-        self.predicter_label = tf.cast(self.predicter >= 0.5, tf.float32)
+        self.predicter_label = tf.cast(self.predicter >= predict_thresh, tf.float32)
         self.correct_pred = tf.cast(
             tf.equal(tf.reshape(self.predicter_label, [-1, n_class]), tf.reshape(self.y, [-1, n_class])), tf.float32)
         self.cost = self._get_cost(self.logits, self.predicter, cost, cost_kwargs)
@@ -223,10 +223,6 @@ class Unet(object):
                 intersection = tf.reduce_sum(flat_predicter * flat_labels)
                 union = tf.reduce_sum(flat_predicter) + tf.reduce_sum(flat_labels)
                 loss = 1 - 2 * intersection / union
-                
-            elif cost_name == "chaffer":
-                #https://stackoverflow.com/questions/37479119/doing-pairwise-distance-computation-with-tensorflow
-                loss = chaffer_loss(flat_predicter,flat_labels, flat_labels)
 
             else:
                 raise ValueError("Unknown cost function: " % cost_name)
@@ -285,63 +281,21 @@ class Unet(object):
         logging.info("Model restored from file: %s" % model_path)
 
 
-# In[4]:
-
-def chaffer_loss(x1, x2, y):
-    # Euclidean distance between x1,x2
-    l2diff = tf.sqrt(tf.reduce_sum(tf.square(tf.subtract(x1, x2)),
-                                   reduction_indices=1))
-
-#     # you can try margin parameters
-#     margin = tf.constant(1.)
-
-#     labels = tf.to_float(y)
-
-#     match_loss = tf.square(l2diff, 'match_term')
-#     mismatch_loss = tf.maximum(0., tf.subtract(margin, tf.square(l2diff)), 'mismatch_term')
-
-#     # if label is 1, only match_loss will count, otherwise mismatch_loss
-#     loss = tf.add(tf.multiply(labels, match_loss), \
-#                   tf.multiply((1 - labels), mismatch_loss), 'loss_add')
-
-#     loss_mean = tf.reduce_mean(loss)
-#     return loss_mean
-    return tf.reduce_mean(l2diff)
-
-
-def get_image_summary(img, idx=0):
-    """
-    Make an image summary for 4d tensor image with index idx
-    """
-    
-    V = tf.slice(img, (0, 0, 0, idx), (1, -1, -1, 1))
-    V -= tf.reduce_min(V)
-    V /= tf.reduce_max(V)
-    V *= 255
-    
-    img_w = tf.shape(img)[1]
-    img_h = tf.shape(img)[2]
-    V = tf.reshape(V, tf.stack((img_w, img_h, 1)))
-    V = tf.transpose(V, (2, 0, 1))
-    V = tf.reshape(V, tf.stack((-1, img_w, img_h, 1)))
-    return V
-
-
 # ## setting up the unet
 
-# In[5]:
+# In[4]:
 
 net = Unet(channels=1, 
            n_class=1, 
            layers=4, 
            pool_size=2,
-           features_root=16, summaries=True
+           features_root=16, summaries=True,
           )
 
 
 # ## training
 
-# In[6]:
+# In[5]:
 
 # data_provider = ImageDataProvider(array=False)
 # trainer = Trainer(net, batch_size=3, optimizer="adam")
@@ -351,35 +305,46 @@ net = Unet(channels=1,
 #                      validation_array = None,
 #                      testing_array = None,
 #                      training_iters=37, 
-#                      epochs=50, 
-#                      dropout=0.75, 
-#                      restore= False,
+#                      epochs=100, 
+#                      dropout=0.6, 
+#                      restore= True,
 #                      display_step=1)
 
 
 # ### Predict
 
-# In[7]:
+# In[18]:
 
 provider = ImageDataProvider()
-testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,3)
+# testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,3)
+
+testing_data, label_data = provider._load_data_and_label(provider.training_data_files,10)
+
+
+# In[19]:
+
 testing_data.shape
-# testing_data = provider._load_data_and_label(provider.training_data_files)
 
 
-# In[39]:
+# In[20]:
 
-i = 1
-prediction = net.predict("./unet_trained_bk/model 10.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
+provider.testing_data_files
 
 
-# In[40]:
+# In[38]:
 
-print(np.unique(prediction, return_counts=True))
-print(prediction.shape)
+i = 8
+prediction = net.predict("./unet_trained/model 6.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
 
 
 # In[41]:
+
+print(np.unique(prediction, return_counts=True))
+print(prediction.shape)
+print(label_data.shape)
+
+
+# In[40]:
 
 get_ipython().magic('matplotlib notebook')
 xs,ys,zs = np.where(prediction == 1)
@@ -389,20 +354,20 @@ ax = fig.add_subplot(111, projection='3d')
 ax.scatter(xs+44, ys+44, zs+44, marker='o', alpha=0.3, s=5)
 plt.show()
 
-fig = plt.figure(figsize=(6,6))
-ax = fig.add_subplot(111, projection='3d')
+# fig = plt.figure(figsize=(6,6))
+# ax = fig.add_subplot(111, projection='3d')
 xs,ys,zs = np.where(label_data[i, ...,0] == 1)
-ax.scatter(xs, ys, zs, marker='o',color='g', alpha=0.3, s=5)
+ax.scatter(xs, ys, zs, marker='o',color='g', alpha=0.1, s=5)
 plt.show()
 
 
-# In[42]:
+# In[77]:
 
 from skimage import measure
 from skimage import filters
 
 
-# In[43]:
+# In[29]:
 
 np.random.seed(1)
 islands = measure.label(prediction)
@@ -412,11 +377,11 @@ fig = plt.figure(figsize=(6,6))
 ax = fig.add_subplot(111, projection='3d')
 for j in range(1,K):
     xs,ys,zs = np.where(islands == j)
-    ax.scatter(xs, ys, zs, marker='o',color=cp[j], alpha=0.3, s=5)
+    ax.scatter(xs, ys, zs, marker='o',color=cp[j], alpha=0.9, s=2)
 plt.show()
 
 
-# In[44]:
+# In[30]:
 
 np.random.seed(1)
 islands = measure.label(label_data[i,...,0])
@@ -426,7 +391,7 @@ fig = plt.figure(figsize=(6,6))
 ax = fig.add_subplot(111, projection='3d')
 for j in range(1,K):
     xs,ys,zs = np.where(islands == j)
-    ax.scatter(xs, ys, zs, marker='o',color=cp[j], alpha=0.3, s=5)
+    ax.scatter(xs, ys, zs, marker='o',color=cp[j], alpha=0.9, s=2)
 plt.show()
 
 
@@ -463,53 +428,55 @@ np.array(predval).shape
 
 
 
-# In[112]:
+# In[264]:
 
-image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/027/case.nrrd'
-label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/077/needles.nrrd'
-img = provider._load_file(image_name, np.float32, padding="noise")
+image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/070/case.nrrd'
+label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/070/needles.nrrd'
+# img = provider._load_file(image_name, np.float32, padding="noise")
 label = provider._load_file(label_name, np.bool, padding="zero")
 
-data = provider._process_data(img)
+# data = provider._process_data(img)
 label = provider._process_labels(label)
 
 data, label = provider._post_process(data, label)
 
-nx = data.shape[0]
-ny = data.shape[1]
-nz = data.shape[2]
+# nx = data.shape[0]
+# ny = data.shape[1]
+# nz = data.shape[2]
 
-data, label = data.reshape(1, nx, ny, nz, provider.channels), label.reshape(1, nx, ny, nz, provider.n_class)
-
-
-# In[113]:
-
-data.shape
+# data, label = data.reshape(1, nx, ny, nz, provider.channels), label.reshape(1, nx, ny, nz, provider.n_class)
 
 
-# In[114]:
+# In[265]:
 
-data.shape
+# print(img.shape)
+# print(data.shape)
 
 
-# In[115]:
+# In[266]:
+
+# data.shape
+
+
+# In[267]:
 
 tiles = (148,148,148)
 tile = 148
 
 
-# In[138]:
+# In[268]:
 
-data = nrrd.read(image_name)[0].astype(np.float32)
+data, options = nrrd.read(image_name)
+data = data.astype(np.float32)
 print(data.shape)
 d = data.resize(max(data.shape[0],tile),
                max(data.shape[1],tile),
                max(data.shape[2],tile))
 print(data.shape)
+print(options)
 
 
-
-# In[151]:
+# In[269]:
 
 def getpad(size,block):
     if size%block:
@@ -576,50 +543,147 @@ def reshapeDataset(nbOfCases, tile_shape=(100,100,100), keepNoNeedle=False, star
     return np.concatenate(logits, axis=0), np.concatenate(labels, axis=0)
 
 
-# In[153]:
+# In[270]:
 
+data.shape
+data = np.pad(data,((44,44),(44,44), (44,44)), mode='mean')
 data.shape
 
 
-# In[154]:
-
-np.reshape(data,(-1,148,148,148))
-
-
-# In[160]:
+# In[271]:
 
 Mx, My, Mz = data.shape
-kx = Mx//tile + 1*((Mx%tile)>0)
-ky = Mx//tile + 1*((My%tile)>0)
-kz = Mz//tile + 1*((Mz%tile)>0)
+# Mx,My,Mz=150,150,150
+tile_in = 60
+kx = Mx//tile_in + 1*((Mx%tile_in)>0)
+ky = Mx//tile_in + 1*((My%tile_in)>0)
+kz = Mz//tile_in + 1*((Mz%tile_in)>0)
 print(Mx,My,Mz)
 print(kx,ky,kz)
 
 
-# In[170]:
+# In[273]:
 
-off_x = (kx*tile - Mx)/max(1,(kx-1))
-off_y = ky*tile - My/max(1,(ky-1))
-off_z = kz*tile - Mz/max(1,(kz-1))
+
+
+off_x = 60
+off_y = 60
+off_z = 60
+
+
+print(off_x, off_y, off_z)
 
 arr_data = []
+nbTiles = 0
 for i in range(kx):
     for j in range(ky):
         for k in range(kz):
-            x = tile*i - off_x*i
-            y = tile*j - off_y*j
-            z = tile*k - off_z*k
+            x = min(off_x*i, Mx - tile)
+            y = min(off_y*j, My - tile)
+            z = min(off_z*k, Mz - tile)
             x = np.int(x)
             y = np.int(y)
             z = np.int(z)
             print(x,y,z)
-            arr_data.append(data[x : x + tile, y : y + tile, z : z + tile ])
+            data_s = data[x : x + tile, y : y + tile, z : z + tile ]
+#             print(data_s.shape)
+            arr_data.append(data_s)
+            nbTiles += 1
+            if (off_z*k+1) > (Mz - tile):
+                break
+        if (off_y*j+1) > (My - tile):
+                break
+    if (off_x*i+1) > (Mx - tile):
+                break
+print("number of tiles: %d " % nbTiles)
 arr_data = np.array(arr_data)            
 
 
-# In[169]:
+# In[274]:
 
-kz
+arr_data[1].shape
+#input shape size required 1,148,148,148,1
+
+
+# In[275]:
+
+arr_out = []
+for i in trange(arr_data.shape[0]):
+    img = arr_data[i]
+    img = img[np.newaxis,...,np.newaxis]
+    out = net.predict("./unet_trained/model 6.cpkt", img)[0][:,:,:,0]
+    out_p = np.pad(out,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
+    arr_out.append(out_p)
+
+
+# In[276]:
+
+data = np.zeros((Mx, My, Mz))
+l=-1
+# for i in range(kx):
+#     for j in range(ky):
+#         for k in range(kz):
+#             l+=1
+#             x = tile*i - off_x*i
+#             y = tile*j - off_y*j
+#             z = tile*k - off_z*k
+#             x = np.int(x)
+#             y = np.int(y)
+#             z = np.int(z)
+#             data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
+            
+            
+            
+            
+for i in range(kx):
+    for j in range(ky):
+        for k in range(kz):
+            l+=1
+            x = min(off_x*i, Mx - tile)
+            y = min(off_y*j, My - tile)
+            z = min(off_z*k, Mz - tile)
+            x = np.int(x)
+            y = np.int(y)
+            z = np.int(z)
+            data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
+            if (off_z*k+1) > (Mz - tile):
+                break
+        if (off_y*j+1) > (My - tile):
+                break
+    if (off_x*i+1) > (Mx - tile):
+                break
+            
+            
+data = np.array(data)
+# data[np.where(data<l//2)]=0
+# data[np.where(data>=l//2)]=1
+data = data.astype(np.int8)
+data=data[44:-44,44:-44,44:-44]
+print(np.unique(data, return_counts=True))
+print(data.shape)
+
+
+# In[195]:
+
+islands = measure.label(data)
+K = np.max(islands)
+cp =sns.color_palette("Set2", K)
+fig = plt.figure(figsize=(6,6))
+ax = fig.add_subplot(111, projection='3d')
+for j in range(1,K):
+    xs,ys,zs = np.where(islands == j)
+    ax.scatter(xs, ys, zs, marker='o',color=cp[j], alpha=0.9, s=2)
+plt.show()
+
+
+# In[277]:
+
+nrrd.write('test70.nrrd', data, options=options)
+
+
+# In[197]:
+
+data.shape
 
 
 # In[ ]:

@@ -1,0 +1,22 @@
+2017-07-20 11:04:28,331 Layers: 4, FeaturesRoot: 16, ConvolutionSize: 3*3*3, PoolingSize: 2*2*2
+2017-07-20 11:04:28,353 Down Convoltion Layer: 0 Size: (?, ?, ?, ?, 16)
+2017-07-20 11:04:28,373 Down Convoltion Layer: 1 Size: (?, ?, ?, ?, 32)
+2017-07-20 11:04:28,393 Down Convoltion Layer: 2 Size: (?, ?, ?, ?, 64)
+2017-07-20 11:04:28,413 Down Convoltion Layer: 3 Size: (?, ?, ?, ?, 128)
+2017-07-20 11:04:28,474 Up Convoltion Layer: 2 Size: Tensor("going_up/layer_up_2/Shape_3:0", shape=(5,), dtype=int32)
+2017-07-20 11:04:28,580 Up Convoltion Layer: 1 Size: Tensor("going_up/layer_up_1/Shape_3:0", shape=(5,), dtype=int32)
+2017-07-20 11:04:28,641 Up Convoltion Layer: 0 Size: Tensor("going_up/layer_up_0/Shape_3:0", shape=(5,), dtype=int32)
+2017-07-20 11:04:28,647 Output map shape (?, ?, ?, ?, 1), offset 88
+2017-07-20 11:04:28,647 Actual Output Shape: (?, ?, ?, ?, 1)
+2017-07-20 11:04:28,647 Desired Output Shape: (?, ?, ?, ?, 1)
+2017-07-20 11:04:28,651 **************************************************
+2017-07-20 11:04:28,651 getting cost
+2017-07-20 11:04:28,651 Logits: (?, ?, ?, ?, 1)
+2017-07-20 11:04:28,651 Y: (?, ?, ?, ?, 1)
+2017-07-20 11:04:54,107 Removing '/mnt/DATA/gp1514/Dropbox/Projects/pw25/ziyang/3d_unet/prediction'
+2017-07-20 11:04:54,107 Removing '/mnt/DATA/gp1514/Dropbox/Projects/pw25/ziyang/3d_unet/unet_trained'
+2017-07-20 11:04:54,107 Allocating '/mnt/DATA/gp1514/Dropbox/Projects/pw25/ziyang/3d_unet/prediction'
+2017-07-20 11:04:54,107 Allocating '/mnt/DATA/gp1514/Dropbox/Projects/pw25/ziyang/3d_unet/unet_trained'
+2017-07-20 11:04:57,265 Validation Accuracy= 1.0000, Validation Loss= nan
+2017-07-20 11:04:57,512 Start optimization
+2017-07-20 11:05:07,682 Iter 0, Minibatch Loss= nan, Accuracy= 1.0000
