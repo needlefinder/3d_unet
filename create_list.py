@@ -1,17 +1,17 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[31]:
 
 from fns import *
 import glob
 
 
-# In[5]:
+# In[32]:
 
-rootPath = "/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/"
+rootPath = "/home/gp1514/DATA/"
 dataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
-claheDataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00_clahe/"
+claheDataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
 trainingCases = loadCases("training.txt")
 validationCases = loadCases("validation.txt")
 testingCases = loadCases("testing.txt")
@@ -21,7 +21,7 @@ files_validation = [claheDataPath + name + '/case.nrrd' for name in validationCa
 files_testing = [claheDataPath + name + '/case.nrrd' for name in testingCases]
 
 
-# In[21]:
+# In[33]:
 
 inputs = [files_training, 
           files_validation, 
@@ -44,12 +44,12 @@ for i in range(3):
 
 
 
-# In[22]:
+# In[34]:
 
 inputs[2]
 
 
-# In[30]:
+# In[35]:
 
 with open('training_subvolumes.txt', 'r') as f:
     training_cases = f.read().splitlines()

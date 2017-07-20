@@ -229,7 +229,7 @@ def cutVolume(data, tile_in=60, tile=148):
     arr_data = np.array(arr_data)
     return arr_data
 
-def predict_full_volume(arr_data, model_path="./unet_trained/model 6.cpkt"):
+def predict_full_volume(net, arr_data, model_path="./unet_trained/model 6.cpkt"):
     '''
     Perform inference on subvolumes
     '''

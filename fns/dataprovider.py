@@ -22,6 +22,7 @@ class BaseDataProvider(object):
         self.a_max = a_max if a_min is not None else np.inf
         ### minimum number of label voxel set to 1
         self.thresh = 2500
+        self.check_vol = False
         
     def _count_valid_training(self, datafile, debug=False):
         c=0
@@ -53,9 +54,11 @@ class BaseDataProvider(object):
             label_ = []
             data, label = [1],[1]
             for i in range(batch_size):
-                while np.sum(label) < self.thresh:
+                if self.check_vol:
+                    while np.sum(label) < self.thresh:
+                        data, label = self._next_data(datafile)
+                else:
                     data, label = self._next_data(datafile)
-                
 
                 data = self._process_data(data)
                 label = self._process_labels(label)
@@ -179,13 +182,15 @@ class ImageDataProvider(BaseDataProvider):
 
     """
 
-    def __init__(self, array=False, search_path='', a_min=None, a_max=None, data_suffix=".tif",
-                 mask_suffix='_mask.tif'):
+    def __init__(self, array=False, search_path='', a_min=None, a_max=None, data_suffix=".tif", 
+                 split_vol=False, check_vol=False,mask_suffix='_mask.tif'):
 
         super(ImageDataProvider, self).__init__(a_min, a_max)
         self.trainingfile_idx = -1
         self.validationfile_idx = -1
         self.testingfile_idx = -1
+        self.split_vol = split_vol
+        self.check_vol = check_vol
 
         if array == True:
             pass
@@ -204,31 +209,46 @@ class ImageDataProvider(BaseDataProvider):
 
     def _find_data_files(self):
         #         rootPath = "/home/administrator/GynNeedleFinder/preprocessed_data/"
-        rootPath = "/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/"
+        rootPath = "/home/gp1514/DATA/"
         dataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
-        claheDataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00_clahe/"
+        claheDataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
 
         trainingCases = loadCases("training.txt")
         validationCases = loadCases("validation.txt")
         testingCases = loadCases("testing.txt")
         
-        files_training = [claheDataPath + name + '/case.nrrd' for name in trainingCases]
-        files_validation = [claheDataPath + name + '/case.nrrd' for name in validationCases]
-        files_testing = [claheDataPath + name + '/case.nrrd' for name in testingCases]
+        files_training_ = [claheDataPath + name + '/case.nrrd' for name in trainingCases]
+        files_validation_ = [claheDataPath + name + '/case.nrrd' for name in validationCases]
+        files_testing_ = [claheDataPath + name + '/case.nrrd' for name in testingCases]
         
-        with open('training_subvolumes.txt', 'r') as f:
-            training_cases = f.read().splitlines()
-        with open('validation_subvolumes.txt', 'r') as f:
-            validation_cases = f.read().splitlines()
-        with open('testing_subvolumes.txt', 'r') as f:
-            testing_cases = f.read().splitlines()
+        if self.split_vol:
+            print(50*'-')
+            print("Using split volumes")
+            files_training, files_validation, files_testing = [], [], []
+
+            for file in files_training_: 
+                folder = file.replace('case.nrrd', '')
+                files_training.append(glob.glob(folder+'case_*.nrrd'))
+            for file in files_validation_: 
+                folder = file.replace('case.nrrd', '')
+                files_validation.append(glob.glob(folder+'case_*.nrrd'))
+            for file in files_testing_: 
+                folder = file.replace('case.nrrd', '')
+                files_testing.append(glob.glob(folder+'case_*.nrrd'))
+
+            files_training = list(np.concatenate(files_training))
+            files_validation = list(np.concatenate(files_validation))
+            files_testing = list(np.concatenate(files_testing))
+            # print(files_training_)
+            # print(50*'*')
+            # print(files_training)
+        else:
+            files_training, files_validation, files_testing = files_training_, files_validation_, files_testing_
             
-        np.random.shuffle(training_cases)
-        np.random.shuffle(validation_cases)
-        np.random.shuffle(testing_cases)
-
-        return training_cases, validation_cases, testing_cases
-
+        np.random.shuffle(files_training)
+        np.random.shuffle(files_validation)
+        np.random.shuffle(files_testing)
+        return files_training, files_validation, files_testing
 
     def _load_file(self, path, dtype=np.float32, padding=None):
         tile = 148  ##

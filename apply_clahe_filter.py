@@ -8,7 +8,7 @@ from fns import *
 from syntheticdata import synthetic_generation
 
 
-# In[21]:
+# In[2]:
 
 rootPath = "/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/"
 dataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
@@ -24,11 +24,12 @@ files = [dataPath + name + '/case.nrrd' for name in trainingCases], [dataPath + 
 files = np.concatenate(files).tolist()
 
 
-# In[23]:
+# In[3]:
 
 for i in trange(len(files)):
     file = files[i]
-    data = nrrd.read(file)[0].astype(np.uint16)
+    data, options = nrrd.read(file)
+    data = data.astype(np.uint16)
     nz = data.shape[2]
     clahe = cv2.createCLAHE(clipLimit=0, tileGridSize=(30, 30))
     data_res = []

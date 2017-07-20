@@ -297,13 +297,17 @@ net = Unet(channels=1,
 
 # ## training
 
-# In[5]:
+# In[6]:
 
-provider = ImageDataProvider()
+provider = ImageDataProvider(split_vol=True, check_vol=True)
+provider.check_vol = True
+provider.split_vol = True
+provider.thresh = 5000
+provider._find_data_files()
 count, vals = provider._count_valid_training(provider.training_data_files)
 
 
-# In[6]:
+# In[7]:
 
 plt.hist(vals, 30)
 print(count)
@@ -311,7 +315,8 @@ print(count)
 
 # In[ ]:
 
-data_provider = ImageDataProvider(array=False)
+# data_provider = ImageDataProvider(array=False)
+data_provider = provider
 trainer = Trainer(net, batch_size=3, optimizer="adam")
 path = trainer.train(data_provider, 
                      "./unet_trained",
@@ -327,38 +332,37 @@ path = trainer.train(data_provider,
 
 # ### Predict
 
-# In[6]:
+# In[7]:
 
 provider = ImageDataProvider()
 # testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,3)
-
 testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,2)
-
-
-# In[7]:
-
-testing_data.shape
 
 
 # In[8]:
 
+testing_data.shape
+
+
+# In[9]:
+
 provider.testing_data_files[:2]
 
 
-# In[17]:
+# In[10]:
 
-i = 0
-prediction = net.predict("./unet_trained/model 6.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
+i = 1
+prediction = net.predict("./unet_trained/model 15.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
 
 
-# In[18]:
+# In[11]:
 
 print(np.unique(prediction, return_counts=True))
 print(prediction.shape)
 print(label_data.shape)
 
 
-# In[19]:
+# In[12]:
 
 get_ipython().magic('matplotlib notebook')
 xs,ys,zs = np.where(prediction == 1)
@@ -375,12 +379,7 @@ ax.scatter(xs, ys, zs, marker='o',color='g', alpha=0.1, s=5)
 plt.show()
 
 
-# In[77]:
-
-
-
-
-# In[29]:
+# In[13]:
 
 np.random.seed(1)
 islands = measure.label(prediction)
@@ -394,10 +393,10 @@ for j in range(1,K):
 plt.show()
 
 
-# In[30]:
+# In[14]:
 
 np.random.seed(1)
-islands = measure.label(label_data[i,...,0])
+islands = measure.label(label_data[i,...,0][44:-44,44:-44,44:-44])
 K = np.max(islands)
 cp =sns.color_palette("Set2", K)
 fig = plt.figure(figsize=(6,6))
@@ -408,43 +407,10 @@ for j in range(1,K):
 plt.show()
 
 
-# In[23]:
+# In[37]:
 
-np.alltrue(blobs_labels==all_labels)
-
-
-# In[14]:
-
-import pyximport; pyximport.install()
-from fns.set_metrics import *
-
-
-# In[15]:
-
-print(prediction.shape)
-print(label_data[0,...,0].shape)
-lab = crop_to_shape(label_data[...,0], prediction[np.newaxis,...].shape)
-print(lab[0].shape)
-
-
-# In[16]:
-
-labval = np.where(lab[0]!=False)
-predval = np.where(prediction!=1)
-# hausdorff_distance(np.array(labval),np.array(predval))
-np.array(labval).shape
-np.array(predval).shape
-
-
-# In[17]:
-
-
-
-
-# In[29]:
-
-image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/074/case.nrrd'
-label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/074/needles.nrrd'
+image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/051/case.nrrd'
+label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/051/needles.nrrd'
 # img = provider._load_file(image_name, np.float32, padding="noise")
 label = provider._load_file(label_name, np.bool, padding="zero")
 
@@ -460,24 +426,24 @@ label = provider._load_file(label_name, np.bool, padding="zero")
 # data, label = data.reshape(1, nx, ny, nz, provider.channels), label.reshape(1, nx, ny, nz, provider.n_class)
 
 
-# In[30]:
+# In[38]:
 
 # print(img.shape)
 # print(data.shape)
 
 
-# In[31]:
+# In[39]:
 
 # data.shape
 
 
-# In[32]:
+# In[40]:
 
 tiles = (148,148,148)
 tile = 148
 
 
-# In[33]:
+# In[41]:
 
 data, options = nrrd.read(image_name)
 data = data.astype(np.float32)
@@ -489,128 +455,16 @@ print(data.shape)
 print(options)
 
 
-# In[34]:
-
-def cutVolume(data, tile_in=60, tile=148):
-    '''
-    Cut the volume in smaller volumes, overlaping so the FOV of the unet (60x60x60) is cover in every location of the 
-    original volume, padded on the boundaries
-    '''
-    
-    ### pad volume
-    print("Original input shape", data.shape)
-    data = np.pad(data,((44,44),(44,44), (44,44)), mode='mean')
-
-    Mx, My, Mz = data.shape
-    kx = Mx//tile_in + 1*((Mx%tile_in)>0)
-    ky = Mx//tile_in + 1*((My%tile_in)>0)
-    kz = Mz//tile_in + 1*((Mz%tile_in)>0)
-    print('Padded input shape:', data.shape)
-    print('# of parts', kx,ky,kz)
-
-    off_x = 60
-    off_y = 60
-    off_z = 60
-
-    arr_data = []
-    nbTiles = 0
-    for i in range(kx):
-        for j in range(ky):
-            for k in range(kz):
-                # to not go over the boundaries
-                x = min(off_x*i, Mx - tile)
-                y = min(off_y*j, My - tile)
-                z = min(off_z*k, Mz - tile)
-                x = np.int(x)
-                y = np.int(y)
-                z = np.int(z)
-                # print(x,y,z)
-                data_s = data[x : x + tile, y : y + tile, z : z + tile ]
-                arr_data.append(data_s)
-                nbTiles += 1
-                # stop cutting if next part is over the boundaries
-                if (off_z*(k+1)) > (Mz - tile):
-                    break
-            if (off_y*(j+1)) > (My - tile):
-                    break
-        if (off_x*(i+1)) > (Mx - tile):
-                    break
-    print("number of tiles: %d " % nbTiles)
-    arr_data = np.array(arr_data)
-    return arr_data
-
-def predict_full_volume(arr_data, model_path="./unet_trained/model 6.cpkt"):
-    '''
-    Perform inference on subvolumes
-    '''
-    arr_out = []
-    for i in trange(arr_data.shape[0]):
-        img = arr_data[i]
-        img = img[np.newaxis,...,np.newaxis]
-        #input shape size required 1,148,148,148,1
-        out = net.predict(model_path, img)[0][:,:,:,0]
-        # out = np.ones((60,60,60))*i
-        out_p = np.pad(out,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
-        arr_out.append(out_p)
-    return arr_out
-
-def recombine(arr_out, data, tile_in=60, tile=148):
-    '''
-    Recombine subvolume into original shape
-    '''
-    data = np.pad(data,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
-    Mx, My, Mz = data.shape
-    kx = Mx//tile_in + 1*((Mx%tile_in)>0)
-    ky = Mx//tile_in + 1*((My%tile_in)>0)
-    kz = Mz//tile_in + 1*((Mz%tile_in)>0)
-    off_x = 60
-    off_y = 60
-    off_z = 60
-    data = np.zeros((Mx, My, Mz))
-    l=-1   
-    print('-'*50)
-    print('Padded input shape:', data.shape)
-    print('# of parts', kx,ky,kz)
-
-    for i in range(kx):
-        for j in range(ky):
-            for k in range(kz):
-                l+=1
-                x = min(off_x*i, Mx - tile)
-                y = min(off_y*j, My - tile)
-                z = min(off_z*k, Mz - tile)
-                x = np.int(x)
-                y = np.int(y)
-                z = np.int(z)
-                data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
-                if (off_z*(k+1)) > (Mz - tile):
-                    break
-            if (off_y*(j+1)) > (My - tile):
-                    break
-        if (off_x*(i+1)) > (Mx - tile):
-                    break
-
-    print("# of subvolumes merged: ", l+1)
-    data = np.array(data)
-    # data[np.where(data<l//2)]=0
-    # data[np.where(data>=l//2)]=1
-    data = data.astype(np.int8)
-    data=data[44:-44,44:-44,44:-44]
-    print(np.unique(data, return_counts=True))
-    print(data.shape)
-    return data
-
-
 # ## Inference pipeline
 
-# In[28]:
+# In[42]:
 
 arr_data = cutVolume(data)
-arr_pred = predict_full_volume(arr_data, model_path="./unet_trained/model 13.cpkt")
+arr_pred = predict_full_volume(net, arr_data, model_path="./unet_trained/model 15.cpkt")
 full_pred = recombine(arr_pred, data)
 
 
-# In[30]:
+# In[21]:
 
 islands = measure.label(full_pred)
 K = np.max(islands)
@@ -623,12 +477,12 @@ for j in range(1,K):
 plt.show()
 
 
-# In[87]:
+# In[43]:
 
-nrrd.write('test74.nrrd', full_pred, options=options)
+nrrd.write('test58.nrrd', full_pred, options=options)
 
 
-# In[74]:
+# In[44]:
 
 full_pred.shape
 

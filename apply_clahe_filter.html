@@ -11790,7 +11790,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rootPath</span> <span class="o">=</span> <span class="s2">&quot;/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/&quot;</span>
@@ -11814,12 +11814,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)):</span>
     <span class="n">file</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">nrrd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="n">nrrd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
     <span class="n">nz</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">clahe</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">createCLAHE</span><span class="p">(</span><span class="n">clipLimit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tileGridSize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
     <span class="n">data_res</span> <span class="o">=</span> <span class="p">[]</span>
@@ -11867,7 +11868,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>  4%|▍         | 2/47 [00:08&lt;03:54,  5.21s/it]</pre>
+<pre>  2%|▏         | 1/47 [00:06&lt;05:16,  6.87s/it]</pre>
 </div>
 </div>
 
@@ -11884,7 +11885,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>  6%|▋         | 3/47 [00:11&lt;03:18,  4.52s/it]</pre>
+<pre>  4%|▍         | 2/47 [00:09&lt;04:12,  5.61s/it]</pre>
 </div>
 </div>
 
@@ -11893,7 +11894,6 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/012/case.nrrd
-/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/014/case.nrrd
 </pre>
 </div>
 </div>
@@ -11902,7 +11902,24 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>  9%|▊         | 4/47 [00:14&lt;02:45,  3.84s/it]</pre>
+<pre>  6%|▋         | 3/47 [00:12&lt;03:32,  4.83s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/014/case.nrrd
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  9%|▊         | 4/47 [00:14&lt;02:55,  4.08s/it]</pre>
 </div>
 </div>
 
@@ -11919,7 +11936,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 13%|█▎        | 6/47 [00:19&lt;02:12,  3.22s/it]</pre>
+<pre> 13%|█▎        | 6/47 [00:20&lt;02:19,  3.39s/it]</pre>
 </div>
 </div>
 
@@ -11937,7 +11954,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 15%|█▍        | 7/47 [00:28&lt;03:20,  5.01s/it]</pre>
+<pre> 15%|█▍        | 7/47 [00:29&lt;03:27,  5.19s/it]</pre>
 </div>
 </div>
 
@@ -11954,7 +11971,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 19%|█▉        | 9/47 [00:38&lt;03:04,  4.85s/it]</pre>
+<pre> 17%|█▋        | 8/47 [00:37&lt;03:53,  5.99s/it]</pre>
 </div>
 </div>
 
@@ -11963,7 +11980,6 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/024/case.nrrd
-/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/025/case.nrrd
 </pre>
 </div>
 </div>
@@ -11972,7 +11988,24 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 21%|██▏       | 10/47 [00:44&lt;03:03,  4.95s/it]</pre>
+<pre> 19%|█▉        | 9/47 [00:40&lt;03:09,  4.98s/it]</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00_clahe/025/case.nrrd
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre> 21%|██▏       | 10/47 [00:45&lt;03:08,  5.09s/it]</pre>
 </div>
 </div>
 
@@ -11989,7 +12022,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 23%|██▎       | 11/47 [00:51&lt;03:28,  5.80s/it]</pre>
+<pre> 23%|██▎       | 11/47 [00:53&lt;03:34,  5.95s/it]</pre>
 </div>
 </div>
 
@@ -12006,7 +12039,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 26%|██▌       | 12/47 [00:55&lt;02:58,  5.11s/it]</pre>
+<pre> 26%|██▌       | 12/47 [00:57&lt;03:03,  5.25s/it]</pre>
 </div>
 </div>
 
@@ -12023,7 +12056,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 28%|██▊       | 13/47 [01:03&lt;03:19,  5.87s/it]</pre>
+<pre> 28%|██▊       | 13/47 [01:05&lt;03:26,  6.08s/it]</pre>
 </div>
 </div>
 
@@ -12040,7 +12073,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 30%|██▉       | 14/47 [01:09&lt;03:15,  5.93s/it]</pre>
+<pre> 30%|██▉       | 14/47 [01:11&lt;03:24,  6.20s/it]</pre>
 </div>
 </div>
 
@@ -12057,7 +12090,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 32%|███▏      | 15/47 [01:17&lt;03:34,  6.71s/it]</pre>
+<pre> 32%|███▏      | 15/47 [01:20&lt;03:44,  7.02s/it]</pre>
 </div>
 </div>
 
@@ -12074,7 +12107,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 34%|███▍      | 16/47 [01:23&lt;03:24,  6.59s/it]</pre>
+<pre> 34%|███▍      | 16/47 [01:27&lt;03:36,  6.98s/it]</pre>
 </div>
 </div>
 
@@ -12091,7 +12124,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 36%|███▌      | 17/47 [01:26&lt;02:39,  5.31s/it]</pre>
+<pre> 36%|███▌      | 17/47 [01:29&lt;02:48,  5.62s/it]</pre>
 </div>
 </div>
 
@@ -12108,7 +12141,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 38%|███▊      | 18/47 [01:32&lt;02:44,  5.67s/it]</pre>
+<pre> 38%|███▊      | 18/47 [01:36&lt;02:52,  5.95s/it]</pre>
 </div>
 </div>
 
@@ -12125,7 +12158,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 40%|████      | 19/47 [01:37&lt;02:33,  5.48s/it]</pre>
+<pre> 40%|████      | 19/47 [01:42&lt;02:45,  5.89s/it]</pre>
 </div>
 </div>
 
@@ -12142,7 +12175,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 43%|████▎     | 20/47 [01:42&lt;02:21,  5.24s/it]</pre>
+<pre> 43%|████▎     | 20/47 [01:47&lt;02:31,  5.63s/it]</pre>
 </div>
 </div>
 
@@ -12159,7 +12192,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 45%|████▍     | 21/47 [01:47&lt;02:15,  5.20s/it]</pre>
+<pre> 45%|████▍     | 21/47 [01:53&lt;02:25,  5.61s/it]</pre>
 </div>
 </div>
 
@@ -12176,7 +12209,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 47%|████▋     | 22/47 [01:53&lt;02:17,  5.52s/it]</pre>
+<pre> 47%|████▋     | 22/47 [01:59&lt;02:27,  5.91s/it]</pre>
 </div>
 </div>
 
@@ -12193,7 +12226,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 49%|████▉     | 23/47 [01:59&lt;02:16,  5.68s/it]</pre>
+<pre> 49%|████▉     | 23/47 [02:05&lt;02:24,  6.03s/it]</pre>
 </div>
 </div>
 
@@ -12210,7 +12243,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 51%|█████     | 24/47 [02:02&lt;01:51,  4.86s/it]</pre>
+<pre> 51%|█████     | 24/47 [02:08&lt;01:58,  5.14s/it]</pre>
 </div>
 </div>
 
@@ -12227,7 +12260,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 53%|█████▎    | 25/47 [02:10&lt;02:06,  5.75s/it]</pre>
+<pre> 53%|█████▎    | 25/47 [02:17&lt;02:12,  6.04s/it]</pre>
 </div>
 </div>
 
@@ -12244,7 +12277,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 55%|█████▌    | 26/47 [02:16&lt;02:03,  5.86s/it]</pre>
+<pre> 55%|█████▌    | 26/47 [02:23&lt;02:08,  6.13s/it]</pre>
 </div>
 </div>
 
@@ -12261,7 +12294,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 57%|█████▋    | 27/47 [02:24&lt;02:08,  6.42s/it]</pre>
+<pre> 57%|█████▋    | 27/47 [02:31&lt;02:14,  6.72s/it]</pre>
 </div>
 </div>
 
@@ -12278,7 +12311,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 60%|█████▉    | 28/47 [02:31&lt;02:04,  6.56s/it]</pre>
+<pre> 60%|█████▉    | 28/47 [02:38&lt;02:11,  6.91s/it]</pre>
 </div>
 </div>
 
@@ -12295,7 +12328,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 62%|██████▏   | 29/47 [02:37&lt;01:55,  6.40s/it]</pre>
+<pre> 62%|██████▏   | 29/47 [02:45&lt;02:00,  6.71s/it]</pre>
 </div>
 </div>
 
@@ -12312,7 +12345,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 64%|██████▍   | 30/47 [02:45&lt;01:55,  6.82s/it]</pre>
+<pre> 64%|██████▍   | 30/47 [02:53&lt;02:00,  7.07s/it]</pre>
 </div>
 </div>
 
@@ -12329,7 +12362,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 66%|██████▌   | 31/47 [02:52&lt;01:50,  6.89s/it]</pre>
+<pre> 66%|██████▌   | 31/47 [03:00&lt;01:54,  7.13s/it]</pre>
 </div>
 </div>
 
@@ -12346,7 +12379,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 68%|██████▊   | 32/47 [02:58&lt;01:41,  6.76s/it]</pre>
+<pre> 68%|██████▊   | 32/47 [03:06&lt;01:44,  6.99s/it]</pre>
 </div>
 </div>
 
@@ -12363,7 +12396,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 70%|███████   | 33/47 [03:06&lt;01:39,  7.11s/it]</pre>
+<pre> 70%|███████   | 33/47 [03:15&lt;01:42,  7.30s/it]</pre>
 </div>
 </div>
 
@@ -12380,7 +12413,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 72%|███████▏  | 34/47 [03:11&lt;01:24,  6.52s/it]</pre>
+<pre> 72%|███████▏  | 34/47 [03:20&lt;01:27,  6.71s/it]</pre>
 </div>
 </div>
 
@@ -12397,7 +12430,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 74%|███████▍  | 35/47 [03:19&lt;01:22,  6.86s/it]</pre>
+<pre> 74%|███████▍  | 35/47 [03:28&lt;01:25,  7.12s/it]</pre>
 </div>
 </div>
 
@@ -12414,7 +12447,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 77%|███████▋  | 36/47 [03:25&lt;01:14,  6.74s/it]</pre>
+<pre> 77%|███████▋  | 36/47 [03:34&lt;01:16,  6.95s/it]</pre>
 </div>
 </div>
 
@@ -12431,7 +12464,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 79%|███████▊  | 37/47 [03:32&lt;01:05,  6.56s/it]</pre>
+<pre> 79%|███████▊  | 37/47 [03:41&lt;01:07,  6.75s/it]</pre>
 </div>
 </div>
 
@@ -12448,7 +12481,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 81%|████████  | 38/47 [03:39&lt;01:02,  6.95s/it]</pre>
+<pre> 81%|████████  | 38/47 [03:49&lt;01:04,  7.18s/it]</pre>
 </div>
 </div>
 
@@ -12465,7 +12498,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 83%|████████▎ | 39/47 [03:47&lt;00:57,  7.21s/it]</pre>
+<pre> 83%|████████▎ | 39/47 [03:58&lt;01:01,  7.66s/it]</pre>
 </div>
 </div>
 
@@ -12482,7 +12515,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 85%|████████▌ | 40/47 [03:54&lt;00:48,  6.97s/it]</pre>
+<pre> 85%|████████▌ | 40/47 [04:05&lt;00:52,  7.44s/it]</pre>
 </div>
 </div>
 
@@ -12499,7 +12532,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 87%|████████▋ | 41/47 [04:01&lt;00:41,  6.94s/it]</pre>
+<pre> 87%|████████▋ | 41/47 [04:12&lt;00:44,  7.35s/it]</pre>
 </div>
 </div>
 
@@ -12516,7 +12549,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 89%|████████▉ | 42/47 [04:07&lt;00:33,  6.70s/it]</pre>
+<pre> 89%|████████▉ | 42/47 [04:18&lt;00:35,  7.02s/it]</pre>
 </div>
 </div>
 
@@ -12533,7 +12566,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 91%|█████████▏| 43/47 [04:13&lt;00:25,  6.50s/it]</pre>
+<pre> 91%|█████████▏| 43/47 [04:24&lt;00:27,  6.78s/it]</pre>
 </div>
 </div>
 
@@ -12550,7 +12583,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 94%|█████████▎| 44/47 [04:18&lt;00:18,  6.19s/it]</pre>
+<pre> 94%|█████████▎| 44/47 [04:30&lt;00:19,  6.43s/it]</pre>
 </div>
 </div>
 
@@ -12567,7 +12600,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 96%|█████████▌| 45/47 [04:26&lt;00:13,  6.64s/it]</pre>
+<pre> 96%|█████████▌| 45/47 [04:38&lt;00:13,  6.85s/it]</pre>
 </div>
 </div>
 
@@ -12584,7 +12617,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre> 98%|█████████▊| 46/47 [04:32&lt;00:06,  6.59s/it]</pre>
+<pre> 98%|█████████▊| 46/47 [04:44&lt;00:06,  6.79s/it]</pre>
 </div>
 </div>
 
@@ -12601,7 +12634,7 @@ div#notebook {
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 47/47 [04:40&lt;00:00,  7.05s/it]
+<pre>100%|██████████| 47/47 [04:53&lt;00:00,  7.23s/it]
 </pre>
 </div>
 </div>
