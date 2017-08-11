@@ -5,3 +5,4 @@ old_models/
 unet_trained/
 models/
 real/
+.ipynb_checkpoints/

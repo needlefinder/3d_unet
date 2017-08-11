@@ -11726,9 +11726,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11749,7 +11747,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11773,6 +11771,413 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fns</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_conv_net</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">n_class</span><span class="p">,</span> <span class="n">layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">features_root</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">filter_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                    <span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">summaries</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a new convolutional unet for the given parametrization.</span>
+<span class="sd">    </span>
+<span class="sd">    :param x: input tensor, shape [?,nx,ny,nz,channels]</span>
+<span class="sd">    :param keep_prob: dropout probability tensor</span>
+<span class="sd">    :param channels: number of channels in the input image</span>
+<span class="sd">    :param n_class: number of output labels</span>
+<span class="sd">    :param layers: number of layers in the net</span>
+<span class="sd">    :param features_root: number of features in the first layer</span>
+<span class="sd">    :param filter_size: size of the convolution filter</span>
+<span class="sd">    :param pool_size: size of the max pooling operation</span>
+<span class="sd">    :param summaries: Flag if summaries should be created</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Layers: </span><span class="si">{layers}</span><span class="s2">, FeaturesRoot: </span><span class="si">{features_root}</span><span class="s2">, ConvolutionSize: </span><span class="si">{filter_size}</span><span class="s2">*</span><span class="si">{filter_size}</span><span class="s2">*</span><span class="si">{filter_size}</span><span class="s2">, PoolingSize: </span><span class="si">{pool_size}</span><span class="s2">*</span><span class="si">{pool_size}</span><span class="s2">*</span><span class="si">{pool_size}</span><span class="s2">&quot;</span>\
+                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">features_root</span><span class="o">=</span><span class="n">features_root</span><span class="p">,</span> <span class="n">filter_size</span><span class="o">=</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">pool_size</span><span class="o">=</span><span class="n">pool_size</span><span class="p">))</span>
+    
+    <span class="n">in_node</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">biases</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">convs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pools</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">deconv</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">dw_h_convs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">up_h_convs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+    <span class="n">in_size</span> <span class="o">=</span> <span class="mi">144</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">in_size</span>
+
+   
+    <span class="c1"># down layers</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s1">&#39;going_down&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">layers</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s1">&#39;layer_down_</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">layer</span>):
+                <span class="n">features</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">layer</span><span class="o">*</span><span class="n">features_root</span>
+                <span class="n">stddev</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">filter_size</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">features</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">layer</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">w1</span> <span class="o">=</span> <span class="n">weight_variable</span><span class="p">([</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">features</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">w1</span> <span class="o">=</span> <span class="n">weight_variable</span><span class="p">([</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">features</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+                <span class="n">w2</span> <span class="o">=</span> <span class="n">weight_variable</span><span class="p">([</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">features</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+                <span class="n">b1</span> <span class="o">=</span> <span class="n">bias_variable</span><span class="p">([</span><span class="n">features</span><span class="p">])</span>
+                <span class="n">b2</span> <span class="o">=</span> <span class="n">bias_variable</span><span class="p">([</span><span class="n">features</span><span class="p">])</span>
+                
+                <span class="n">conv1</span> <span class="o">=</span> <span class="n">conv3d</span><span class="p">(</span><span class="n">in_node</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">)</span>
+                <span class="n">tmp_h_conv</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">conv1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>
+                <span class="n">conv2</span> <span class="o">=</span> <span class="n">conv3d</span><span class="p">(</span><span class="n">tmp_h_conv</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">)</span>
+                <span class="n">dw_h_convs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">conv2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>
+                
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Down Convoltion Layer: </span><span class="si">{layer}</span><span class="s2"> Size: </span><span class="si">{size}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">dw_h_convs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()))</span>
+                
+                <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">))</span>
+                <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">))</span>
+                <span class="n">convs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">conv1</span><span class="p">,</span> <span class="n">conv2</span><span class="p">))</span>
+
+                <span class="n">size</span> <span class="o">-=</span> <span class="mi">4</span>    
+                <span class="k">if</span> <span class="n">layer</span> <span class="o">&lt;</span> <span class="n">layers</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">pools</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_pool</span><span class="p">(</span><span class="n">dw_h_convs</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span> <span class="n">pool_size</span><span class="p">)</span>
+                    <span class="n">in_node</span> <span class="o">=</span> <span class="n">pools</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span>
+                    <span class="n">size</span> <span class="o">/=</span> <span class="mi">2</span>    
+        
+    <span class="n">in_node</span> <span class="o">=</span> <span class="n">dw_h_convs</span><span class="p">[</span><span class="n">layers</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+    <span class="c1"># up layers</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s1">&#39;going_up&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">layers</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>   
+            <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s1">&#39;layer_up_</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">layer</span>):
+                <span class="n">features</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">layer</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">features_root</span>
+                <span class="n">stddev</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">filter_size</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">features</span><span class="p">)</span>
+
+                <span class="n">wd</span> <span class="o">=</span> <span class="n">weight_variable_devonc</span><span class="p">([</span><span class="n">pool_size</span><span class="p">,</span> <span class="n">pool_size</span><span class="p">,</span> <span class="n">pool_size</span><span class="p">,</span> <span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">features</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+                <span class="n">bd</span> <span class="o">=</span> <span class="n">bias_variable</span><span class="p">([</span><span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">h_deconv</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">deconv3d</span><span class="p">(</span><span class="n">in_node</span><span class="p">,</span> <span class="n">wd</span><span class="p">,</span> <span class="n">pool_size</span><span class="p">)</span> <span class="o">+</span> <span class="n">bd</span><span class="p">)</span>
+                <span class="n">h_deconv_concat</span> <span class="o">=</span> <span class="n">crop_and_concat</span><span class="p">(</span><span class="n">dw_h_convs</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span> <span class="n">h_deconv</span><span class="p">)</span>    
+                <span class="n">deconv</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">h_deconv_concat</span>
+
+                <span class="n">w1</span> <span class="o">=</span> <span class="n">weight_variable</span><span class="p">([</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+                <span class="n">w2</span> <span class="o">=</span> <span class="n">weight_variable</span><span class="p">([</span><span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">filter_size</span><span class="p">,</span> <span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+                <span class="n">b1</span> <span class="o">=</span> <span class="n">bias_variable</span><span class="p">([</span><span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">b2</span> <span class="o">=</span> <span class="n">bias_variable</span><span class="p">([</span><span class="n">features</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span>
+
+                <span class="n">conv1</span> <span class="o">=</span> <span class="n">conv3d</span><span class="p">(</span><span class="n">h_deconv_concat</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">)</span>
+                <span class="n">h_conv</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">conv1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>
+                <span class="n">conv2</span> <span class="o">=</span> <span class="n">conv3d</span><span class="p">(</span><span class="n">h_conv</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">)</span>
+                <span class="n">in_node</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">conv2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span>
+                <span class="n">up_h_convs</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">=</span> <span class="n">in_node</span>
+                
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Up Convoltion Layer: </span><span class="si">{layer}</span><span class="s2"> Size: </span><span class="si">{size}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">,</span>
+                                                                                <span class="n">size</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">dw_h_convs</span><span class="p">[</span><span class="n">layer</span><span class="p">])))</span>
+                
+                <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">))</span>
+                <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">))</span>
+                <span class="n">convs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">conv1</span><span class="p">,</span> <span class="n">conv2</span><span class="p">))</span>
+
+                <span class="n">size</span> <span class="o">*=</span> <span class="mi">2</span>
+                <span class="n">size</span> <span class="o">-=</span> <span class="mi">4</span>
+
+    <span class="c1"># Output Map</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">name_scope</span><span class="p">(</span><span class="s1">&#39;output_map&#39;</span><span class="p">):</span>
+        <span class="c1">#stddev = 1 / (features_root)</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">weight_variable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">features_root</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">stddev</span><span class="p">)</span>
+        <span class="n">bias</span> <span class="o">=</span> <span class="n">bias_variable</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">conv</span> <span class="o">=</span> <span class="n">conv3d</span><span class="p">(</span><span class="n">in_node</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+        <span class="n">output_map</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">conv</span> <span class="o">+</span> <span class="n">bias</span><span class="p">)</span>
+        <span class="n">up_h_convs</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_map</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Output map shape </span><span class="si">{size}</span><span class="s2">, offset </span><span class="si">{offset}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">output_map</span><span class="o">.</span><span class="n">get_shape</span><span class="p">(),</span> <span class="n">offset</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">in_size</span><span class="o">-</span><span class="n">size</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">summaries</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dw_h_convs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="s2">&quot;dw_convolution_</span><span class="si">%03d</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">k</span> + &#39;/activations&#39;, dw_h_convs[k])
+
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">up_h_convs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="s2">&quot;up_convolution_</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">k</span> + &#39;/activations&#39;, up_h_convs[k])
+
+        <span class="n">variables</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">w1</span><span class="p">,</span><span class="n">w2</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">:</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">b1</span><span class="p">,</span><span class="n">b2</span> <span class="ow">in</span> <span class="n">biases</span><span class="p">:</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
+            <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span>
+        
+        <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+        <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">output_map</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">in_size</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load data entirely into memory 🙁</span>
+<span class="n">dataprovider</span> <span class="o">=</span> <span class="n">ImageDataProvider</span><span class="p">(</span><span class="n">split_vol</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_vol</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;preprocessing/training_subvolumes_synth.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">files_training</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;preprocessing/training_subvolumes.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">files_training</span> <span class="o">+=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="n">dataprovider</span><span class="o">.</span><span class="n">training_data_files</span> <span class="o">=</span> <span class="n">files_training</span>
+
+<span class="n">features</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">dataprovider</span><span class="o">.</span><span class="n">_load_data_and_label</span><span class="p">(</span><span class="n">files_training</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">def</span> <span class="nf">data_iterator</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; A simple data iterator &quot;&quot;&quot;</span>
+    <span class="n">batch_idx</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># shuffle labels and features</span>
+        <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">idxs</span><span class="p">)</span>
+        <span class="n">shuf_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">idxs</span><span class="p">]</span>
+        <span class="n">shuf_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">idxs</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">batch_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+            <span class="n">images_batch</span> <span class="o">=</span> <span class="n">shuf_features</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">:</span><span class="n">batch_idx</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span> <span class="o">/</span> <span class="mf">255.</span>
+            <span class="n">images_batch</span> <span class="o">=</span> <span class="n">images_batch</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+            <span class="n">labels_batch</span> <span class="o">=</span> <span class="n">shuf_labels</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">:</span><span class="n">batch_idx</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+            <span class="k">yield</span> <span class="n">images_batch</span><span class="p">,</span> <span class="n">crop_to_shape</span><span class="p">(</span><span class="n">labels_batch</span><span class="p">,</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">CustomRunner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class manages the the background threads needed to fill</span>
+<span class="sd">        a queue full of data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataX</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">148</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">148</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataY</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span> <span class="p">])</span>
+        <span class="c1"># The actual queue of data. The queue contains a vector for</span>
+        <span class="c1"># the mnist features, and a scalar label.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">RandomShuffleQueue</span><span class="p">(</span><span class="n">shapes</span><span class="o">=</span><span class="p">[[</span> <span class="mi">148</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">148</span><span class="p">],</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">60</span><span class="p">]],</span>
+                                           <span class="n">dtypes</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+                                           <span class="n">capacity</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+                                           <span class="n">min_after_dequeue</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+        <span class="c1"># The symbolic operation to add data to the queue</span>
+        <span class="c1"># we could do some preprocessing here or do it in numpy. In this example</span>
+        <span class="c1"># we do the scaling in numpy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enqueue_op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">enqueue_many</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">dataX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataY</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return&#39;s tensors containing a batch of images and labels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">images_batch</span><span class="p">,</span> <span class="n">labels_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">dequeue_many</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">images_batch</span><span class="p">,</span> <span class="n">labels_batch</span>
+
+    <span class="k">def</span> <span class="nf">thread_main</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sess</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function run on alternate thread. Basically, keep adding data to the queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">dataX</span><span class="p">,</span> <span class="n">dataY</span> <span class="ow">in</span> <span class="n">data_iterator</span><span class="p">():</span>
+            <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enqueue_op</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataX</span><span class="p">:</span><span class="n">dataX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataY</span><span class="p">:</span><span class="n">dataY</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">start_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sess</span><span class="p">,</span> <span class="n">n_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Start background threads to feed queue &quot;&quot;&quot;</span>
+        <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_threads</span><span class="p">):</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">thread_main</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">sess</span><span class="p">,))</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># thread will close when parent quits</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">threads</span>
+
+<span class="c1"># Doing anything with data on the CPU is generally a good idea.</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;/cpu:0&quot;</span><span class="p">):</span>
+    <span class="n">custom_runner</span> <span class="o">=</span> <span class="n">CustomRunner</span><span class="p">()</span>
+    <span class="n">images_batch</span><span class="p">,</span> <span class="n">labels_batch</span> <span class="o">=</span> <span class="n">custom_runner</span><span class="o">.</span><span class="n">get_inputs</span><span class="p">()</span>
+
+<span class="c1"># simple model</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">labels_batch</span>
+<span class="n">logits</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">create_conv_net</span><span class="p">(</span><span class="n">images_batch</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Offset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">))</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Actual Output Shape: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()))</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Desired Output Shape: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()))</span>
+
+
+
+
+<span class="c1"># for monitoring</span>
+<span class="n">loss_mean</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+<span class="n">train_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">()</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="n">intra_op_parallelism_threads</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">initialize_all_variables</span><span class="p">()</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+
+<span class="c1"># start the tensorflow QueueRunner&#39;s</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">start_queue_runners</span><span class="p">(</span><span class="n">sess</span><span class="o">=</span><span class="n">sess</span><span class="p">)</span>
+<span class="c1"># start our custom queue runner&#39;s threads</span>
+<span class="n">custom_runner</span><span class="o">.</span><span class="n">start_threads</span><span class="p">(</span><span class="n">sess</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">loss_val</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">train_op</span><span class="p">,</span> <span class="n">loss_mean</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">loss_val</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>--------------------------------------------------
+Using split volumes
+Number of training data used: 415
+Number of validation data used: 93
+Number of testing data used: 83
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">InvalidArgumentError</span>                      Traceback (most recent call last)
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/common_shapes.py</span> in <span class="ansi-cyan-fg">_call_cpp_shape_fn_impl</span><span class="ansi-blue-fg">(op, input_tensors_needed, input_tensors_as_shapes_needed, debug_python_shape_fn, require_shape_fn)</span>
+<span class="ansi-green-intense-fg ansi-bold">    670</span>           graph_def_version<span class="ansi-blue-fg">,</span> node_def_str<span class="ansi-blue-fg">,</span> input_shapes<span class="ansi-blue-fg">,</span> input_tensors<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 671</span><span class="ansi-red-fg">           input_tensors_as_shapes, status)
+</span><span class="ansi-green-intense-fg ansi-bold">    672</span>   <span class="ansi-green-fg">except</span> errors<span class="ansi-blue-fg">.</span>InvalidArgumentError <span class="ansi-green-fg">as</span> err<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/contextlib.py</span> in <span class="ansi-cyan-fg">__exit__</span><span class="ansi-blue-fg">(self, type, value, traceback)</span>
+<span class="ansi-green-intense-fg ansi-bold">     87</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 88</span><span class="ansi-red-fg">                 </span>next<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>gen<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     89</span>             <span class="ansi-green-fg">except</span> StopIteration<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/errors_impl.py</span> in <span class="ansi-cyan-fg">raise_exception_on_not_ok_status</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">    465</span>           compat<span class="ansi-blue-fg">.</span>as_text<span class="ansi-blue-fg">(</span>pywrap_tensorflow<span class="ansi-blue-fg">.</span>TF_Message<span class="ansi-blue-fg">(</span>status<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 466</span><span class="ansi-red-fg">           pywrap_tensorflow.TF_GetCode(status))
+</span><span class="ansi-green-intense-fg ansi-bold">    467</span>   <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">InvalidArgumentError</span>: Shape must be rank 5 but is rank 4 for &#39;going_down/layer_down_0/Conv3D&#39; (op: &#39;Conv3D&#39;) with input shapes: [2,148,148,148], [3,3,3,1,16].
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-3-c1ce7d556fe4&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     77</span> 
+<span class="ansi-green-intense-fg ansi-bold">     78</span> y <span class="ansi-blue-fg">=</span> labels_batch
+<span class="ansi-green-fg">---&gt; 79</span><span class="ansi-red-fg"> </span>logits<span class="ansi-blue-fg">,</span> variables<span class="ansi-blue-fg">,</span> offset <span class="ansi-blue-fg">=</span> create_conv_net<span class="ansi-blue-fg">(</span>images_batch<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0.75</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     80</span> logging<span class="ansi-blue-fg">.</span>info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Offset: {}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>offset<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span> logging<span class="ansi-blue-fg">.</span>info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Actual Output Shape: {}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>logits<span class="ansi-blue-fg">.</span>get_shape<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-2-3dd446fcf013&gt;</span> in <span class="ansi-cyan-fg">create_conv_net</span><span class="ansi-blue-fg">(x, keep_prob, channels, n_class, layers, features_root, filter_size, pool_size, summaries)</span>
+<span class="ansi-green-intense-fg ansi-bold">     44</span>                 b2 <span class="ansi-blue-fg">=</span> bias_variable<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>features<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     45</span> 
+<span class="ansi-green-fg">---&gt; 46</span><span class="ansi-red-fg">                 </span>conv1 <span class="ansi-blue-fg">=</span> conv3d<span class="ansi-blue-fg">(</span>in_node<span class="ansi-blue-fg">,</span> w1<span class="ansi-blue-fg">,</span> keep_prob<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     47</span>                 tmp_h_conv <span class="ansi-blue-fg">=</span> tf<span class="ansi-blue-fg">.</span>nn<span class="ansi-blue-fg">.</span>elu<span class="ansi-blue-fg">(</span>conv1 <span class="ansi-blue-fg">+</span> b1<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     48</span>                 conv2 <span class="ansi-blue-fg">=</span> conv3d<span class="ansi-blue-fg">(</span>tmp_h_conv<span class="ansi-blue-fg">,</span> w2<span class="ansi-blue-fg">,</span> keep_prob<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/Dropbox/Projects/pw25/ziyang/3d_unet/fns/functions.py</span> in <span class="ansi-cyan-fg">conv3d</span><span class="ansi-blue-fg">(x, W, keep_prob_)</span>
+<span class="ansi-green-intense-fg ansi-bold">    121</span> 
+<span class="ansi-green-intense-fg ansi-bold">    122</span> <span class="ansi-green-fg">def</span> conv3d<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> W<span class="ansi-blue-fg">,</span> keep_prob_<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 123</span><span class="ansi-red-fg">     </span>conv_3d <span class="ansi-blue-fg">=</span> tf<span class="ansi-blue-fg">.</span>nn<span class="ansi-blue-fg">.</span>conv3d<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> W<span class="ansi-blue-fg">,</span> strides<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> padding<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;VALID&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    124</span>     <span class="ansi-green-fg">return</span> tf<span class="ansi-blue-fg">.</span>nn<span class="ansi-blue-fg">.</span>dropout<span class="ansi-blue-fg">(</span>conv_3d<span class="ansi-blue-fg">,</span> keep_prob_<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    125</span> 
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/ops/gen_nn_ops.py</span> in <span class="ansi-cyan-fg">conv3d</span><span class="ansi-blue-fg">(input, filter, strides, padding, data_format, name)</span>
+<span class="ansi-green-intense-fg ansi-bold">    524</span>   result = _op_def_lib.apply_op(&#34;Conv3D&#34;, input=input, filter=filter,
+<span class="ansi-green-intense-fg ansi-bold">    525</span>                                 strides<span class="ansi-blue-fg">=</span>strides<span class="ansi-blue-fg">,</span> padding<span class="ansi-blue-fg">=</span>padding<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 526</span><span class="ansi-red-fg">                                 data_format=data_format, name=name)
+</span><span class="ansi-green-intense-fg ansi-bold">    527</span>   <span class="ansi-green-fg">return</span> result
+<span class="ansi-green-intense-fg ansi-bold">    528</span> 
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py</span> in <span class="ansi-cyan-fg">apply_op</span><span class="ansi-blue-fg">(self, op_type_name, name, **keywords)</span>
+<span class="ansi-green-intense-fg ansi-bold">    765</span>         op = g.create_op(op_type_name, inputs, output_types, name=scope,
+<span class="ansi-green-intense-fg ansi-bold">    766</span>                          input_types<span class="ansi-blue-fg">=</span>input_types<span class="ansi-blue-fg">,</span> attrs<span class="ansi-blue-fg">=</span>attr_protos<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 767</span><span class="ansi-red-fg">                          op_def=op_def)
+</span><span class="ansi-green-intense-fg ansi-bold">    768</span>         <span class="ansi-green-fg">if</span> output_structure<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    769</span>           outputs <span class="ansi-blue-fg">=</span> op<span class="ansi-blue-fg">.</span>outputs
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/ops.py</span> in <span class="ansi-cyan-fg">create_op</span><span class="ansi-blue-fg">(self, op_type, inputs, dtypes, input_types, name, attrs, op_def, compute_shapes, compute_device)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2506</span>                     original_op=self._default_original_op, op_def=op_def)
+<span class="ansi-green-intense-fg ansi-bold">   2507</span>     <span class="ansi-green-fg">if</span> compute_shapes<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 2508</span><span class="ansi-red-fg">       </span>set_shapes_for_outputs<span class="ansi-blue-fg">(</span>ret<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2509</span>     self<span class="ansi-blue-fg">.</span>_add_op<span class="ansi-blue-fg">(</span>ret<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2510</span>     self<span class="ansi-blue-fg">.</span>_record_op_seen_by_control_dependencies<span class="ansi-blue-fg">(</span>ret<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/ops.py</span> in <span class="ansi-cyan-fg">set_shapes_for_outputs</span><span class="ansi-blue-fg">(op)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1871</span>       shape_func <span class="ansi-blue-fg">=</span> _call_cpp_shape_fn_and_require_op
+<span class="ansi-green-intense-fg ansi-bold">   1872</span> 
+<span class="ansi-green-fg">-&gt; 1873</span><span class="ansi-red-fg">   </span>shapes <span class="ansi-blue-fg">=</span> shape_func<span class="ansi-blue-fg">(</span>op<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1874</span>   <span class="ansi-green-fg">if</span> shapes <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1875</span>     raise RuntimeError(
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/ops.py</span> in <span class="ansi-cyan-fg">call_with_requiring</span><span class="ansi-blue-fg">(op)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1821</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1822</span>   <span class="ansi-green-fg">def</span> call_with_requiring<span class="ansi-blue-fg">(</span>op<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1823</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> call_cpp_shape_fn<span class="ansi-blue-fg">(</span>op<span class="ansi-blue-fg">,</span> require_shape_fn<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1824</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1825</span>   _call_cpp_shape_fn_and_require_op <span class="ansi-blue-fg">=</span> call_with_requiring
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/common_shapes.py</span> in <span class="ansi-cyan-fg">call_cpp_shape_fn</span><span class="ansi-blue-fg">(op, input_tensors_needed, input_tensors_as_shapes_needed, debug_python_shape_fn, require_shape_fn)</span>
+<span class="ansi-green-intense-fg ansi-bold">    608</span>     res = _call_cpp_shape_fn_impl(op, input_tensors_needed,
+<span class="ansi-green-intense-fg ansi-bold">    609</span>                                   input_tensors_as_shapes_needed<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 610</span><span class="ansi-red-fg">                                   debug_python_shape_fn, require_shape_fn)
+</span><span class="ansi-green-intense-fg ansi-bold">    611</span>     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> isinstance<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">,</span> dict<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    612</span>       <span class="ansi-red-fg"># Handles the case where _call_cpp_shape_fn_impl calls unknown_shape(op).</span>
+
+<span class="ansi-green-fg">~/.pyenv/versions/anaconda3-4.4.0/envs/needles/lib/python3.6/site-packages/tensorflow/python/framework/common_shapes.py</span> in <span class="ansi-cyan-fg">_call_cpp_shape_fn_impl</span><span class="ansi-blue-fg">(op, input_tensors_needed, input_tensors_as_shapes_needed, debug_python_shape_fn, require_shape_fn)</span>
+<span class="ansi-green-intense-fg ansi-bold">    674</span>       missing_shape_fn <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
+<span class="ansi-green-intense-fg ansi-bold">    675</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 676</span><span class="ansi-red-fg">       </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span>err<span class="ansi-blue-fg">.</span>message<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    677</span> 
+<span class="ansi-green-intense-fg ansi-bold">    678</span>   <span class="ansi-green-fg">if</span> missing_shape_fn<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">ValueError</span>: Shape must be rank 5 but is rank 4 for &#39;going_down/layer_down_0/Conv3D&#39; (op: &#39;Conv3D&#39;) with input shapes: [2,148,148,148], [3,3,3,1,16].</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
     </div>
   </div>
 </body>

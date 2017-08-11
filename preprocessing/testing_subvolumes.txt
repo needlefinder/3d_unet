@@ -1,0 +1,16 @@
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_13.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_22.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_12.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_25.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_26.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_14.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_23.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/028/case_21.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/051/case_22.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/051/case_26.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/051/case_31.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/051/case_23.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/051/case_21.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/054/case_38.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/054/case_37.nrrd
+/home/gp1514/DATA/LabelMapsNEW2_1.00-1.00-1.00/054/case_36.nrrd

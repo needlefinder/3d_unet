@@ -1,5 +1,14 @@
 from fns.utils import *
 
+def f(w=20, h=3):
+    plt.figure(figsize=(w, h), linewidth=0.1)
+
+def mva(values, window):
+    weigths = np.repeat(1.0, window) / window
+    smas = np.convolve(values, weigths, 'valid')
+    return smas  # as a numpy array
+
+
 def plot_prediction(x_test, y_test, prediction, save=False):
 
     test_size = x_test.shape[0]
@@ -38,11 +47,26 @@ def crop_to_shape(data, shape):
     :param data: the array to crop
     :param shape: the target shape
     """
+    #print("CROP")
+    #print(data.shape, shape)
     offset0 = (data.shape[1] - shape[1]) // 2
     offset1 = (data.shape[2] - shape[2]) // 2
     offset2 = (data.shape[3] - shape[3]) // 2
     out = data[:, offset0:(-offset0), offset1:(-offset1), offset2:(-offset2)]
-    # out = data[:, offset0:offset0 + shape[1], offset1:offset1 + shape[2], offset2:offset2 + shape[3]]
+    return out
+
+def crop_to_shape2(data, shape):
+    """
+    Crops the array to the given image shape by removing the border (expects a tensor of shape [batches, nx, ny, nz, channels].
+    :param data: the array to crop
+    :param shape: the target shape
+    """
+    #print("CROP")
+    #print(data.shape, shape)
+    offset0 = (data.shape[0] - shape[0]) // 2
+    offset1 = (data.shape[1] - shape[1]) // 2
+    offset2 = (data.shape[2] - shape[2]) // 2
+    out = data[offset0:(-offset0), offset1:(-offset1), offset2:(-offset2)]
     return out
 
 
@@ -82,17 +106,17 @@ def reshape_to_shape(data, shape, padding):
 
 def weight_variable(shape, stddev=0.1):
     initial = tf.truncated_normal(shape, stddev=stddev)
-    return tf.Variable(initial)
+    return tf.Variable(initial, dtype=tf.float32)
 
 
 def weight_variable_devonc(shape, stddev=0.1):
     initial = tf.truncated_normal(shape, stddev=stddev)
-    return tf.Variable(initial)
+    return tf.Variable(initial, dtype=tf.float32)
 
 
 def bias_variable(shape):
     initial = tf.constant(0.01, shape=shape)
-    return tf.Variable(initial)
+    return tf.Variable(initial, dtype=tf.float32)
 
 
 def conv3d(x, W, keep_prob_):
@@ -181,16 +205,46 @@ def error_rate(predictions, labels):
         np.sum(np.argmax(predictions, 3) == np.argmax(labels, 3)) /
         (predictions.shape[1] * predictions.shape[2] * predictions.shape[3]))
 
-def cutVolume(data, tile_in=60, tile=148):
+def predict_full_volume(net, arr_data, model_path="./unet_trained/model 6.cpkt", off=44):
+    '''
+    Perform inference on subvolumes
+    '''
+    arr_out = []
+    imgs = []
+    for i in trange(arr_data.shape[0]):
+        img = arr_data[i]
+        img = img[np.newaxis,...,np.newaxis]
+        #input shape size required 1,148,148,148,1
+        img -= np.amin(img)
+        img /= np.amax(img)
+        imgs.append(img)
+    
+    outs = net.predict_multiple(model_path, imgs)
+    
+    for out in outs:
+        out = out[0][:,:,:,0]
+        out_p = np.pad(out,((off,off),(off,off),(off,off)), mode='constant', constant_values=[0])
+        arr_out.append(out_p)
+    return arr_out
+
+def _process_data(data):
+        # normalization
+        data -= np.amin(data)
+        data /= np.amax(data)
+        return data
+
+def cutVolume(data, tile_in=60, tile=148, off=44):
     '''
     Cut the volume in smaller volumes, overlaping so the FOV of the unet (60x60x60) is cover in every location of the 
     original volume, padded on the boundaries
+    Preprocessing is done as well
     '''
     
     ### pad volume
     print("Original input shape", data.shape)
-    data = np.pad(data,((44,44),(44,44), (44,44)), mode='mean')
-
+    tile = 148  ##
+    data = np.pad(data,((off,off), (off,off), (off,off)), mode='mean')
+    
     Mx, My, Mz = data.shape
     kx = Mx//tile_in + 1*((Mx%tile_in)>0)
     ky = Mx//tile_in + 1*((My%tile_in)>0)
@@ -219,36 +273,21 @@ def cutVolume(data, tile_in=60, tile=148):
                 arr_data.append(data_s)
                 nbTiles += 1
                 # stop cutting if next part is over the boundaries
-                if (off_z*(k+1)) > (Mz - tile):
+                if (off_z*(k+1)) > (Mz - off):
                     break
-            if (off_y*(j+1)) > (My - tile):
+            if (off_y*(j+1)) > (My - off):
                     break
-        if (off_x*(i+1)) > (Mx - tile):
+        if (off_x*(i+1)) > (Mx - off):
                     break
     print("number of tiles: %d " % nbTiles)
-    arr_data = np.array(arr_data)
-    return arr_data
+    print("data shape", np.shape(arr_data))
+    return np.array(arr_data).astype(np.float32)
 
-def predict_full_volume(net, arr_data, model_path="./unet_trained/model 6.cpkt"):
-    '''
-    Perform inference on subvolumes
-    '''
-    arr_out = []
-    for i in trange(arr_data.shape[0]):
-        img = arr_data[i]
-        img = img[np.newaxis,...,np.newaxis]
-        #input shape size required 1,148,148,148,1
-        out = net.predict(model_path, img)[0][:,:,:,0]
-        # out = np.ones((60,60,60))*i
-        out_p = np.pad(out,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
-        arr_out.append(out_p)
-    return arr_out
-
-def recombine(arr_out, data, tile_in=60, tile=148):
+def recombine(arr_out=None, data=None, tile_in=60, tile=148, off=44):
     '''
     Recombine subvolume into original shape
     '''
-    data = np.pad(data,((44,44),(44,44), (44,44)), mode='constant', constant_values=[0])
+    data = np.pad(data,((off,off), (off,off), (off,off)), mode='constant', constant_values=[0])
     Mx, My, Mz = data.shape
     kx = Mx//tile_in + 1*((Mx%tile_in)>0)
     ky = Mx//tile_in + 1*((My%tile_in)>0)
@@ -273,19 +312,43 @@ def recombine(arr_out, data, tile_in=60, tile=148):
                 y = np.int(y)
                 z = np.int(z)
                 data[x : x + tile, y : y + tile, z : z + tile ] += arr_out[l]
-                if (off_z*(k+1)) > (Mz - tile):
+                if (off_z*(k+1)) > (Mz - off):
                     break
-            if (off_y*(j+1)) > (My - tile):
+            if (off_y*(j+1)) > (My - off):
                     break
-        if (off_x*(i+1)) > (Mx - tile):
+        if (off_x*(i+1)) > (Mx - off):
                     break
 
     print("# of subvolumes merged: ", l+1)
     data = np.array(data)
     # data[np.where(data<l//2)]=0
     # data[np.where(data>=l//2)]=1
-    data = data.astype(np.int8)
-    data=data[44:-44,44:-44,44:-44]
+    data = data.astype(np.uint16)
+    data=data[off:-off, off:-off, off:-off]
     print(np.unique(data, return_counts=True))
     print(data.shape)
-    return data
+    return data!=0
+
+def post_processing(full_pred, min_area=150, max_residual=10):
+    ''' Clustering + removing small clusters + keeping only line-looking clusters'''
+    islands_ = measure.label(full_pred)
+    regions = measure.regionprops(islands_)
+    islands = np.zeros_like(full_pred, dtype=np.uint8)
+    K = len(regions)
+    print('Number of regions: %d' % K)
+    i=0
+    for k in range(K):
+        region = regions[k]
+        coords = region.coords
+        if region.area > min_area:
+            lm = measure.LineModelND()
+            lm.estimate(coords)
+            res = lm.residuals(coords)
+            mean_res = np.mean(res)
+            if mean_res < max_residual:
+                i+=1
+                print(i, mean_res, region.area)
+                for x,y,z in coords:
+                    islands[x,y,z] = i
+    return islands
+

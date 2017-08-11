@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 get_ipython().magic('matplotlib inline')
 get_ipython().magic('load_ext autoreload')
 get_ipython().magic('autoreload 2')
@@ -12,7 +13,9 @@ from syntheticdata import synthetic_generation
 
 # In[2]:
 
-def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3, pool_size=2, summaries=True):
+
+def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3, 
+                    pool_size=2, summaries=True):
     """
     Creates a new convolutional unet for the given parametrization.
     
@@ -153,6 +156,7 @@ def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16,
 
 # In[3]:
 
+
 class Unet(object):
     """
     A unet implementation
@@ -164,7 +168,7 @@ class Unet(object):
     """
 
     def __init__(self, channels=1, n_class=1, cost="dice_coefficient", predict_thresh=0.5, cost_kwargs={}, **kwargs):
-        tf.reset_default_graph()
+        #tf.reset_default_graph()
 
         self.n_class = n_class
         self.summaries = kwargs.get("summaries", True)
@@ -235,6 +239,14 @@ class Unet(object):
                 loss += (regularizer * regularizers)
 
         return loss
+    
+    def dice(self, logits, labels):
+        flat_logits = logits.flatten()
+        flat_labels = labels.flatten()
+        intersection = np.sum(flat_logits*flat_labels)
+        union = np.sum(flat_logits) + np.sum(flat_labels)
+        loss = 1 - 2 * intersection / union
+        return loss
 
     def predict(self, model_path, x_test):
         """
@@ -257,6 +269,31 @@ class Unet(object):
             prediction = sess.run(self.predicter_label, feed_dict={self.x: x_test, self.y: y_dummy, self.keep_prob: 1.})
 
         return prediction
+    
+    def predict_multiple(self, model_path, x_tests):
+        """
+        Uses the model to create a prediction for the given data
+
+        :param model_path: path to the model checkpoint to restore
+        :param x_test: Data to predict on. Shape [n, nx, ny, nz, channels]
+        :returns prediction: The unet prediction Shape [n, px, py, pz, labels] (px=nx-self.offset/2)
+        """
+
+        init = tf.global_variables_initializer()
+        with tf.Session() as sess:
+            # Initialize variables
+            sess.run(init)
+            y_dummy = np.empty((x_tests[0].shape[0], x_tests[0].shape[1], x_tests[0].shape[2], x_tests[0].shape[3], self.n_class))
+
+            # Restore model weights from previously saved model
+            self.restore(sess, model_path)
+
+            predictions = []
+            for i in trange(len(x_tests)):
+                x_test = x_tests[i]
+                predictions.append(sess.run(self.predicter_label, feed_dict={self.x: x_test, self.y: y_dummy, self.keep_prob: 1.}))
+
+        return predictions
 
     def save(self, sess, model_path):
         """
@@ -287,82 +324,99 @@ class Unet(object):
 
 # In[4]:
 
+
 net = Unet(channels=1, 
            n_class=1, 
            layers=4, 
            pool_size=2,
            features_root=16, summaries=True,
+           #cost_kwargs=dict(regularizer=0.001)
           )
 
 
 # ## training
 
-# In[6]:
+# In[5]:
 
-provider = ImageDataProvider(split_vol=True, check_vol=True)
-provider.check_vol = True
-provider.split_vol = True
-provider.thresh = 5000
+
+provider = ImageDataProvider(split_vol=False, check_vol=False)
+
+provider.thresh = 400
 provider._find_data_files()
 count, vals = provider._count_valid_training(provider.training_data_files)
 
 
+# In[6]:
+
+
+# plt.hist(vals, 30)
+count = np.sum(np.array(vals)>400)
+# print(count)
+
+
 # In[7]:
 
-plt.hist(vals, 30)
-print(count)
 
-
-# In[ ]:
-
-# data_provider = ImageDataProvider(array=False)
-data_provider = provider
-trainer = Trainer(net, batch_size=3, optimizer="adam")
-path = trainer.train(data_provider, 
-                     "./unet_trained",
-                     training_array = None,
-                     validation_array = None,
-                     testing_array = None,
-                     training_iters=count, 
-                     epochs=100, 
-                     dropout=0.75, 
-                     restore= False,
-                     display_step=1)
+# # data_provider = ImageDataProvider(array=False)
+# data_provider = provider
+# trainer = Trainer(net, batch_size=3, optimizer="adam")
+# path = trainer.train(data_provider, 
+#                      "./unet_trained",
+#                      training_array = None,
+#                      validation_array = None,
+#                      testing_array = None,
+#                      training_iters=count, 
+#                      epochs=100, 
+#                      dropout=0.75, 
+#                      restore=False,
+#                      display_step=1)
 
 
 # ### Predict
 
-# In[7]:
+# In[8]:
+
 
 provider = ImageDataProvider()
 # testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,3)
-testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,2)
+testing_data, label_data = provider._load_data_and_label(provider.testing_data_files,3)
 
 
-# In[8]:
+# In[6]:
+
 
 testing_data.shape
 
 
-# In[9]:
-
-provider.testing_data_files[:2]
+# In[7]:
 
 
-# In[10]:
-
-i = 1
-prediction = net.predict("./unet_trained/model 15.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
+provider.testing_data_files[:]
 
 
-# In[11]:
+# In[18]:
+
+
+i = 2
+prediction = net.predict("./unet_trained/model 99.cpkt", testing_data[i][np.newaxis,...])[0][:,:,:,0]
+
+
+# In[19]:
+
 
 print(np.unique(prediction, return_counts=True))
 print(prediction.shape)
 print(label_data.shape)
 
 
-# In[12]:
+# In[10]:
+
+
+net.dice(prediction, label_data[i][44:-44,44:-44,44:-44])
+
+
+# In[11]:
+
 
 get_ipython().magic('matplotlib notebook')
 xs,ys,zs = np.where(prediction == 1)
@@ -379,7 +433,8 @@ ax.scatter(xs, ys, zs, marker='o',color='g', alpha=0.1, s=5)
 plt.show()
 
 
-# In[13]:
+# In[24]:
+
 
 np.random.seed(1)
 islands = measure.label(prediction)
@@ -393,7 +448,8 @@ for j in range(1,K):
 plt.show()
 
 
-# In[14]:
+# In[25]:
+
 
 np.random.seed(1)
 islands = measure.label(label_data[i,...,0][44:-44,44:-44,44:-44])
@@ -407,43 +463,37 @@ for j in range(1,K):
 plt.show()
 
 
-# In[37]:
+# In[6]:
 
-image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/051/case.nrrd'
-label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/051/needles.nrrd'
+
+image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/075/case.nrrd'
+label_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/075/needles.nrrd'
 # img = provider._load_file(image_name, np.float32, padding="noise")
 label = provider._load_file(label_name, np.bool, padding="zero")
 
-# data = provider._process_data(img)
-# label = provider._process_labels(label)
 
-# data, label = provider._post_process(data, label)
+# In[7]:
 
-# nx = data.shape[0]
-# ny = data.shape[1]
-# nz = data.shape[2]
-
-# data, label = data.reshape(1, nx, ny, nz, provider.channels), label.reshape(1, nx, ny, nz, provider.n_class)
-
-
-# In[38]:
 
 # print(img.shape)
 # print(data.shape)
 
 
-# In[39]:
+# In[8]:
+
 
 # data.shape
 
 
-# In[40]:
+# In[9]:
+
 
 tiles = (148,148,148)
 tile = 148
 
 
-# In[41]:
+# In[10]:
+
 
 data, options = nrrd.read(image_name)
 data = data.astype(np.float32)
@@ -457,18 +507,78 @@ print(options)
 
 # ## Inference pipeline
 
-# In[42]:
+# In[11]:
+
 
 arr_data = cutVolume(data)
-arr_pred = predict_full_volume(net, arr_data, model_path="./unet_trained/model 15.cpkt")
+arr_pred = predict_full_volume(net, arr_data, model_path="./unet_trained/model 99.cpkt")
 full_pred = recombine(arr_pred, data)
 
 
-# In[21]:
+# In[111]:
 
-islands = measure.label(full_pred)
+
+def post_processing(full_pred, min_area=150, max_residual=10):
+    ''' Clustering + removing small clusters + keeping only line-looking clusters'''
+    islands_ = measure.label(full_pred)
+    regions = measure.regionprops(islands_)
+    islands = np.zeros_like(full_pred, dtype=np.uint8)
+    K = len(regions)
+    print('Number of regions: %d' % K)
+    i=0
+    for k in range(K):
+        region = regions[k]
+        coords = region.coords
+        if region.area > min_area:
+            lm = measure.LineModelND()
+            lm.estimate(coords)
+            res = lm.residuals(coords)
+            mean_res = np.mean(res)
+            if mean_res < max_residual:
+                i+=1
+                print(k, i, mean_res, np.std(res), region.area)
+                for x,y,z in coords:
+                    islands[x,y,z] = i
+
+
+# In[112]:
+
+
+islands = post_processing(full_pred)
+
+
+# In[113]:
+
+
+islands_ = measure.label(full_pred)
+regions = measure.regionprops(islands_)
+region = regions[691]
+lm = measure.LineModelND()
+lm.estimate(region.coords)
+res = lm.residuals(region.coords)
+res
 K = np.max(islands)
-cp =sns.color_palette("Set2", K)
+cp = sns.color_palette("Set2", K)
+fig = plt.figure(figsize=(6,6))
+ax = fig.add_subplot(111, projection='3d')
+
+xs,ys,zs = region.coords.T
+ax.scatter(xs, ys, zs, marker='o',color=cp[j], alpha=0.9, s=2)
+plt.show()
+
+
+# In[75]:
+
+
+print(np.unique(islands, return_counts=True))
+
+
+# In[76]:
+
+
+# islands = measure.label(full_pred)
+K = np.max(islands)
+cp = sns.color_palette("Set2", K)
 fig = plt.figure(figsize=(6,6))
 ax = fig.add_subplot(111, projection='3d')
 for j in range(1,K):
@@ -477,17 +587,21 @@ for j in range(1,K):
 plt.show()
 
 
-# In[43]:
-
-nrrd.write('test58.nrrd', full_pred, options=options)
+# In[13]:
 
 
-# In[44]:
-
-full_pred.shape
+nrrd.write('test75.nrrd', islands, options=options)
 
 
-# In[37]:
+# In[15]:
+
+
+islands.shape
+print(np.unique(islands, return_counts=True))
+
+
+# In[13]:
+
 
 image_name = '/mnt/DATA/gp1514/Dropbox/2016-paolo/preprocessed_data/LabelMapsNEW2_1.00-1.00-1.00/074/needles.nrrd'
 data, options = nrrd.read(image_name)
@@ -496,16 +610,75 @@ data = data.astype(np.int8)
 
 # In[38]:
 
+
 arr_labels = cutVolume(data)
 
 
-# In[39]:
+# In[25]:
 
-for d in data:
-    print(np.sum(d))
+
+# '''
+# EXPORT
+# '''
+
+# with tf.Graph().as_default():
+#         # Inject placeholder into the graph
+#         serialized_tf_example = tf.placeholder(tf.string, name='input_image')
+#         feature_configs = {'data': tf.FixedLenFeature(shape=[1,148,148,148,1], dtype=tf.float32),}
+#         tf_example = tf.parse_example(serialized_tf_example, feature_configs)
+#         x_test = tf_example['data']
+#         # now the image shape is (1,148,148,148,1)
+
+#         # Create UNET model
+#         net = Unet(channels=1, n_class=1, layers=4, pool_size=2, features_root=16, summaries=True)
+#         # Create saver to restore from checkpoints
+#         saver = tf.train.Saver()
+
+#         with tf.Session() as sess:
+            
+#             # Restore the model from last checkpoints
+#             saver.restore(sess, "./unet_trained/model 99.cpkt")
+            
+            
+#             y_dummy = np.empty((1,148,148,148,1))
+
+#             # (re-)create export directory
+#             export_path = './export/'
+#             if os.path.exists(export_path):
+#                 shutil.rmtree(export_path)
+
+#             # create model builder
+#             builder = tf.saved_model.builder.SavedModelBuilder(export_path)
+
+#             # create tensors info
+#             predict_tensor_inputs_info = tf.saved_model.utils.build_tensor_info(x_test)
+#             predict_tensor_scores_info = tf.saved_model.utils.build_tensor_info(net.predicter_label)
+
+#             # build prediction signature
+#             prediction_signature = (
+#                 tf.saved_model.signature_def_utils.build_signature_def(
+#                     inputs={'images': predict_tensor_inputs_info},
+#                     outputs={'scores': predict_tensor_scores_info},
+#                     method_name=tf.saved_model.signature_constants.PREDICT_METHOD_NAME
+#                 )
+#             )
+
+#             # save the model
+#             legacy_init_op = tf.group(tf.tables_initializer(), name='legacy_init_op')
+#             builder.add_meta_graph_and_variables(
+#                 sess, [tf.saved_model.tag_constants.SERVING],
+#                 signature_def_map={
+#                     'predict_images': prediction_signature
+#                 },
+#                 legacy_init_op=legacy_init_op)
+
+#             builder.save()
+
+# print("Successfully exported UNET model")
 
 
 # In[ ]:
+
 
 
 

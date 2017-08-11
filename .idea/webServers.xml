@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="e2ea938a-5b81-480f-8a83-bd667f6aa9b1" name="cnl2" url="http://129.31.136.140">
+      <webServer id="e2ea938a-5b81-480f-8a83-bd667f6aa9b1" name="cnl2-unet" url="http://129.31.136.140">
         <fileTransfer host="129.31.136.140" port="22" rootFolder="/mnt/DATA/gp1514/Dropbox/Projects/pw25/ziyang/3d_unet" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />

@@ -1,5 +1,5 @@
 import os
-import cv2
+# import cv2
 import shutil
 from time import gmtime, strftime
 import numpy as np
@@ -16,9 +16,10 @@ import seaborn as sns
 import pandas as pd
 from skimage import measure
 from skimage import filters
+from sklearn import preprocessing
 import glob
 
-logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d %H:%M:%S", gmtime())+".log",level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(filename="logging_info_"+strftime("%Y-%m-%d_%H:%M:%S", gmtime())+".log",level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 def update_mpl_settings():
     #Direct input
