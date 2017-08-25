@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e2ea938a-5b81-480f-8a83-bd667f6aa9b1" name="cnl2-unet" url="http://129.31.136.140">
+        <fileTransfer host="129.31.136.140" port="22" rootFolder="/mnt/DATA/gp1514/Dropbox/Projects/pw25/ziyang/3d_unet" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="4c3e8f34-e3c9-433d-9f96-437cba2ac2c5" name="cnl3" url="http://155.198.133.235">
+        <fileTransfer host="155.198.133.235" port="22" rootFolder="/mnt/DATA/gp1514/Projects/github/gevi" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
