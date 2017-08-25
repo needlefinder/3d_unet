@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[2]:
 
 
 get_ipython().magic('matplotlib inline')
@@ -10,7 +10,7 @@ from syntheticdata import synthetic_generation
 # import ipyvolume
 
 
-# In[4]:
+# In[3]:
 
 
 import plotly
@@ -19,7 +19,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 
 
-# In[5]:
+# In[4]:
 
 
 def dice(logits, labels):
@@ -33,7 +33,7 @@ def dice(logits, labels):
 
 # ### Predict
 
-# In[24]:
+# In[5]:
 
 
 def predict_case(caseNumber):
@@ -61,7 +61,7 @@ def save_case(caseNumber):
 
 
 
-# In[18]:
+# In[9]:
 
 
 def predict_and_save(caseNumber):
@@ -73,8 +73,11 @@ def predict_and_save(caseNumber):
 def predict_and_plot3d(caseNumber):
     label_data, prediction, options = predict_case(caseNumber)
     dice(prediction, label_data)
-    islands = post_processing(prediction, min_area=int(50), max_residual=float(4))
+    islands = post_processing(prediction, min_area=int(100), max_residual=float(4))
     nrrd.write('predictions/%s.nrrd'%str(caseNumber), islands, options=options)
+    x,y,z = np.where(label_data == 1)
+    xs,ys,zs = np.where(islands != 0)
+
     x,y,z = np.where(label_data == 1)
     xs,ys,zs = np.where(islands != 0)
 
@@ -111,19 +114,20 @@ def predict_and_plot3d(caseNumber):
     )
     data = [trace1, trace2]
     layout = go.Layout(
+        title=str(caseNumber),
         margin=dict(
             l=0,
             r=0,
             b=0,
-            t=0
+            t=100
         )
     )
 
     fig = go.Figure(data=data, layout=layout)
-    py.iplot(fig, filename='simple-3d-scatter')
+    py.iplot(fig, filename=str(caseNumber))
 
 
-# In[8]:
+# In[7]:
 
 
 validationCases = loadCases("preprocessing/validation.txt")
@@ -142,11 +146,11 @@ validationCases
 testingCases
 
 
-# In[15]:
+# In[11]:
 
 
-for case in validationCases:
-    predict_and_save(case)
+for case in validationCases+testingCases:
+    predict_and_plot3d(case)
 
 
 # In[16]:

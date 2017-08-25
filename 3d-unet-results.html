@@ -11777,7 +11777,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -11793,7 +11793,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">plotly</span>
@@ -11809,7 +11809,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dice</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
@@ -11836,7 +11836,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">predict_case</span><span class="p">(</span><span class="n">caseNumber</span><span class="p">):</span>
@@ -11870,7 +11870,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">predict_and_save</span><span class="p">(</span><span class="n">caseNumber</span><span class="p">):</span>
@@ -11882,8 +11882,11 @@ div#notebook {
 <span class="k">def</span> <span class="nf">predict_and_plot3d</span><span class="p">(</span><span class="n">caseNumber</span><span class="p">):</span>
     <span class="n">label_data</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="n">predict_case</span><span class="p">(</span><span class="n">caseNumber</span><span class="p">)</span>
     <span class="n">dice</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">label_data</span><span class="p">)</span>
-    <span class="n">islands</span> <span class="o">=</span> <span class="n">post_processing</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">min_area</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">max_residual</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">islands</span> <span class="o">=</span> <span class="n">post_processing</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">min_area</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">max_residual</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
     <span class="n">nrrd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;predictions/</span><span class="si">%s</span><span class="s1">.nrrd&#39;</span><span class="o">%</span><span class="k">str</span>(caseNumber), islands, options=options)
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">label_data</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">xs</span><span class="p">,</span><span class="n">ys</span><span class="p">,</span><span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">islands</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+
     <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">label_data</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">xs</span><span class="p">,</span><span class="n">ys</span><span class="p">,</span><span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">islands</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -11920,16 +11923,17 @@ div#notebook {
     <span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace1</span><span class="p">,</span> <span class="n">trace2</span><span class="p">]</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">caseNumber</span><span class="p">),</span>
         <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
             <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">t</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">t</span><span class="o">=</span><span class="mi">100</span>
         <span class="p">)</span>
     <span class="p">)</span>
 
     <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
-    <span class="n">py</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;simple-3d-scatter&#39;</span><span class="p">)</span>
+    <span class="n">py</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">caseNumber</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -11939,7 +11943,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">validationCases</span> <span class="o">=</span> <span class="n">loadCases</span><span class="p">(</span><span class="s2">&quot;preprocessing/validation.txt&quot;</span><span class="p">)</span>
@@ -12019,11 +12023,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">validationCases</span><span class="p">:</span>
-    <span class="n">predict_and_save</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">validationCases</span><span class="o">+</span><span class="n">testingCases</span><span class="p">:</span>
+    <span class="n">predict_and_plot3d</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12062,7 +12066,7 @@ data shape (75, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 75/75 [00:00&lt;00:00, 639375.61it/s]</pre>
+<pre>100%|██████████| 75/75 [00:00&lt;00:00, 944663.06it/s]</pre>
 </div>
 </div>
 
@@ -12097,7 +12101,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (75, 148, 148, 148, 2)
 Feature shape:  (75, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 3.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12108,7 +12112,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 75/75 [00:32&lt;00:00,  2.61it/s]
+<pre>100%|██████████| 75/75 [00:09&lt;00:00,  7.70it/s]
 </pre>
 </div>
 </div>
@@ -12125,20 +12129,25 @@ Merging subvolumes
 Padded input shape: (288, 288, 165)
 # of parts 5 5 3
 # of subvolumes merged:  75
-(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15], dtype=uint16), array([3077040,    1085,     613,     832,     103,      45,      41,
-            46,      51,      37,      35,      27,      15,      18,
-             5,       7]))
+(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18], dtype=uint16), array([3074765,    2040,     726,    1056,     215,     207,     331,
+            46,      44,      38,      47,      37,      55,      60,
+            44,      48,      44,      85,     112]))
 (200, 200, 77)
-Number of regions: 18
-1 1.03882356434 118
-2 1.14661786773 241
-3 1.12693186823 202
-4 1.17225105284 193
-5 1.07417868319 157
-6 1.1670551589 147
-7 1.06904409815 106
-8 1.04412159822 163
-9 1.64221277971 232
+Number of regions: 37
+1 1.95342312477 151
+2 1.19406364806 227
+3 1.14619730123 366
+4 1.15749784846 247
+5 1.14085874575 191
+6 1.10449033882 169
+7 1.09305605204 113
+8 2.19508855661 246
+9 1.06578685487 107
+10 1.05190114476 195
+11 1.05835499086 118
+12 1.92607878772 341
+13 1.59773998413 225
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (200, 200, 240)
@@ -12161,7 +12170,7 @@ data shape (125, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 125/125 [00:00&lt;00:00, 787219.22it/s]</pre>
+<pre>100%|██████████| 125/125 [00:00&lt;00:00, 788403.01it/s]</pre>
 </div>
 </div>
 
@@ -12196,7 +12205,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (125, 148, 148, 148, 2)
 Feature shape:  (125, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 3.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12207,7 +12216,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 125/125 [00:51&lt;00:00,  2.53it/s]
+<pre>100%|██████████| 125/125 [00:16&lt;00:00,  7.64it/s]
 </pre>
 </div>
 </div>
@@ -12224,42 +12233,38 @@ Merging subvolumes
 Padded input shape: (288, 288, 328)
 # of parts 5 5 6
 # of subvolumes merged:  125
-(array([0, 1, 2, 3], dtype=uint16), array([9587203,   11508,    1112,     177]))
+(array([0, 1, 2, 3, 4, 5, 6], dtype=uint16), array([9579306,   14756,    2310,    1369,     965,     729,     565]))
 (200, 200, 240)
-Number of regions: 62
-1 3.73389990529 1563
-2 1.14351180286 250
-3 1.01814572583 93
-4 1.14415810746 76
-5 1.1101837314 163
-6 1.0594522935 106
-7 0.94956822085 65
-8 0.96360935794 57
-9 2.24505963343 624
-10 1.01846418015 81
-11 1.08364005714 172
-12 1.12620933089 340
-13 0.956561978922 95
-14 1.10292467103 267
-15 1.08082632405 281
-16 2.00833530863 1120
-17 1.22247704313 180
-18 1.11469843032 172
-19 2.54912547713 307
-20 1.03951256196 270
-21 2.3253252079 1313
-22 1.07836258105 242
-23 1.56501527859 390
-24 1.73132786814 913
-25 2.90779949179 1614
-26 1.1339460438 315
-27 1.04535165401 192
-28 1.17921122557 123
-29 1.07720819737 255
-30 1.57315283909 527
-31 1.47902579814 95
-32 1.59269499952 177
-33 1.16078658587 51
+Number of regions: 67
+1 3.78211384823 2141
+2 1.29181700644 461
+3 1.13741951308 220
+4 1.08672351058 148
+5 1.07070466014 106
+6 1.03467650031 283
+7 2.62782622164 722
+8 1.0506065525 175
+9 1.13835058213 263
+10 1.08502525471 289
+11 1.09582160534 284
+12 2.18764155801 1114
+13 3.02316533574 508
+14 1.10477822656 316
+15 2.75084040593 1553
+16 1.10524508031 358
+17 1.13106046258 264
+18 1.85694822166 493
+19 1.08048129799 153
+20 2.91543600135 1659
+21 1.10982688284 560
+22 1.13111903715 335
+23 1.05476950543 207
+24 1.04415495507 130
+25 1.21691135356 424
+26 1.55592658523 480
+27 1.9775188957 157
+28 1.03468594507 132
+29 1.78831970034 118
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 153)
@@ -12282,7 +12287,7 @@ data shape (96, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:00&lt;00:00, 738813.18it/s]</pre>
+<pre>100%|██████████| 96/96 [00:00&lt;00:00, 783371.95it/s]</pre>
 </div>
 </div>
 
@@ -12317,7 +12322,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (96, 148, 148, 148, 2)
 Feature shape:  (96, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 3.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12328,7 +12333,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:38&lt;00:00,  2.47it/s]
+<pre>100%|██████████| 96/96 [00:12&lt;00:00,  7.68it/s]
 </pre>
 </div>
 </div>
@@ -12345,31 +12350,37 @@ Merging subvolumes
 Padded input shape: (388, 283, 241)
 # of parts 7 7 5
 # of subvolumes merged:  96
-(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12], dtype=uint16), array([8941983,    4305,    1172,    1662,     249,     202,     202,
-           153,     204,     202,     134,      25,       7]))
+(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12], dtype=uint16), array([8928452,   10134,    4318,    2948,    1354,     916,     795,
+           260,     413,      85,     177,     354,     294]))
 (300, 195, 153)
-Number of regions: 48
-1 1.0248624473 115
-2 1.01406675859 165
-3 1.06542989086 227
-4 1.13878930651 605
-5 1.14494475354 265
-6 1.13942349763 709
-7 1.14880171221 585
-8 1.10890893225 625
-9 1.16072924923 182
-10 1.11390420992 171
-11 1.07355643392 111
-12 1.15313685574 180
-13 1.05077275914 129
-14 1.00471152815 238
-15 1.34465075367 242
-16 1.11554858529 208
-17 1.17976290785 211
-18 1.07368013632 118
-19 1.94075435208 157
-20 2.47627775797 265
-21 1.40231249608 65
+Number of regions: 77
+1 1.0167895948 108
+2 1.03441018098 127
+3 1.04355693245 140
+4 1.12715884429 192
+5 1.08335145207 147
+6 1.3069535606 548
+7 1.14093626349 282
+8 1.19328226331 133
+9 1.18415175077 617
+10 1.17125112054 382
+11 1.09124699072 114
+12 1.1399359383 703
+13 1.27921295515 660
+14 1.10110059338 290
+15 1.16959597174 322
+16 1.11493056921 169
+17 1.19119655147 186
+18 1.0974903578 112
+19 1.11836210719 161
+20 1.1268581106 152
+21 1.30189633947 679
+22 1.00289929718 131
+23 1.20848415586 305
+24 1.39734460217 242
+25 1.23017872615 311
+26 1.14185142157 213
+27 3.37272526786 902
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (319, 319, 128)
@@ -12392,7 +12403,7 @@ data shape (147, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 147/147 [00:00&lt;00:00, 934185.89it/s]</pre>
+<pre>100%|██████████| 147/147 [00:00&lt;00:00, 961876.27it/s]</pre>
 </div>
 </div>
 
@@ -12427,7 +12438,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (147, 148, 148, 148, 2)
 Feature shape:  (147, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12438,7 +12449,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 147/147 [00:59&lt;00:00,  2.55it/s]
+<pre>100%|██████████| 147/147 [00:19&lt;00:00,  7.63it/s]
 </pre>
 </div>
 </div>
@@ -12455,26 +12466,22 @@ Merging subvolumes
 Padded input shape: (407, 407, 216)
 # of parts 7 7 4
 # of subvolumes merged:  147
-(array([0, 1, 2, 3, 4], dtype=uint16), array([13009135,     9308,     4967,     1109,      889]))
+(array([0, 1, 2, 3, 4], dtype=uint16), array([13008376,     9082,     5701,     1260,      989]))
 (319, 319, 128)
-Number of regions: 40
-1 1.20067954788 963
-2 1.19040008856 945
-3 1.05931341431 137
-4 3.17504569928 1939
-5 1.13112702008 861
-6 1.13910333935 789
-7 1.00043361477 86
-8 1.79564429612 1112
-9 1.31289078007 187
-10 1.08723023316 173
-11 1.82258435378 335
-12 1.04401532938 142
-13 1.36479709602 926
-14 1.00942520273 65
-15 3.47138634617 649
-16 1.00319158294 51
-17 1.19279608884 65
+Number of regions: 39
+1 1.0245349693 143
+2 1.20556968915 1014
+3 1.18217152899 918
+4 3.06052096797 2068
+5 1.13937277286 885
+6 1.19835356068 855
+7 1.06082426662 172
+8 2.25714950007 1167
+9 1.06392658291 154
+10 1.13257985134 200
+11 1.30148126976 316
+12 1.05673152606 169
+13 1.30240596805 882
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 230)
@@ -12497,7 +12504,7 @@ data shape (120, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 120/120 [00:00&lt;00:00, 186137.75it/s]</pre>
+<pre>100%|██████████| 120/120 [00:00&lt;00:00, 1154395.60it/s]</pre>
 </div>
 </div>
 
@@ -12532,7 +12539,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (120, 148, 148, 148, 2)
 Feature shape:  (120, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12543,7 +12550,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 120/120 [00:46&lt;00:00,  2.57it/s]
+<pre>100%|██████████| 120/120 [00:15&lt;00:00,  7.65it/s]
 </pre>
 </div>
 </div>
@@ -12560,32 +12567,29 @@ Merging subvolumes
 Padded input shape: (388, 283, 318)
 # of parts 7 7 6
 # of subvolumes merged:  120
-(array([0, 1, 2, 3], dtype=uint16), array([13439814,    14821,      318,       47]))
+(array([0, 1, 2, 3, 4], dtype=uint16), array([13438003,    15537,     1051,      394,       15]))
 (300, 195, 230)
-Number of regions: 55
-1 0.97212478627 90
-2 0.932433579914 52
-3 1.14328129879 205
-4 1.03122485519 126
-5 1.15306061201 748
-6 1.1279032769 625
-7 1.36689280679 989
-8 1.15378371291 333
-9 1.11323860841 375
-10 1.11581782567 350
-11 1.11712885919 265
-12 1.14170736998 159
-13 1.14472248712 180
-14 1.02605075546 183
-15 1.61884222639 363
-16 1.11495137882 905
-17 1.10148974438 176
-18 1.14302590399 433
-19 1.25512741114 1005
-20 0.979761850095 67
-21 0.972674455346 72
-22 1.12266865729 347
-23 2.90440594733 309
+Number of regions: 59
+1 1.17572849735 165
+2 0.996255009489 124
+3 1.20051979029 220
+4 1.12525175199 710
+5 1.12757640128 617
+6 1.15349456376 490
+7 1.27658956824 287
+8 1.1599595623 417
+9 1.2639726879 433
+10 1.11642238 409
+11 1.06633612332 242
+12 1.09930845054 152
+13 1.18947722218 319
+14 1.08111474968 274
+15 1.33103174545 265
+16 1.11422052245 883
+17 1.09399595834 310
+18 1.26113504963 1043
+19 1.29501802128 542
+20 1.67024902666 137
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 230)
@@ -12608,7 +12612,7 @@ data shape (120, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 120/120 [00:00&lt;00:00, 869285.80it/s]</pre>
+<pre>100%|██████████| 120/120 [00:00&lt;00:00, 939023.28it/s]</pre>
 </div>
 </div>
 
@@ -12643,7 +12647,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (120, 148, 148, 148, 2)
 Feature shape:  (120, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12654,7 +12658,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 120/120 [00:46&lt;00:00,  2.54it/s]
+<pre>100%|██████████| 120/120 [00:15&lt;00:00,  7.61it/s]
 </pre>
 </div>
 </div>
@@ -12671,38 +12675,35 @@ Merging subvolumes
 Padded input shape: (388, 283, 318)
 # of parts 7 7 6
 # of subvolumes merged:  120
-(array([0, 1, 2, 3, 4, 5, 6], dtype=uint16), array([13428190,    19374,     6692,      389,      167,      132,       56]))
+(array([0, 1, 2, 3, 4, 5, 6], dtype=uint16), array([13425250,    20833,     7906,      488,      147,      122,      254]))
 (300, 195, 230)
-Number of regions: 87
-1 1.30929859138 60
-2 0.933493815787 57
-3 0.920058052235 67
-4 1.10363295902 850
-5 1.13970772983 965
-6 2.85281228818 1872
-7 1.15520428563 879
-8 0.998309459623 87
-9 0.978788649827 95
-10 1.08166702612 237
-11 1.13722916086 313
-12 1.15486206836 328
-13 1.32575089728 373
-14 1.01348090455 73
-15 1.1290230054 597
-16 1.15385121725 304
-17 1.17766816344 1046
-18 1.16981447916 382
-19 1.03004661306 60
-20 1.12975674411 72
-21 1.14140549009 946
-22 1.10266476431 624
-23 1.1038642623 638
-24 1.64160959109 235
-25 2.09365174548 339
-26 1.18614624161 275
-27 0.984458785111 82
-28 1.01244518246 73
-29 2.59411394511 349
+Number of regions: 67
+1 1.10094976663 270
+2 1.13090289141 130
+3 1.11717666466 866
+4 1.14252009407 1025
+5 2.69747626717 1691
+6 1.18969863793 963
+7 1.04843482173 137
+8 1.15483879522 506
+9 1.10959184441 327
+10 1.1341519378 327
+11 1.26736905323 424
+12 1.1401923701 792
+13 1.12813797646 291
+14 1.26475906046 155
+15 1.13521349506 1024
+16 1.13906526801 494
+17 1.14618351165 690
+18 1.14506294407 917
+19 1.10390041993 753
+20 1.14882541775 297
+21 0.932077868634 108
+22 1.48589031729 207
+23 1.47955237507 441
+24 1.26515671352 149
+25 1.22634934475 315
+26 3.33912887747 480
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 192)
@@ -12725,7 +12726,7 @@ data shape (96, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:00&lt;00:00, 675592.59it/s]</pre>
+<pre>100%|██████████| 96/96 [00:00&lt;00:00, 680157.41it/s]</pre>
 </div>
 </div>
 
@@ -12760,7 +12761,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (96, 148, 148, 148, 2)
 Feature shape:  (96, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12771,7 +12772,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:39&lt;00:00,  2.49it/s]
+<pre>100%|██████████| 96/96 [00:12&lt;00:00,  7.63it/s]
 </pre>
 </div>
 </div>
@@ -12788,43 +12789,44 @@ Merging subvolumes
 Padded input shape: (388, 283, 280)
 # of parts 7 7 5
 # of subvolumes merged:  96
-(array([0, 1, 2, 3, 4, 5, 6], dtype=uint16), array([11207126,    17095,     6884,      362,      481,       26,       26]))
+(array([0, 1, 2, 3, 4, 5, 6, 7, 8], dtype=uint16), array([11203033,    18812,     8297,      660,      939,       84,
+            100,       47,       28]))
 (300, 195, 192)
-Number of regions: 55
-1 1.06266773537 209
-2 1.15575771226 207
-3 1.12098408827 152
-4 1.1176558295 111
-5 3.80791237244 2473
-6 1.14572473868 871
-7 1.12697814581 804
-8 1.02353741846 113
-9 1.16531583788 899
-10 1.46531502822 869
-11 1.03367001511 97
-12 1.15962149299 964
-13 1.15114480222 432
-14 1.03186310196 55
-15 1.09078701084 121
-16 1.14177862136 504
-17 2.08438482513 1141
-18 1.14063773735 374
-19 1.12224597418 1009
-20 1.12234545422 430
-21 1.06515293323 70
-22 1.0957780534 265
-23 1.18274806769 504
-24 1.15183321011 1018
-25 1.16226576449 885
-26 1.16526271831 605
-27 1.06059803331 190
-28 1.11643114908 755
-29 1.13423587694 883
-30 1.14364400425 878
-31 1.09769771295 782
-32 1.14455743336 935
-33 1.14046936377 169
-34 1.06997404713 113
+Number of regions: 74
+1 0.985525972755 103
+2 1.12239065855 255
+3 1.12775265131 154
+4 3.67541290997 2358
+5 1.16277439246 939
+6 1.05617383283 106
+7 1.14045334489 826
+8 1.13251995034 174
+9 1.15905355161 931
+10 1.54029740174 947
+11 1.05408389051 105
+12 1.13161948139 945
+13 1.12540056669 428
+14 1.12028345744 185
+15 1.09259958909 459
+16 1.12295385638 155
+17 1.16461708162 431
+18 1.14577806639 1014
+19 1.12623609854 323
+20 1.15154868824 422
+21 1.14246848874 909
+22 1.19803119819 542
+23 1.17044221826 1086
+24 1.28199218604 724
+25 1.15703996561 846
+26 1.12568842779 738
+27 1.12378387574 841
+28 1.02521171327 133
+29 1.20508566403 922
+30 1.12767218167 858
+31 1.15716991172 983
+32 1.23904502263 207
+33 1.06817118534 282
+34 1.23935011456 101
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 204)
@@ -12847,7 +12849,7 @@ data shape (120, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 120/120 [00:00&lt;00:00, 354698.01it/s]</pre>
+<pre>100%|██████████| 120/120 [00:00&lt;00:00, 837465.02it/s]</pre>
 </div>
 </div>
 
@@ -12882,7 +12884,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (120, 148, 148, 148, 2)
 Feature shape:  (120, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -12893,7 +12895,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 120/120 [00:48&lt;00:00,  2.58it/s]
+<pre>100%|██████████| 120/120 [00:15&lt;00:00,  7.61it/s]
 </pre>
 </div>
 </div>
@@ -12910,68 +12912,55 @@ Merging subvolumes
 Padded input shape: (388, 283, 292)
 # of parts 7 7 5
 # of subvolumes merged:  120
-(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11], dtype=uint16), array([11915326,    12177,     3705,     1840,      190,      114,
-            147,      176,      198,       91,       30,        6]))
+(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12], dtype=uint16), array([11905545,    16055,     5895,     4117,     1161,      200,
+            227,      193,      153,      132,      138,      127,       57]))
 (300, 195, 204)
-Number of regions: 196
-1 1.51878846734 210
-2 0.978228305124 60
-3 1.00639212396 91
-4 1.48396145948 390
-5 1.01619817347 97
-6 1.44006892416 195
-7 0.871333428868 58
-8 1.71315872421 264
-9 1.08694154891 111
-10 1.1208321981 216
-11 1.1247589501 201
-12 1.07645236928 143
-13 1.1993353979 926
-14 1.138625528 73
-15 1.07878842529 275
-16 1.10375120239 95
-17 1.18454637278 353
-18 1.15244082231 433
-19 0.90388768243 57
-20 1.09460904994 266
-21 1.01387839123 56
-22 1.06255331968 201
-23 1.0511163794 427
-24 1.02774415638 239
-25 0.943166920527 63
-26 1.09377968088 308
-27 1.21331499806 451
-28 1.11179511264 201
-29 1.25576825121 386
-30 0.961384142503 83
-31 1.78133563802 416
-32 1.01357966653 58
-33 0.977541170784 74
-34 1.97314143621 514
-35 1.11339591348 85
-36 1.14742451417 242
-37 1.14382171097 362
-38 0.982118873578 61
-39 1.03480081004 202
-40 1.10079604834 215
-41 1.20232952206 365
-42 1.15180514053 94
-43 0.977124335069 184
-44 1.09636850414 112
-45 0.943482074019 65
-46 1.01857219997 133
-47 1.08522434076 257
-48 1.05859682858 125
-49 1.1299470785 262
-50 1.07926082835 136
-51 1.21303782223 336
-52 1.20385424851 477
-53 0.927908492576 103
-54 0.991752153509 74
-55 1.38447484319 157
-56 3.84402803498 617
-57 1.58464906012 117
-58 1.4298017454 94
+Number of regions: 154
+1 3.17723896122 547
+2 3.51782743546 866
+3 1.90490041565 532
+4 2.51547514321 603
+5 1.0584957925 112
+6 2.00420792025 346
+7 1.07909655399 137
+8 1.14692576754 226
+9 1.1923847713 232
+10 1.11640992291 134
+11 1.62191059734 282
+12 1.21548075584 964
+13 0.963337157686 213
+14 2.49609752956 873
+15 1.21419954609 533
+16 1.59106061679 338
+17 1.09798999533 186
+18 1.16107557529 317
+19 1.1712117245 637
+20 1.2596749204 492
+21 1.17599857348 477
+22 1.03108171591 154
+23 1.34403072038 494
+24 1.17257211327 312
+25 0.954240787507 135
+26 1.08319967218 207
+27 1.21527507011 422
+28 1.9164982446 718
+29 1.19487337722 553
+30 1.17462799533 353
+31 1.10066332421 331
+32 1.1537382327 611
+33 1.44410935607 328
+34 1.17156215316 231
+35 1.13039990745 301
+36 1.13292551297 326
+37 1.13331962084 201
+38 1.08449613519 134
+39 1.12574465601 332
+40 1.33397349841 422
+41 1.1602362938 386
+42 1.13932014055 110
+43 1.40502917983 298
+44 1.11824721921 112
+45 3.83945107588 742
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 179)
@@ -12994,7 +12983,7 @@ data shape (96, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:00&lt;00:00, 761159.14it/s]</pre>
+<pre>100%|██████████| 96/96 [00:00&lt;00:00, 1051313.80it/s]</pre>
 </div>
 </div>
 
@@ -13029,7 +13018,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (96, 148, 148, 148, 2)
 Feature shape:  (96, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -13040,7 +13029,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:36&lt;00:00,  2.55it/s]
+<pre>100%|██████████| 96/96 [00:12&lt;00:00,  7.64it/s]
 </pre>
 </div>
 </div>
@@ -13057,21 +13046,22 @@ Merging subvolumes
 Padded input shape: (388, 283, 267)
 # of parts 7 7 5
 # of subvolumes merged:  96
-(array([0, 1, 2, 3], dtype=uint16), array([10463793,     6376,     1287,       44]))
+(array([0, 1, 2, 3], dtype=uint16), array([10462270,     7571,     1583,       76]))
 (300, 195, 179)
-Number of regions: 35
-1 1.02334708534 153
-2 1.00581173292 98
-3 0.973794034472 58
-4 1.00086846344 94
-5 1.22165731201 686
-6 1.1208292246 826
-7 1.23658469983 193
-8 1.03380132658 115
-9 2.44964022432 1277
-10 2.64015613684 1865
-11 2.36298170596 1813
-12 1.0146393675 100
+Number of regions: 54
+1 1.06591878145 218
+2 0.963283341137 107
+3 1.17706141546 929
+4 1.13587575812 886
+5 1.06061372495 116
+6 1.06363236573 105
+7 1.07423139787 113
+8 2.50033708168 1329
+9 2.75167829813 1994
+10 2.5205819111 2248
+11 1.22201305647 103
+12 1.05902346586 109
+13 1.1376818083 119
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 179)
@@ -13094,7 +13084,7 @@ data shape (96, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:00&lt;00:00, 439577.71it/s]</pre>
+<pre>100%|██████████| 96/96 [00:00&lt;00:00, 951898.78it/s]</pre>
 </div>
 </div>
 
@@ -13129,7 +13119,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (96, 148, 148, 148, 2)
 Feature shape:  (96, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -13140,7 +13130,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:40&lt;00:00,  1.87it/s]
+<pre>100%|██████████| 96/96 [00:12&lt;00:00,  7.64it/s]
 </pre>
 </div>
 </div>
@@ -13157,38 +13147,34 @@ Merging subvolumes
 Padded input shape: (388, 283, 267)
 # of parts 7 7 5
 # of subvolumes merged:  96
-(array([0, 1, 2, 3, 4, 5, 6], dtype=uint16), array([10454426,    11042,     5486,      115,      373,       17,       41]))
+(array([0, 1, 2, 3, 4, 5, 6], dtype=uint16), array([10450571,    14176,     6192,      130,      360,       21,       50]))
 (300, 195, 179)
-Number of regions: 76
-1 2.15762588459 282
-2 1.02863046525 59
-3 1.07742430347 52
-4 1.74647583453 233
-5 1.94559309858 476
-6 1.41527831842 130
-7 0.997369570728 55
-8 0.971488500001 78
-9 0.928392132038 88
-10 3.80449469443 2079
-11 3.51122551938 2292
-12 1.13172196616 167
-13 3.99629934262 2692
-14 1.11806446109 116
-15 1.03634567856 156
-16 1.16762302012 155
-17 1.77209306286 306
-18 1.15825461856 144
-19 1.16727554843 144
-20 2.03964434024 988
-21 1.09449699079 316
-22 1.01313597674 100
-23 1.31794379384 1192
-24 0.945860949197 59
-25 1.12477306434 277
-26 1.05388180602 198
-27 0.958062703093 65
-28 1.03395390851 256
-29 0.996891967061 155
+Number of regions: 95
+1 2.06597406916 338
+2 2.46441309179 495
+3 1.43905430233 126
+4 1.07005147533 157
+5 1.11412249202 322
+6 1.05194106195 131
+7 1.02028258139 101
+8 1.06789197587 114
+9 3.81551363988 2105
+10 3.58175232703 2378
+11 1.17460039862 117
+12 1.17923682792 109
+13 1.8659179252 1012
+14 1.16846389063 191
+15 1.22043131509 147
+16 1.2271112286 111
+17 2.43152535402 1652
+18 1.09158251692 131
+19 1.09458625475 272
+20 1.29836767066 1250
+21 1.87964742758 228
+22 1.16463504505 158
+23 1.14627459393 311
+24 1.32991211937 329
+25 1.04275305739 223
 --------------------------------------------------
 Loading and Preparing the data
 Original input shape (300, 195, 166)
@@ -13211,7 +13197,7 @@ data shape (96, 148, 148, 148)
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:00&lt;00:00, 958698.06it/s]</pre>
+<pre>100%|██████████| 96/96 [00:00&lt;00:00, 684784.33it/s]</pre>
 </div>
 </div>
 
@@ -13246,7 +13232,7 @@ Starting the segmenter.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>imgs shape (96, 148, 148, 148, 2)
 Feature shape:  (96, 148, 148, 148, 2)
-INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 4.cpkt
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
 </pre>
 </div>
 </div>
@@ -13257,7 +13243,7 @@ INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-c
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 96/96 [00:37&lt;00:00,  2.32it/s]
+<pre>100%|██████████| 96/96 [00:12&lt;00:00,  7.65it/s]
 </pre>
 </div>
 </div>
@@ -13274,28 +13260,370 @@ Merging subvolumes
 Padded input shape: (388, 283, 254)
 # of parts 7 7 5
 # of subvolumes merged:  96
-(array([0, 1, 2, 3, 4], dtype=uint16), array([9702724,    6109,    1808,     303,      56]))
+(array([0, 1, 2, 3, 4, 5], dtype=uint16), array([9701335,    7087,    2013,     466,      95,       4]))
 (300, 195, 166)
-Number of regions: 46
-1 0.900571086929 53
-2 1.12641023453 77
-3 0.943084434411 91
-4 0.98832450191 66
-5 1.09172542506 274
-6 1.34124100697 172
-7 1.85746295917 366
-8 1.06043336577 129
-9 1.02879602786 111
-10 1.05943386723 344
-11 1.09712349491 438
-12 3.03748097232 857
-13 0.958126135094 66
-14 1.131542999 574
-15 1.10704701568 522
-16 0.923792173739 68
-17 0.998394391793 110
-18 1.07250946042 103
-19 1.12413642399 61
+Number of regions: 51
+1 1.83199243929 211
+2 1.32285395361 410
+3 1.29860601195 167
+4 1.49736061807 283
+5 1.01106651181 113
+6 1.09285266398 572
+7 1.14531630966 608
+8 2.1734208164 666
+9 1.0340549465 192
+10 1.14002887186 583
+11 1.12461882468 527
+12 1.04224932332 122
+13 1.30223425174 118
+14 1.03267489441 134
+15 2.80876019311 1023
+--------------------------------------------------
+Loading and Preparing the data
+Original input shape (220, 220, 204)
+Padded input shape: (308, 308, 292)
+# of parts 6 6 5
+number of tiles: 125 
+data shape (125, 148, 148, 148)
+Original input shape (220, 220, 204)
+Padded input shape: (308, 308, 292)
+# of parts 6 6 5
+number of tiles: 125 
+data shape (125, 148, 148, 148)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 125/125 [00:00&lt;00:00, 696265.60it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>--------------------------------------------------
+Starting the segmenter.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>imgs shape (125, 148, 148, 148, 2)
+Feature shape:  (125, 148, 148, 148, 2)
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 125/125 [00:16&lt;00:00,  7.59it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>prediction shape: (125, 1, 60, 60, 60, 1)
+Merging subvolumes
+--------------------------------------------------
+Padded input shape: (308, 308, 292)
+# of parts 6 6 5
+# of subvolumes merged:  125
+(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20], dtype=uint16), array([9836580,   27917,    5700,    2851,     287,     111,      26,
+            15,      20,       5,       8,       7,      11,       8,
+             5,      14,      10,      11,       9,       4,       1]))
+(220, 220, 204)
+Number of regions: 110
+1 1.77723383929 144
+2 1.62832085586 424
+3 1.14549163852 430
+4 1.22560324983 731
+5 1.18001525696 461
+6 0.941220091684 146
+7 1.23994715054 235
+8 1.16306576291 242
+9 0.941640894851 103
+10 1.13951170132 816
+11 2.90934554628 1755
+12 1.21082931059 1109
+13 1.08101478359 451
+14 1.11062452316 359
+15 1.14277973818 407
+16 1.1458260046 890
+17 2.12656988334 1235
+18 1.13876498162 543
+19 1.14050790664 814
+20 1.90197197845 368
+21 1.65353948458 799
+22 1.21280108426 861
+23 1.09236145916 189
+24 1.09954403455 105
+25 1.14943110141 1166
+26 0.98943828196 101
+27 2.05785469685 369
+28 3.85788052174 2314
+29 1.13127125361 1063
+30 3.20590946652 2932
+31 1.04656215039 288
+32 1.37217787522 101
+33 1.363993769 313
+34 1.09940068553 116
+35 1.29816332832 550
+36 1.08567888003 199
+37 1.04327574597 162
+38 1.39516323842 116
+--------------------------------------------------
+Loading and Preparing the data
+Original input shape (300, 195, 191)
+Padded input shape: (388, 283, 279)
+# of parts 7 7 5
+number of tiles: 96 
+data shape (96, 148, 148, 148)
+Original input shape (300, 195, 191)
+Padded input shape: (388, 283, 279)
+# of parts 7 7 5
+number of tiles: 96 
+data shape (96, 148, 148, 148)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 96/96 [00:00&lt;00:00, 1043142.96it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>--------------------------------------------------
+Starting the segmenter.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>imgs shape (96, 148, 148, 148, 2)
+Feature shape:  (96, 148, 148, 148, 2)
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 96/96 [00:12&lt;00:00,  7.64it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>prediction shape: (96, 1, 60, 60, 60, 1)
+Merging subvolumes
+--------------------------------------------------
+Padded input shape: (388, 283, 279)
+# of parts 7 7 5
+# of subvolumes merged:  96
+(array([0, 1, 2, 3, 4, 5, 6, 7, 8], dtype=uint16), array([11150415,    12091,     4096,     1835,     3933,      325,
+            290,      241,      274]))
+(300, 195, 191)
+Number of regions: 81
+1 1.03343090045 123
+2 1.03114576436 195
+3 1.04743753705 125
+4 0.994366664807 115
+5 1.36676942471 436
+6 1.13147616748 689
+7 1.1050956066 636
+8 1.09286734849 733
+9 1.05699926888 118
+10 1.13335967557 217
+11 1.40865109766 211
+12 1.10609625808 131
+13 1.12703160351 151
+14 2.72812415791 1640
+15 1.12807101017 945
+16 1.17602572917 224
+17 1.21702241685 209
+18 1.09851920765 113
+19 1.09038612617 111
+20 1.45498828814 858
+21 1.11322601571 287
+22 1.06841589094 116
+--------------------------------------------------
+Loading and Preparing the data
+Original input shape (319, 319, 220)
+Padded input shape: (407, 407, 308)
+# of parts 7 7 6
+number of tiles: 245 
+data shape (245, 148, 148, 148)
+Original input shape (319, 319, 220)
+Padded input shape: (407, 407, 308)
+# of parts 7 7 6
+number of tiles: 245 
+data shape (245, 148, 148, 148)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 245/245 [00:00&lt;00:00, 1063772.75it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>--------------------------------------------------
+Starting the segmenter.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>imgs shape (245, 148, 148, 148, 2)
+Feature shape:  (245, 148, 148, 148, 2)
+INFO:tensorflow:Restoring parameters from ./models/unet_trained_mix_dropout-05-clahe30_f32/model 50.cpkt
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 245/245 [00:32&lt;00:00,  7.53it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>prediction shape: (245, 1, 60, 60, 60, 1)
+Merging subvolumes
+--------------------------------------------------
+Padded input shape: (407, 407, 308)
+# of parts 7 7 6
+# of subvolumes merged:  245
+(array([0, 1, 2, 3], dtype=uint16), array([22376283,    10969,       50,      118]))
+(319, 319, 220)
+Number of regions: 44
+1 2.21699926633 260
+2 1.11507041178 507
+3 1.02636334125 145
+4 2.43138594818 1223
+5 2.35602087299 954
+6 1.09287907791 162
+7 1.06297751986 159
+8 1.09400983021 133
+9 1.13027008748 731
+10 1.1309131292 724
+11 3.90014135853 1977
+12 1.6243117554 445
+13 1.17151150116 812
+14 1.0891173995 423
+15 1.22177081367 685
+16 1.07443959932 226
+17 1.16609511569 672
+18 1.13606916751 219
 </pre>
 </div>
 </div>
