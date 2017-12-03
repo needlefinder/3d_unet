@@ -205,9 +205,8 @@ class ImageDataProvider(BaseDataProvider):
         self.channels = 1
 
     def _find_data_files(self):
-        rootPath = "/home/gp1514/SSD/preprocessed_data/"
-        dataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
-        claheDataPath = rootPath + "LabelMapsNEW2_1.00-1.00-1.00/"
+        rootPath = "/Users/guillaume/Projects/github/NeedleFinder/data/"
+        claheDataPath = rootPath + "LabelMaps/"
 
         trainingCases = loadCases("preprocessing/training.txt")
         validationCases = loadCases("preprocessing/validation.txt")
@@ -245,7 +244,6 @@ class ImageDataProvider(BaseDataProvider):
 
     def _load_file(self, path, dtype=np.float32, padding=None):
         tile = 148  ##
-        zer = np.zeros((tile, tile, tile), dtype=dtype)
         data = nrrd.read(path)[0].astype(dtype)
         zer = reshape_to_shape(data, (tile, tile, tile), padding)
         return zer

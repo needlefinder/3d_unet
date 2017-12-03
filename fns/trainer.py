@@ -266,8 +266,8 @@ class Trainer(object):
                             loss_step_val = sess.run([self.cost], feed_dict={handle: test_iterator_handle})
                             logging.info("Iter {:}, Testing Loss= {:.4f}".format(step_val, np.mean(loss_step_val)))
                             loss_step += loss_step_val
-                        summary_loss_val = tf.Summary(value=[tf.Summary.Value(tag="loss_val", simple_value=loss_step/nfiles_testing),])
-                        summary_writer.add_summary(summary_loss_val, step)
+                        #summary_loss_val = tf.Summary(value=[tf.Summary.Value(tag="loss_val", simple_value=loss_step/nfiles_testing),])
+                        #summary_writer.add_summary(summary_loss_val, step)
                         summary_writer.flush()
 
                 save_path = os.path.join(output_path, "model {}.cpkt".format(epoch))
@@ -437,7 +437,7 @@ def predict_multiple2(features, model_path, layers=4, filter_size=3):
 
     return predictions        
         
-def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=32, filter_size=3, 
+def create_conv_net(x, keep_prob, channels, n_class, layers=3, features_root=16, filter_size=3,
                     pool_size=2, summaries=True):
     """
     Creates a new convolutional unet for the given parametrization.

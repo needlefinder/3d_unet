@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import tensorflow as tf
 import matplotlib as mpl
 import matplotlib.pylab as plt
-from PIL import Image
+# from PIL import Image
 from tqdm import tnrange, trange
 import seaborn as sns
 import pandas as pd
